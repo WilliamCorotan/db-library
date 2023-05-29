@@ -11,7 +11,7 @@ background-size: cover;
         <div class="d-flex justify-content-center position-absolute top-0">
             <img class="w-4 mt-3" src="<?= base_url('assets/images/site/logo_full.png') ?>" alt="">
         </div>
-        <div class="bg-light bg-gradient bg-opacity-75 max-w-36 row rounded py-3">
+        <div class="bg-body-tertiary bg-opacity-75 max-w-36 row rounded py-3">
             <h5 class="display-5">Discover the joy of reading.</h5>
             <h5>Register and borrow books! </h5>
             <!-- Registration Form -->
