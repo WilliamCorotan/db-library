@@ -10,7 +10,10 @@ class Auth extends CI_Controller
      */
     public function show_login()
     {
-        exit('show_login');
+        $data['title'] = 'Login | Tower of Honai';
+        $this->load->view('partials/header', $data);
+        $this->load->view('pages/auth/login');
+        $this->load->view('partials/footer');
     }
 
 
@@ -56,6 +59,24 @@ class Auth extends CI_Controller
                 'matches' => 'The input provided didn\'t match the password.'
             )
         );
-        exit('register');
+
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            $form_data = array(
+                'email' => $this->input->post('email'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+            );
+            try {
+                $this->user_model->insert($form_data);
+                $json_response['message'] = 'Successfully registered user';
+                $json_response['location'] = 'login';
+                exit(json_encode($json_response));
+            } catch (\Exception $e) {
+                $json_response['error_message'] = $e;
+                exit(json_encode($json_response));
+            }
+        }
     }
 }
