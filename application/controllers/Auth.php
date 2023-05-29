@@ -22,7 +22,33 @@ class Auth extends CI_Controller
      */
     public function login()
     {
-        exit('login');
+        $this->form_validation->set_rules(
+            'email',
+            'Email',
+            'required|valid_email',
+            array(
+                'valid_email' => 'Please provide a valid %s.'
+            )
+        );
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            $form_data = array(
+                'email' => $this->input->post('email'),
+                'password' => $this->input->post('password')
+            );
+            $authenticated_user = $this->user_model->verify_credentials($form_data['email'], $form_data['password']);
+
+            if (!empty($authenticated_user)) {
+                $json_response['authenticated_user'] = $authenticated_user;
+                $json_response['message'] = 'Logged in successfully!';
+                exit(json_encode($json_response));
+            }
+
+            $json_response['error_message'] = 'Invalid credentials, please try again!';
+            exit(json_encode($json_response));
+        }
     }
 
     /**

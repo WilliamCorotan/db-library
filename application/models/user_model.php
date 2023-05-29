@@ -10,4 +10,17 @@ class User_model extends CI_Model
     {
         return $this->db->insert('user', $data);
     }
+
+    public function verify_credentials($email, $password)
+    {
+        $query = $this->db->select('*')
+            ->from('user')
+            ->where('email', $email)
+            ->get();
+        $result = $query->row_array();
+        if (password_verify($password, $result['password'])) {
+            return $result;
+        }
+        return [];
+    }
 }
