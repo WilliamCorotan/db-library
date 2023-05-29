@@ -35,14 +35,20 @@ class Auth extends CI_Controller
             exit(json_encode($json_response));
         } else {
             $form_data = array(
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('password')
+                'email' => $this->input->post('email', TRUE),
+                'password' => $this->input->post('password', TRUE)
             );
             $authenticated_user = $this->user_model->verify_credentials($form_data['email'], $form_data['password']);
 
             if (!empty($authenticated_user)) {
                 $json_response['authenticated_user'] = $authenticated_user;
                 $json_response['message'] = 'Logged in successfully!';
+
+                $this->session->set_userdata($authenticated_user);
+                $this->session->set_userdata('is_logged_in', TRUE);
+
+
+                $json_response['session'] = $this->session->userdata();
                 exit(json_encode($json_response));
             }
 
@@ -91,8 +97,8 @@ class Auth extends CI_Controller
             exit(json_encode($json_response));
         } else {
             $form_data = array(
-                'email' => $this->input->post('email'),
-                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT)
+                'email' => $this->input->post('email', TRUE),
+                'password' => password_hash($this->input->post('password', TRUE), PASSWORD_BCRYPT)
             );
             try {
                 $this->user_model->insert($form_data);
