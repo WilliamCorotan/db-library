@@ -1,4 +1,4 @@
-<section id="registration-section" class="vh-100 vw-100 " style="
+<section id="registration-section" class="h-100 vw-100 " style="
 background-image: url('<?= base_url("assets/images/site/bg/bg-image1.jpg") ?>');
 background-repeat: no-repeat;
 background-position: center center;
@@ -6,11 +6,7 @@ background-size: cover;
 ">
 
     <!-- Register Form Container -->
-    <div class="container vh-100 mx-auto row align-items-center justify-content-center position-relative">
-        <!-- logo image top -->
-        <div class="d-flex justify-content-center position-absolute top-0">
-            <img class="w-4 mt-3" src="<?= base_url('assets/images/site/logo_full.png') ?>" alt="">
-        </div>
+    <div class="container h-100 mx-auto row align-items-center justify-content-center position-relative">
         <div class="bg-body-tertiary bg-opacity-75 max-w-36 row rounded py-3">
             <h5 class="display-5">Discover the joy of reading.</h5>
             <h5>Register and borrow books! </h5>

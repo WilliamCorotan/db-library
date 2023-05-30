@@ -1,4 +1,4 @@
-<section id="registration-section" class="vh-100 vw-100 " style="
+<section id="registration-section" class="h-100 vw-100 " style="
 background-image: url('<?= base_url("assets/images/site/bg/bg-image1.jpg") ?>');
 background-repeat: no-repeat;
 background-position: center center;
@@ -6,11 +6,7 @@ background-size: cover;
 ">
 
     <!-- Register Form Container -->
-    <div class="container vh-100 mx-auto row align-items-center justify-content-center position-relative">
-        <!-- logo image top -->
-        <div class="d-flex justify-content-center position-absolute top-0">
-            <img class="w-4 mt-3" src="<?= base_url('assets/images/site/logo_full.png') ?>" alt="">
-        </div>
+    <div class="container h-100 mx-auto row align-items-center justify-content-center position-relative">
         <div class="bg-body-tertiary bg-opacity-75 max-w-36 row rounded py-3">
 
             <div>
@@ -71,13 +67,17 @@ background-size: cover;
                     console.log(response);
                     if (response.form_errors) {
                         if (response.form_errors.email) {
-                            $('.form-hcontrol').val('');
+                            $('.form-control').val('');
                             $('#email_error').html(response.form_errors.email);
                         }
                     }
                     if (response.error_message) {
                         $('.form-control').val('');
                         $('#login_error').html(response.error_message);
+                    }
+
+                    if (response.location) {
+                        window.location.replace(response.location)
                     }
                 }
             });

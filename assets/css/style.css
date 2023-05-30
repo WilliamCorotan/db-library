@@ -1,7 +1,18 @@
+/* Utilities */
 .max-w-36{
     max-width: 36rem;
 }
 
 .w-4 {
     width: 16rem;
+}
+
+.h-1 {
+    height: 4rem !important;
+}
+
+/* main */
+
+#app{
+    height: calc(100vh - 80px) !important;
 }
