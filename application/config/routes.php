@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -58,6 +58,11 @@ $route['login'] = 'auth/show_login';
 $route['login/user'] = 'auth/login';
 $route['register'] = 'auth/show_register';
 $route['register/user'] = 'auth/register';
+$route['profile'] = 'profile/index';
+$route['profile/update/user'] = 'profile/update_user';
+$route['profile/update/address'] = 'profile/update_address';
+$route['profile/update/security'] = 'profile/update_security';
+$route['logout'] = 'auth/logout';
 
 
 $route['404_override'] = '';
