@@ -63,7 +63,11 @@ $route['profile/update/user'] = 'profile/update_user';
 $route['profile/update/address'] = 'profile/update_address';
 $route['profile/update/security'] = 'profile/update_security';
 $route['logout'] = 'auth/logout';
-
+$route['dashboard'] = 'admin/index';
+$route['admin/login'] = 'admin/show_login';
+$route['admin/login/user'] = 'admin/login';
+$route['admin/register'] = 'admin/show_register';
+$route['admin/register/user'] = 'admin/register';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
