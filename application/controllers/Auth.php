@@ -43,7 +43,7 @@ class Auth extends CI_Controller
             // Check if the a record is returned from the database
             if (!empty($authenticated_user)) {
                 // Stores user data to session
-                $this->session->set_userdata($authenticated_user);
+                $this->session->set_userdata('user_id', $authenticated_user['id']);
                 $this->session->set_userdata('is_logged_in', TRUE);
 
                 //Stores useful information to the Response Body
@@ -106,5 +106,14 @@ class Auth extends CI_Controller
                 exit(json_encode($json_response));
             }
         }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('is_logged_in');
+        $this->session->sess_destroy();
+
+        redirect('/');
     }
 }
