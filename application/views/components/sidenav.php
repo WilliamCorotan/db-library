@@ -8,7 +8,7 @@
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 ">
-                            <a class="nav-link px-3 fs-5" href="#">Dashboard</a>
+                            <a class="nav-link px-3 fs-5" href="<?= base_url('dashboard') ?>">Dashboard</a>
                         </li>
                     </ul>
                 </div>
@@ -46,7 +46,7 @@
                 <div class="px-3 row mt-2 bg-light-subtle">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 p-2">
-                            <a class="nav-link px-3 " href="#">Admins</a>
+                            <a class="nav-link px-3 " href="<?= base_url('admin/users/admins') ?>">Admins</a>
                         </li>
                         <li class="nav-item fs-6 p-2">
                             <a class="nav-link px-3 " href="#">All Users</a>

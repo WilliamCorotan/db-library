@@ -68,6 +68,9 @@ $route['admin/login'] = 'admin/show_login';
 $route['admin/login/user'] = 'admin/login';
 $route['admin/register'] = 'admin/show_register';
 $route['admin/register/user'] = 'admin/register';
+$route['admin/users/admins'] = 'admin/show_admins';
+$route['admin/fetch/admins'] = 'admin/fetch_admins';
+$route['admin/add/admin'] = 'admin/store';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

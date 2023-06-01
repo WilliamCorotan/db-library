@@ -5,10 +5,37 @@ class Admin extends CI_Controller
 {
     public function index()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $data['title'] = 'Dashboard | Tower of Honai';
         $this->load->view('partials/admin_header', $data);
         $this->load->view('pages/admin/index');
         $this->load->view('partials/footer');
+    }
+
+    public function store()
+    {
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[admin.email]');
+        $this->form_validation->set_rules('password', 'Password', 'required', array('required' => 'Please generate a password!'));
+
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            $form_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'status_id' => 1,
+            );
+            $this->admin_model->insert($form_data);
+            exit(json_encode($this->input->post()));
+        }
     }
 
     /**
@@ -17,7 +44,7 @@ class Admin extends CI_Controller
     public function show_login()
     {
         $data['title'] = 'Admin Login | Tower of Honai';
-        $this->load->view('partials/header', $data);
+        $this->load->view('partials/admin_header', $data);
         $this->load->view('pages/admin/login');
         $this->load->view('partials/footer');
     }
@@ -62,5 +89,22 @@ class Admin extends CI_Controller
             $json_response['error_message'] = 'Invalid credentials, please try again!';
             exit(json_encode($json_response));
         }
+    }
+
+    public function show_admins()
+    {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
+        $data['title'] = 'Admins | Tower of Honai';
+        $this->load->view('partials/admin_header', $data);
+        $this->load->view('pages/admin/user_admin');
+        $this->load->view('partials/footer');
+    }
+
+    public function fetch_admins()
+    {
+        exit(json_encode($this->admin_model->get_all()));
     }
 }
