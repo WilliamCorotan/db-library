@@ -1,13 +1,20 @@
 $(document).ready(function() {
-
     const actions = `
-    <div class=" d-flex justify-content-between">
-        <span> <i class="fa-solid fa-pencil fa-md"></i> </span>
-        <span> <i class="fa-solid fa-eye fa-md"></i> </span>
-        <span> <i class="fa-solid fa-trash-can fa-md"></i> </span>
+    <div class="text-center">
+        <span class="edit-admin h-100"> <i class="fa-solid fa-pencil fa-md"></i> </span>      
     </div>
     `;
     
+    function generatePassword() {
+        var length = 8,
+            charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+            retVal = "";
+        for (var i = 0, n = charset.length; i < length; ++i) {
+            retVal += charset.charAt(Math.floor(Math.random() * n));
+        }
+        return retVal;
+    }
+
     const dt = $('#myTable').DataTable({
         'ajax': {
             type: "get",
@@ -35,23 +42,12 @@ $(document).ready(function() {
             },
         ],
     });
-    
-
-
-    function generatePassword() {
-        var length = 8,
-            charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-            retVal = "";
-        for (var i = 0, n = charset.length; i < length; ++i) {
-            retVal += charset.charAt(Math.floor(Math.random() * n));
-        }
-        return retVal;
-    }
 
     $('#generate-password-btn').on('click', function() {
         const password = generatePassword();
         $('#password').val(password);
     })
+
     $('#add-admin-form').on('submit', function(event) {
         event.preventDefault();
 
@@ -94,6 +90,61 @@ $(document).ready(function() {
                 } else {
                     $('input').val('');
                     $('#add-admin-modal').modal('hide');
+                    dt.ajax.reload();
+                }   
+            }
+        });
+    });
+
+    $(document).on('click', '.edit-admin', function(){
+        console.log($(this).parent().parent().siblings().first().html())
+        $.ajax({
+            type: "get",
+            url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}`,
+            dataType: "json",
+            success: function (response) {
+                $('#edit_id').val(response.data.id);
+                $('#edit_last_name').val(response.data.last_name);
+                $('#edit_first_name').val(response.data.first_name);
+                $('#edit_email').val(response.data.email);
+                console.log(response.data.status_id)
+                if(response.data.status_id == "1"){
+                    $('#edit_status').children('[value=1]').attr('selected', 'selected');
+                    $('#edit_status').children('[value=2]').removeAttr('selected');
+                }
+                else{
+                    $('#edit_status').children('[value=1]').removeAttr('selected');
+                    $('#edit_status').children('[value=2]').attr('selected', 'selected');
+                }
+                $('#edit-admin-modal').modal('show');
+            }
+        });
+    });
+
+    $('#edit-admin-form').on('submit', function(event){
+        event.preventDefault();
+        console.log( $(this).serialize());
+        $.ajax({
+            type: "post",
+            url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}/edit`,
+            data: $(this).serialize(),
+            dataType: "json",
+            success: function (response) {
+                console.log(response)
+                if (response.form_errors) {
+                    if (response.form_errors.first_name) {
+                        $('#edit_first_name_error').html(response.form_errors.first_name);
+                    }
+                    if (response.form_errors.last_name) {
+                        $('#edit_last_name_error').html(response.form_errors.last_name);
+                    }
+                    if (response.form_errors.email) {
+                        $('#edit_email_error').html(response.form_errors.email);
+                    }
+
+                } else {
+                    $('input').val('');
+                    $('#edit-admin-modal').modal('hide');
                     dt.ajax.reload();
                 }   
             }

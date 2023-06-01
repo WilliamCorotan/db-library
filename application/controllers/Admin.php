@@ -38,6 +38,40 @@ class Admin extends CI_Controller
         }
     }
 
+    public function show($id)
+    {
+        $json_response['data'] = $this->admin_model->get($id);
+        exit(json_encode($json_response));
+    }
+
+    public function update($id)
+    {
+        // Form validation Rules
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        // Form Data 
+        $form_data = array(
+            'id' => $this->input->post('id'),
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email'),
+            'status_id' => $this->input->post('status'),
+        );
+
+
+        // Checks if form validation is not met
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            // updates the user data in the database
+            $this->admin_model->update($form_data);
+            $json_response['message'] = 'Personal information successfully updated!';
+            exit(json_encode($json_response));
+        }
+    }
+
     /**
      * Loads login page
      */

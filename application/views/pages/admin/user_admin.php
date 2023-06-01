@@ -14,6 +14,7 @@ print_r($this->session->userdata());
 
         <!-- Modal -->
         <?php $this->load->view('components/admin/add_admin') ?>
+        <?php $this->load->view('components/admin/edit_admin') ?>
 
         <div class="table-responsive">
             <table id="myTable" class="table ">

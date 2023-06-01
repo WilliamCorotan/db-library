@@ -70,6 +70,8 @@ $route['admin/register'] = 'admin/show_register';
 $route['admin/register/user'] = 'admin/register';
 $route['admin/users/admins'] = 'admin/show_admins';
 $route['admin/fetch/admins'] = 'admin/fetch_admins';
+$route['admin/fetch/admin/(:any)'] = 'admin/show/$1';
+$route['admin/fetch/admin/(:any)/edit'] = 'admin/update/$1';
 $route['admin/add/admin'] = 'admin/store';
 
 $route['404_override'] = '';
