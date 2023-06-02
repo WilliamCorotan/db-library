@@ -114,6 +114,7 @@ class Admin extends CI_Controller
             if (!empty($authenticated_user)) {
                 // Stores user data to session
                 $this->session->set_userdata('user_id', $authenticated_user['id']);
+                $this->session->set_userdata('user_email', $authenticated_user['email']);
                 $this->session->set_userdata('is_logged_in', TRUE);
                 $this->session->set_userdata('is_admin', TRUE);
 
@@ -126,6 +127,55 @@ class Admin extends CI_Controller
 
             // Returns Response Body when Credentials not match
             $json_response['error_message'] = 'Invalid credentials, please try again!';
+            exit(json_encode($json_response));
+        }
+    }
+
+    public function show_profile()
+    {
+        if (empty($this->session->userdata('user_id'))) {
+            redirect('admin/login');
+            exit();
+        }
+        $data['title'] = 'Profile Settings | Tower of Honai';
+        $data['userdata'] = $this->admin_model->get($this->session->userdata('user_id'));
+
+        $this->load->view('partials/admin_header', $data);
+        $this->load->view('pages/profile/admin');
+        $this->load->view('partials/footer');
+    }
+
+    public function update_user()
+    {
+        $this->form_validation->set_rules('first_name', "First Name", 'required');
+        $this->form_validation->set_rules('last_name', "Last Name", 'required');
+        $this->form_validation->set_rules('email', "Email", 'required');
+        $this->form_validation->set_rules('current_password', "Password", 'required|callback_validate_password');
+
+        if (!empty($this->input->post('new_password')) || !empty($this->input->post('confirm_password'))) {
+            $this->form_validation->set_rules('new_password', 'New Password', 'required|min_length[8]|max_length[255]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'matches[new_password]');
+        }
+
+        // Checks if form validation is not met
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            // Form Data 
+            $form_data = array(
+                'id' => $this->input->post('id'),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+            );
+            // updates the user data in the database
+            $this->admin_model->update($form_data);
+            $this->session->unset_userdata('user_email');
+            $this->session->set_userdata('user_email', $this->input->post('email'));
+            $json_response['message'] = 'Personal information successfully updated!';
+            $json_response['data'] = $form_data;
+            $json_response['session'] = $this->session->userdata();
             exit(json_encode($json_response));
         }
     }
@@ -145,5 +195,20 @@ class Admin extends CI_Controller
     public function fetch_admins()
     {
         exit(json_encode($this->admin_model->get_all($this->session->userdata('user_id'))));
+    }
+
+    /**
+     * Custom validation rule for checking if the passed password matches the database 
+     */
+    public function validate_password()
+    {
+        $validated_credentials = $this->admin_model->verify_credentials($this->session->userdata('user_email'), $this->input->post('current_password'));
+        $this->form_validation->set_message('validate_password', 'Incorrect password!');
+        // Check if the a record is returned from the database
+        if (!empty($validated_credentials)) {
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

@@ -9,7 +9,7 @@
                     <a type=button class="visually-hidden">Toggle Dropdown</a>
                 </span>
                 <ul class="dropdown-menu  dropdown-menu-end">
-                    <li><a class="dropdown-item" href="<?= base_url('profile') ?>">Profile</a></li>
+                    <li><a class="dropdown-item" href="<?= base_url('admin/profile') ?>">Profile</a></li>
                     <li><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
                 </ul>
             </div>
@@ -24,7 +24,6 @@
             url: "<?= base_url("admin/fetch/admin/") . $this->session->userdata('user_id') ?>",
             dataType: "json",
             success: function(response) {
-                console.log(response);
                 if (response.data.first_name) {
                     $('#nav-user-container').html(response.data.first_name);
                 }

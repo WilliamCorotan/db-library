@@ -63,16 +63,24 @@ $route['profile/update/user'] = 'profile/update_user';
 $route['profile/update/address'] = 'profile/update_address';
 $route['profile/update/security'] = 'profile/update_security';
 $route['logout'] = 'auth/logout';
-$route['dashboard'] = 'admin/index';
+
+// Admin Auth Routes
 $route['admin/login'] = 'admin/show_login';
 $route['admin/login/user'] = 'admin/login';
 $route['admin/register'] = 'admin/show_register';
 $route['admin/register/user'] = 'admin/register';
+
+// Admin Routes
+$route['dashboard'] = 'admin/index';
 $route['admin/users/admins'] = 'admin/show_admins';
 $route['admin/fetch/admins'] = 'admin/fetch_admins';
 $route['admin/fetch/admin/(:any)'] = 'admin/show/$1';
 $route['admin/fetch/admin/(:any)/edit'] = 'admin/update/$1';
 $route['admin/add/admin'] = 'admin/store';
+
+// Admin Profile Routes
+$route['admin/profile'] = 'admin/show_profile';
+$route['admin/profile/update/user'] = 'admin/update_user';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

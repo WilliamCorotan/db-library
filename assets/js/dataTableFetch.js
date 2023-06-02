@@ -64,7 +64,6 @@ $(document).ready(function() {
             data: formData,
             dataType: "json",
             beforeSend: function() {
-                console.log(formData);
 
                 $('#first_name_error').html('');
                 $('#last_name_error').html('');
@@ -127,9 +126,7 @@ $(document).ready(function() {
             status_id: $('#edit_status').val(),
         }
 
-        console.log("status: " + $('#edit_status').val())
         if($('#edit_password').val()){
-            console.log('is me')
             formData.password = $('#edit_password').val();
         }
 
@@ -139,7 +136,6 @@ $(document).ready(function() {
             data: formData,
             dataType: "json",
             success: function (response) {
-                console.log(response)
                 if (response.form_errors) {
                     if (response.form_errors.first_name) {
                         $('#edit_first_name_error').html(response.form_errors.first_name);

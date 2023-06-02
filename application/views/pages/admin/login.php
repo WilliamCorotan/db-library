@@ -34,13 +34,9 @@ background-size: cover;
 
 
             <div class="d-flex justify-content-between">
-                <!-- Redirect link to login -->
-                <div class="mb-3 d-inline">
-                    <span>Haven't registered yet? </span><a href="<?= base_url('register') ?>">Register</a>
-                </div>
 
                 <!-- Submit Button -->
-                <div class="mb-4">
+                <div class="mb-4 text-end w-100">
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
             </div>
@@ -64,7 +60,6 @@ background-size: cover;
                     $('.form-errors').html('');
                 },
                 success: function(response) {
-                    console.log(response);
                     if (response.form_errors) {
                         if (response.form_errors.email) {
                             $('.form-control').val('');
