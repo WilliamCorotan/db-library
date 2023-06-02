@@ -11,8 +11,3 @@
     height: 4rem !important;
 }
 
-/* main */
-
-#app{
-    height: calc(100vh - 80px) !important;
-}

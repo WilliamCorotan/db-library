@@ -21,6 +21,12 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+    <style>
+        /* main */
+        #app {
+            height: calc(100vh - 80px) !important;
+        }
+    </style>
 </head>
 
 <body>

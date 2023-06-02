@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <title><?= $title ?></title>
@@ -26,12 +26,21 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
+    <style>
+        /* main */
+
+        #app {
+            height: 100vh !important;
+        }
+    </style>
 </head>
 
 <body>
     <header id="main-header" class="position-sticky sticky-top shadow">
         <!-- place navbar here -->
-        <?php $this->load->view('components/admin_navbar') ?>
-        <?php $this->load->view('components/sidenav') ?>
+        <?php if (!empty($this->session->userdata('is_logged_in'))) : ?>
+            <?php $this->load->view('components/admin_navbar') ?>
+            <?php $this->load->view('components/sidenav') ?>
+        <?php endif ?>
     </header>
     <main id="app">
