@@ -49,7 +49,7 @@
                             <a class="nav-link px-3 " href="<?= base_url('admin/users/admins') ?>">Admins</a>
                         </li>
                         <li class="nav-item fs-6 p-2">
-                            <a class="nav-link px-3 " href="#">All Users</a>
+                            <a class="nav-link px-3 " href="<?= base_url('admin/users/users') ?>">All Users</a>
                         </li>
                     </ul>
                 </div>

@@ -199,9 +199,26 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    public function show_users()
+    {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
+        $data['title'] = 'Users | Tower of Honai';
+        $this->load->view('partials/admin_header', $data);
+        $this->load->view('pages/admin/user_user');
+        $this->load->view('partials/footer');
+    }
+
     public function fetch_admins()
     {
         exit(json_encode($this->admin_model->get_all($this->session->userdata('user_id'))));
+    }
+
+    public function fetch_users()
+    {
+        exit(json_encode($this->user_model->get_all()));
     }
 
     /**

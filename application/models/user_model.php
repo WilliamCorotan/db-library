@@ -12,6 +12,11 @@ class User_model extends CI_Model
         return $this->db->insert('user', $data);
     }
 
+    public function get_all()
+    {
+        return $this->db->get('user')->result_array();
+    }
+
     /**
      * Fetches specific data of a user in the database based on ID
      * @param int $id

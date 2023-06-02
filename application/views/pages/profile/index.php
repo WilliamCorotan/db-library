@@ -126,17 +126,14 @@
         // Personal Information Form submit event
         $('#personal-information-form').on('submit', function(event) {
             event.preventDefault();
+            console.log($(this).serialize())
             $.ajax({
                 type: "post",
                 url: "profile/update/user",
-                headers: {
-                    'X-CSRF-TOKEN': '<?= $this->security->get_csrf_hash() ?>'
-                },
                 data: $(this).serialize(),
                 dataType: "json",
                 success: function(response) {
                     console.log(response);
-                    location.reload();
                 }
             });
         });
@@ -151,7 +148,7 @@
                 dataType: "json",
                 success: function(response) {
                     console.log(response);
-                    location.reload();
+
                 }
             });
         });
@@ -166,7 +163,7 @@
                 dataType: "json",
                 success: function(response) {
                     console.log(response);
-                    location.reload();
+
                 }
             });
         });

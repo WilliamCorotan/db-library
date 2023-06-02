@@ -1,10 +1,15 @@
 $(document).ready(function() {
-    const actions = `
+    const actions =  function(type){ return (`
     <div class="text-center">
-        <span class="edit-admin h-100"> <i class="fa-solid fa-pencil fa-md"></i> </span>      
+        <span class="edit-${type} h-100"> <i class="fa-solid fa-pencil fa-md"></i> </span>      
     </div>
-    `;
+    `)}
     
+
+    $(document).on('submit', '#personal-information-form', function(event){
+        event.preventDefault()
+        console.log($(this).serialize())
+    })
     function generatePassword() {
         var length = 8,
             charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
@@ -38,10 +43,36 @@ $(document).ready(function() {
             },
             {
                 "data": null,
-                "defaultContent": actions
+                "defaultContent": actions('admin')
             },
         ],
     });
+
+    const udt = $('#user-table').DataTable({
+        'ajax': {
+            type: "get",
+            url: "http://localhost/admin/fetch/users",
+            dataSrc: ''
+        },
+        'columns': [{
+                "data": "id"
+            },
+            {
+                "data": "last_name"
+            },
+            {
+                "data": "first_name"
+            },
+            {
+                "data": "email"
+            },
+            {
+                "data": null,
+                "defaultContent": actions('user')
+            },
+        ],
+    });
+
 
     $('.generate-password-btn').on('click', function() {
         const password = generatePassword();
@@ -112,6 +143,23 @@ $(document).ready(function() {
                     $('#edit_status').val('2');
                 }
                 $('#edit-admin-modal').modal('show');
+            }
+        });
+    });
+
+    $(document).on('click', '.edit-user', function(){
+        $.ajax({
+            type: "get",
+            url: `http://localhost/admin/fetch/user/${$(this).parent().parent().siblings().first().html()}`,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                // $('#edit_id').val(response.data.id);
+                // $('#edit_last_name').val(response.data.last_name);
+                // $('#edit_first_name').val(response.data.first_name);
+                // $('#edit_email').val(response.data.email);
+
+                $('#edit-user-modal').modal('show');
             }
         });
     });
