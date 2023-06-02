@@ -110,10 +110,16 @@ class Auth extends CI_Controller
 
     public function logout()
     {
+        if (!empty($this->session->userdata('is_admin'))) {
+            $redirect_url = 'admin/login';
+        } else {
+            $redirect_url = '/';
+        }
+
         $this->session->unset_userdata('user_id');
         $this->session->unset_userdata('is_logged_in');
         $this->session->sess_destroy();
 
-        redirect('/');
+        redirect($redirect_url);
     }
 }
