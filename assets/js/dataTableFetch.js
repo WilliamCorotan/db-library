@@ -97,7 +97,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.edit-admin', function(){
-        console.log($(this).parent().parent().siblings().first().html())
+        console.log("id: " + $(this).parent().parent().siblings().first().html())
         $.ajax({
             type: "get",
             url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}`,
@@ -107,14 +107,14 @@ $(document).ready(function() {
                 $('#edit_last_name').val(response.data.last_name);
                 $('#edit_first_name').val(response.data.first_name);
                 $('#edit_email').val(response.data.email);
-                console.log(response.data.status_id)
+                console.log("status id: " + response.data.status_id)
                 if(response.data.status_id == "1"){
-                    $('#edit_status').children('[value=1]').attr('selected', 'selected');
-                    $('#edit_status').children('[value=2]').removeAttr('selected');
+                    console.log('me f')
+                    $('#edit_status').val('1');
                 }
                 else{
-                    $('#edit_status').children('[value=1]').removeAttr('selected');
-                    $('#edit_status').children('[value=2]').attr('selected', 'selected');
+                    console.log('me t')
+                    $('#edit_status').val('2');
                 }
                 $('#edit-admin-modal').modal('show');
             }
