@@ -52,13 +52,16 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         // Form Data 
         $form_data = array(
-            'id' => $this->input->post('id'),
+            'id' => $id,
             'first_name' => $this->input->post('first_name'),
             'last_name' => $this->input->post('last_name'),
             'email' => $this->input->post('email'),
-            'status_id' => $this->input->post('status'),
+            'status_id' => $this->input->post('status_id'),
         );
 
+        if (!empty($this->input->post('password'))) {
+            $form_data['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+        }
 
         // Checks if form validation is not met
         if ($this->form_validation->run() === FALSE) {
@@ -68,6 +71,7 @@ class Admin extends CI_Controller
             // updates the user data in the database
             $this->admin_model->update($form_data);
             $json_response['message'] = 'Personal information successfully updated!';
+            $json_response['data'] = $form_data;
             exit(json_encode($json_response));
         }
     }
@@ -104,13 +108,14 @@ class Admin extends CI_Controller
             );
 
             // Verify and stores user credentials
-            $authenticated_user = $this->user_model->verify_credentials($form_data['email'], $form_data['password']);
+            $authenticated_user = $this->admin_model->verify_credentials($form_data['email'], $form_data['password']);
 
             // Check if the a record is returned from the database
             if (!empty($authenticated_user)) {
                 // Stores user data to session
                 $this->session->set_userdata('user_id', $authenticated_user['id']);
                 $this->session->set_userdata('is_logged_in', TRUE);
+                $this->session->set_userdata('is_admin', TRUE);
 
                 //Stores useful information to the Response Body
                 $json_response['authenticated_user'] = $authenticated_user;
@@ -139,6 +144,6 @@ class Admin extends CI_Controller
 
     public function fetch_admins()
     {
-        exit(json_encode($this->admin_model->get_all()));
+        exit(json_encode($this->admin_model->get_all($this->session->userdata('user_id'))));
     }
 }

@@ -5,7 +5,7 @@ background-position: center center;
 background-size: cover;
 ">
 
-    <!-- Register Form Container -->
+    <!-- Admin Login Form Container -->
     <div class="container h-100 mx-auto row align-items-center justify-content-center position-relative">
         <div class="bg-body-tertiary bg-opacity-75 max-w-36 row rounded py-3">
 
@@ -15,7 +15,7 @@ background-size: cover;
             </div>
             <!-- Registration Form -->
             <?= form_open('', array(
-                'id' => 'register-form',
+                'id' => 'admin-login-form',
                 'method' => 'post'
             )) ?>
 
@@ -52,11 +52,11 @@ background-size: cover;
 
 <script>
     $(document).ready(function() {
-        $('#register-form').on('submit', function(event) {
+        $('#admin-login-form').on('submit', function(event) {
             event.preventDefault();
             $.ajax({
                 type: "post",
-                url: "login/user",
+                url: "<?= base_url('admin/login/user') ?>",
                 data: $(this).serialize(),
                 dataType: "json",
                 beforeSend: function() {

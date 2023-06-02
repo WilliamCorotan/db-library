@@ -3,11 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin_model extends CI_Model
 {
-    public function get_all()
+    public function get_all($id)
     {
         return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
             ->from('admin')
             ->join('status', 'status.id = admin.status_id', 'left')
+            ->where('admin.id !=', $id)
             ->get()
             ->result_array();
     }
@@ -25,5 +26,24 @@ class Admin_model extends CI_Model
     {
         $this->db->where('id', $data['id']);
         return $this->db->update('admin', $data);
+    }
+
+    /**
+     * Verify the user credentials in the database
+     * @param string $email
+     * @param string $password
+     * @return array user data | empty array
+     */
+    public function verify_credentials($email, $password)
+    {
+        $query = $this->db->select('*')
+            ->from('admin')
+            ->where('email', $email)
+            ->get();
+        $result = $query->row_array();
+        if (password_verify($password, $result['password'])) {
+            return $result;
+        }
+        return [];
     }
 }

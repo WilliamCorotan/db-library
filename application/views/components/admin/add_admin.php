@@ -35,7 +35,7 @@
                         <div class="d-flex">
                             <input type="text" class="form-control disabled text-center w-75 rounded-0 rounded-start" id="password" name="password" disabled>
                             </input>
-                            <a id="generate-password-btn" class="btn btn-outline-secondary  w-25  rounded-0 rounded-end" role="button">Generate</a>
+                            <a class="generate-password-btn btn btn-outline-secondary  w-25  rounded-0 rounded-end" role="button">Generate</a>
                         </div>
                         <small id="password_error" class="text-danger"></small>
                     </div>

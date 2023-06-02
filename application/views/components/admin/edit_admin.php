@@ -41,6 +41,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                        <div class="d-flex">
+                            <input type="text" class="form-control disabled text-center w-75 rounded-0 rounded-start" id="edit_password" name="password" disabled>
+                            </input>
+                            <a class=" generate-password-btn btn btn-outline-secondary  w-25  rounded-0 rounded-end" role="button">Generate</a>
+                        </div>
+                        <small id="password_error" class="text-danger"></small>
+                    </div>
+                </div>
 
             </div>
             <div class="modal-footer">

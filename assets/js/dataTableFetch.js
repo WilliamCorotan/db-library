@@ -43,9 +43,9 @@ $(document).ready(function() {
         ],
     });
 
-    $('#generate-password-btn').on('click', function() {
+    $('.generate-password-btn').on('click', function() {
         const password = generatePassword();
-        $('#password').val(password);
+        $(this).siblings("[name=password]").val(password);
     })
 
     $('#add-admin-form').on('submit', function(event) {
@@ -97,7 +97,6 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.edit-admin', function(){
-        console.log("id: " + $(this).parent().parent().siblings().first().html())
         $.ajax({
             type: "get",
             url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}`,
@@ -107,13 +106,10 @@ $(document).ready(function() {
                 $('#edit_last_name').val(response.data.last_name);
                 $('#edit_first_name').val(response.data.first_name);
                 $('#edit_email').val(response.data.email);
-                console.log("status id: " + response.data.status_id)
                 if(response.data.status_id == "1"){
-                    console.log('me f')
                     $('#edit_status').val('1');
                 }
                 else{
-                    console.log('me t')
                     $('#edit_status').val('2');
                 }
                 $('#edit-admin-modal').modal('show');
@@ -123,11 +119,24 @@ $(document).ready(function() {
 
     $('#edit-admin-form').on('submit', function(event){
         event.preventDefault();
-        console.log( $(this).serialize());
-        $.ajax({
+
+        let formData = {
+            last_name: $('#edit_last_name').val(),
+            first_name: $('#edit_first_name').val(),
+            email: $('#edit_email').val(),
+            status_id: $('#edit_status').val(),
+        }
+
+        console.log("status: " + $('#edit_status').val())
+        if($('#edit_password').val()){
+            console.log('is me')
+            formData.password = $('#edit_password').val();
+        }
+
+            $.ajax({
             type: "post",
-            url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}/edit`,
-            data: $(this).serialize(),
+            url: `http://localhost/admin/fetch/admin/${$('#edit_id').val()}/edit`,
+            data: formData,
             dataType: "json",
             success: function (response) {
                 console.log(response)
