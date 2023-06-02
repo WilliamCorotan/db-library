@@ -154,5 +154,9 @@ $(document).ready(function() {
                 }   
             }
         });
-    })
+    });
+
+    $('#edit-admin-modal').on('hidden.bs.modal', function(){
+        $('#edit_password').val('');
+    });
 });

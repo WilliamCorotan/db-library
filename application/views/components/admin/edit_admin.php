@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="edit-admin-modal" tabindex="-1" aria-labelledby="edit-admin-modal-label" aria-hidden="true">
+<div class="modal fade" id="edit-admin-modal" tabindex="-1" aria-labelledby="editAdminModel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-header">

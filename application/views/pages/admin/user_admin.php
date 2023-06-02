@@ -1,8 +1,3 @@
-<?php
-
-print_r($this->session->userdata());
-?>
-
 <section class="py-3">
     <div id="datatable-container" class="container">
         <div class="my-3 d-flex justify-content-between">
