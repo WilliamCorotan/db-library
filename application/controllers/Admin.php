@@ -147,11 +147,13 @@ class Admin extends CI_Controller
 
     public function update_user()
     {
+        // Form Validation Rules
         $this->form_validation->set_rules('first_name', "First Name", 'required');
         $this->form_validation->set_rules('last_name', "Last Name", 'required');
         $this->form_validation->set_rules('email', "Email", 'required');
         $this->form_validation->set_rules('current_password', "Password", 'required|callback_validate_password');
 
+        // Form Validation Rules for new password and confirm password
         if (!empty($this->input->post('new_password')) || !empty($this->input->post('confirm_password'))) {
             $this->form_validation->set_rules('new_password', 'New Password', 'required|min_length[8]|max_length[255]');
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'matches[new_password]');
@@ -169,6 +171,11 @@ class Admin extends CI_Controller
                 'last_name' => $this->input->post('last_name'),
                 'email' => $this->input->post('email'),
             );
+
+            // Check if a new password is entered
+            if (!empty($this->input->post('new_password'))) {
+                $form_data['password'] = password_hash($this->input->post('new_password'), PASSWORD_BCRYPT);
+            }
             // updates the user data in the database
             $this->admin_model->update($form_data);
             $this->session->unset_userdata('user_email');
