@@ -13,6 +13,8 @@ $(document).ready(function() {
             success: function(response) {
                 // checks for form errors
                 if (response.form_errors) {
+                    $('#new_password').val('');
+                    $('#confirm_password').val('');
                     // checks for current password errors
                     if (response.form_errors.current_password) {
                         $('#password_errors').html(response.form_errors.current_password);
@@ -41,6 +43,8 @@ $(document).ready(function() {
                     }
                 }
                 if (!response.form_errors) {
+                    $('#new_password').val('');
+                    $('#confirm_password').val('');
                     $('#confirm-password-modal').modal('hide');
                     adminNavbar()
                 }
