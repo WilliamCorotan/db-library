@@ -1,4 +1,7 @@
 <?php
+
+use PSpell\Config;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -211,9 +214,45 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
-    public function fetch_admins()
+    public function fetch_admins($page = 1)
     {
-        exit(json_encode($this->admin_model->get_all($this->session->userdata('user_id'))));
+        $config['base_url'] = base_url('admin/users/admins');
+        $config['total_rows'] = $this->admin_model->count_record();
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 4;
+
+        if ($page == 1) {
+
+            $current_offset = 0;
+        } else {
+            $current_offset = $config['per_page'] * ($page - 1);
+        }
+
+        // Checker for negative page number
+        if ($page == 1) {
+            $prev_page = null;
+        } else {
+            $prev_page = $page - 1;
+        }
+
+        // Checker for exceeding page number
+        if (($page) >  ($config['total_rows'] / $config['per_page'])) {
+            $next_page = null;
+        } else {
+            $next_page = $page + 1;
+        }
+
+        $this->pagination->initialize($config);
+
+        // $page = (($this->uri->segment(4)) ? $this->uri->segment(4) : 0);
+        $json_response['data'] = $this->admin_model->get_all($this->session->userdata('user_id'), $config['per_page'], $current_offset);
+        $json_response['total_rows'] = $config['total_rows'];
+        $json_response['page'] = $page;
+        $json_response['prev_page'] = $prev_page;
+        $json_response['next_page'] = $next_page;
+        $json_response['current_offset'] = $current_offset;
+        $json_response['nt'] = ($config['total_rows'] / $config['per_page']);
+        exit(json_encode($json_response));
     }
 
     public function fetch_users()

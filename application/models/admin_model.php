@@ -3,12 +3,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin_model extends CI_Model
 {
-    public function get_all($id)
+    public function get_all($id, $limit = 10, $offset = 0)
     {
         return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
             ->from('admin')
             ->join('status', 'status.id = admin.status_id', 'left')
             ->where('admin.id !=', $id)
+            ->limit($limit, $offset)
             ->get()
             ->result_array();
     }
@@ -28,6 +29,10 @@ class Admin_model extends CI_Model
         return $this->db->update('admin', $data);
     }
 
+    public function count_record()
+    {
+        return $this->db->count_all('admin');
+    }
     /**
      * Verify the user credentials in the database
      * @param string $email

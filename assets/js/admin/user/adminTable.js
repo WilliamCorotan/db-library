@@ -8,13 +8,14 @@ const actions =  function(userType){ return (`
 $(document).ready(function () {
     $.ajax({
         type: "get",
-        url: "http://localhost/admin/fetch/admins",
+        url: "http://localhost/admin/fetch/admins/3",
         dataType: "json",
         beforeSend: function(){
             $('tbody').children().remove();
         },
         success: function (response) {
-            response.forEach(element => {
+            console.log(response)
+            response.data.forEach(element => {
                 $('tbody').append(`
                 <tr> 
                 <td>${element.id}</td>

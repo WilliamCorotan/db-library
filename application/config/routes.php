@@ -74,6 +74,7 @@ $route['admin/register/user'] = 'admin/register';
 $route['dashboard'] = 'admin/index';
 $route['admin/users/admins'] = 'admin/show_admins';
 $route['admin/fetch/admins'] = 'admin/fetch_admins';
+$route['admin/fetch/admins/(:any)'] = 'admin/fetch_admins/$1';
 $route['admin/fetch/admin/(:any)'] = 'admin/show/$1';
 $route['admin/fetch/admin/(:any)/edit'] = 'admin/update/$1';
 $route['admin/add/admin'] = 'admin/store';
