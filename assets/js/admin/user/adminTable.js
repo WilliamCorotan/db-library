@@ -18,8 +18,8 @@ $(document).ready(function () {
                 $('tbody').append(`
                 <tr> 
                 <td>${element.id}</td>
-                <td>${element.first_name}</td> 
                 <td>${element.last_name}</td>
+                <td>${element.first_name}</td> 
                 <td>${element.email}</td>
                 <td>${element.status}</td>
                 <td>${actions('admin')} </td>`)
