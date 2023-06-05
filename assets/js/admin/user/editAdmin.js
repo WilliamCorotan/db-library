@@ -45,4 +45,4 @@ $('#edit-admin-form').on('submit', function(event){
     $('#edit-admin-modal').on('hidden.bs.modal', function(){
         $('#edit_password').val('');
     });
-});5e51U2j9
+});
