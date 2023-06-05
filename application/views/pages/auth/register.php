@@ -54,46 +54,4 @@ background-size: cover;
     </div>
 </section>
 
-<script>
-    $(document).ready(function() {
-        $('#register-form').on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "register/user",
-                data: $(this).serialize(),
-                dataType: "json",
-                beforeSend: function() {
-                    // resets all error messages
-                    $('.form-errors').html('');
-                },
-                success: function(response) {
-                    console.log(response);
-
-                    // Checks if form errors exits in the server response
-                    if (response.form_errors) {
-
-                        // Checks if the form errors has email error
-                        if (response.form_errors.email) {
-                            $('#email_error').html(response.form_errors.email);
-                        }
-
-                        // Checks if the form errors has password error
-                        if (response.form_errors.password) {
-                            $('#password_error').html(response.form_errors.password);
-                        }
-
-                        // Checks if the form errors has confirm password error
-                        if (response.form_errors.confirm_password) {
-                            $('#confirm_password_error').html(response.form_errors.confirm_password);
-                        }
-                    } else {
-                        console.log(response.message);
-                        window.location.replace(response.location);
-                    }
-
-                }
-            });
-        });
-    });
-</script>
+<script src="<?= base_url('assets/js/auth/register.js') ?>"></script>

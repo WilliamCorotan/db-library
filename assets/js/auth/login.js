@@ -1,0 +1,36 @@
+$(document).ready(function() {
+    $('#register-form').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "login/user",
+            data: $(this).serialize(),
+            dataType: "json",
+            beforeSend: function() {
+                // resets all error messages
+                $('.form-errors').html('');
+            },
+            success: function(response) {
+
+                // Checks for form errors
+                if (response.form_errors) {
+                    if (response.form_errors.email) {
+                        $('.form-control').val('');
+                        $('#email_error').html(response.form_errors.email);
+                    }
+                }
+
+                // Check for login credentials errors
+                if (response.error_message) {
+                    $('.form-control').val('');
+                    $('#login_error').html(response.error_message);
+                }
+
+                // Redirects if a redirect url is received from the server
+                if (response.location) {
+                    window.location.replace(response.location)
+                }
+            }
+        });
+    });
+});
