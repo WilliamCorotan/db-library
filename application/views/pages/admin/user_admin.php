@@ -35,3 +35,4 @@
 
 <script src="<?= base_url('assets/js/admin/user/adminTable.js') ?>"></script>
 <script src="<?= base_url('assets/js/admin/user/addAdmin.js') ?>"></script>
+<script src="<?= base_url('assets/js/admin/user/editAdmin.js') ?>"></script>
