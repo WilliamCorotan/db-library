@@ -1,44 +1,4 @@
 $(document).ready(function() {
-    const actions =  function(type){ return (`
-    <div class="text-center">
-        <span class="edit-${type} h-100"> <i class="fa-solid fa-pencil fa-md"></i> </span>      
-    </div>
-    `)}
-    
-
-    $(document).on('submit', '#personal-information-form', function(event){
-        event.preventDefault()
-        console.log($(this).serialize())
-    })
-
-
-    const dt = $('#myTable').DataTable({
-        'ajax': {
-            type: "get",
-            url: "http://localhost/admin/fetch/admins",
-            dataSrc: ''
-        },
-        'columns': [{
-                "data": "id"
-            },
-            {
-                "data": "last_name"
-            },
-            {
-                "data": "first_name"
-            },
-            {
-                "data": "email"
-            },
-            {
-                "data": "status"
-            },
-            {
-                "data": null,
-                "defaultContent": actions('admin')
-            },
-        ],
-    });
 
     const udt = $('#user-table').DataTable({
         'ajax': {
@@ -68,52 +28,7 @@ $(document).ready(function() {
 
    
 
-    $('#add-admin-form').on('submit', function(event) {
-        event.preventDefault();
 
-        const formData = {
-            first_name: $('#first_name').val(),
-            last_name: $('#last_name').val(),
-            email: $('#email').val(),
-            password: $('#password').val(),
-        }
-
-        $.ajax({
-            type: "post",
-            url: "http://localhost/admin/add/admin",
-            data: formData,
-            dataType: "json",
-            beforeSend: function() {
-
-                $('#first_name_error').html('');
-                $('#last_name_error').html('');
-                $('#email_error').html('');
-                $('#password_error').html('');
-
-            },
-            success: function(response) {
-
-                if (response.form_errors) {
-                    if (response.form_errors.first_name) {
-                        $('#first_name_error').html(response.form_errors.first_name);
-                    }
-                    if (response.form_errors.last_name) {
-                        $('#last_name_error').html(response.form_errors.last_name);
-                    }
-                    if (response.form_errors.email) {
-                        $('#email_error').html(response.form_errors.email);
-                    }
-                    if (response.form_errors.password) {
-                        $('#password_error').html(response.form_errors.password);
-                    }
-                } else {
-                    $('input').val('');
-                    $('#add-admin-modal').modal('hide');
-                    dt.ajax.reload();
-                }   
-            }
-        });
-    });
 
 
 
@@ -124,10 +39,10 @@ $(document).ready(function() {
             dataType: "json",
             success: function (response) {
                 console.log(response);
-                // $('#edit_id').val(response.data.id);
-                // $('#edit_last_name').val(response.data.last_name);
-                // $('#edit_first_name').val(response.data.first_name);
-                // $('#edit_email').val(response.data.email);
+                $('#edit_id').val(response.data.id);
+                $('#edit_last_name').val(response.data.last_name);
+                $('#edit_first_name').val(response.data.first_name);
+                $('#edit_email').val(response.data.email);
 
                 $('#edit-user-modal').modal('show');
             }

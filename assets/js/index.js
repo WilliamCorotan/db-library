@@ -18,11 +18,12 @@ $(document).ready(function () {
 
     // Edit admin (Pencil Icon) button onclick event
     $(document).on('click', '.edit-admin', function(){
-        const id = $(this).parent().siblings().first().html()
+        const id = $(this).parent().parent().siblings().first().html()
         $.ajax({
             type: "get",
             url: `${location.origin}/admin/fetch/admin/${id}`,
             dataType: "json",
+            
             success: function (response) {
                 $('#edit_id').val(response.data.id);
                 $('#edit_last_name').val(response.data.last_name);
