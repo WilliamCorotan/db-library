@@ -11,8 +11,8 @@ $(document).ready(function() {
                 $('.form-errors').html('');
             },
             success: function(response) {
-                console.log('test')
-                console.log(response)
+
+                // Checks for form error form the server response
                 if (response.form_errors) {
                     
                     if (response.form_errors.email) {
@@ -20,13 +20,15 @@ $(document).ready(function() {
                         $('#email_error').html(response.form_errors.email);
                     }
                 }
+
+                // Checks for login credentials error from the server response
                 if (response.error_message) {
                     $('.form-control').val('');
                     $('#login_error').html(response.error_message);
                 }
 
+                // Redirects to the url location if present in the server response
                 if (response.location) {
-
                     window.location.replace(`${location.origin}/${response.location}`)
                 }
             }
