@@ -12,7 +12,7 @@
         <?php $this->load->view('components/admin/edit_admin') ?>
 
         <div class="table-responsive">
-            <table id="myTable" class="table ">
+            <table id="admin-table" class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -32,4 +32,4 @@
     </div>
 </section>
 
-<script src="<?= base_url('assets/js/dataTableFetch.js') ?>"></script>
+<script src="<?= base_url('assets/js/admin/user/adminTable.js') ?>"></script>

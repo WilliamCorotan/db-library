@@ -10,15 +10,7 @@ $(document).ready(function() {
         event.preventDefault()
         console.log($(this).serialize())
     })
-    function generatePassword() {
-        var length = 8,
-            charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-            retVal = "";
-        for (var i = 0, n = charset.length; i < length; ++i) {
-            retVal += charset.charAt(Math.floor(Math.random() * n));
-        }
-        return retVal;
-    }
+
 
     const dt = $('#myTable').DataTable({
         'ajax': {
@@ -74,10 +66,7 @@ $(document).ready(function() {
     });
 
 
-    $('.generate-password-btn').on('click', function() {
-        const password = generatePassword();
-        $(this).siblings("[name=password]").val(password);
-    })
+   
 
     $('#add-admin-form').on('submit', function(event) {
         event.preventDefault();
@@ -126,26 +115,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('click', '.edit-admin', function(){
-        $.ajax({
-            type: "get",
-            url: `http://localhost/admin/fetch/admin/${$(this).parent().parent().siblings().first().html()}`,
-            dataType: "json",
-            success: function (response) {
-                $('#edit_id').val(response.data.id);
-                $('#edit_last_name').val(response.data.last_name);
-                $('#edit_first_name').val(response.data.first_name);
-                $('#edit_email').val(response.data.email);
-                if(response.data.status_id == "1"){
-                    $('#edit_status').val('1');
-                }
-                else{
-                    $('#edit_status').val('2');
-                }
-                $('#edit-admin-modal').modal('show');
-            }
-        });
-    });
+
 
     $(document).on('click', '.edit-user', function(){
         $.ajax({
