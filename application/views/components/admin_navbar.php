@@ -17,6 +17,6 @@
     </div>
 </nav>
 
-<script src="<?= base_url('assets/js/adminNavbar.js') ?>">
+<script src="<?= base_url('assets/js/admin/adminNavbar.js') ?>">
 
 </script>
