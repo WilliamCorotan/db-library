@@ -46,36 +46,4 @@ background-size: cover;
     </div>
 </section>
 
-<script>
-    $(document).ready(function() {
-        $('#admin-login-form').on('submit', function(event) {
-            event.preventDefault();
-            $.ajax({
-                type: "post",
-                url: "<?= base_url('admin/login/user') ?>",
-                data: $(this).serialize(),
-                dataType: "json",
-                beforeSend: function() {
-                    // resets all error messages
-                    $('.form-errors').html('');
-                },
-                success: function(response) {
-                    if (response.form_errors) {
-                        if (response.form_errors.email) {
-                            $('.form-control').val('');
-                            $('#email_error').html(response.form_errors.email);
-                        }
-                    }
-                    if (response.error_message) {
-                        $('.form-control').val('');
-                        $('#login_error').html(response.error_message);
-                    }
-
-                    if (response.location) {
-                        window.location.replace(`<?= base_url() ?>${response.location}`)
-                    }
-                }
-            });
-        });
-    });
-</script>
+<script src="<?= base_url('assets/js/auth/admin-login.js') ?>"></script>
