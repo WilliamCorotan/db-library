@@ -13,4 +13,5 @@ function adminNavbar(){
     });
 }
 
+// Dependency from assets/js/admin/adminNavbar.js
 adminNavbar();
