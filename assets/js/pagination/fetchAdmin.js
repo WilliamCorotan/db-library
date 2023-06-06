@@ -54,7 +54,7 @@ function fetchAdmin(pageNumber = 1){
                         // Checks for current page
                         if(response.current_page == i){
                             $('.pagination').append(`
-                            <li class="page-item active disabled" aria-current="page" >
+                            <li class="page-item active" aria-current="page" >
                                 <a type="button" data-page-number="${i}" class="page-link">${i}</a>
                             </li>
                             `)    
