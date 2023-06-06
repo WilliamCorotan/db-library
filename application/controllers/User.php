@@ -8,4 +8,33 @@ class User extends CI_Controller
         $user = $this->user_model->get($id);
         exit(json_encode($user));
     }
+
+    /**
+     * Handles the request for updating the user's security information 
+     */
+    public function update_security($id)
+    {
+        // Form validation rules
+        $this->form_validation->set_rules('email', 'Email', 'required');
+
+        // Checks if form validation is not met
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+
+            $form_data = array(
+                'email' => $this->input->post('email'),
+            );
+
+            if (!empty($this->input->post('password'))) {
+                $form_data['password'] = password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+            }
+            // Updates data in the database
+            $this->user_model->update($id, $form_data);
+
+            $json_response['message'] = 'Personal information successfully updated!';
+            exit(json_encode($json_response));
+        }
+    }
 }

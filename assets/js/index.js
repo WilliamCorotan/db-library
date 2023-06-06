@@ -40,6 +40,26 @@ $(document).ready(function () {
         });
     });
 
+    // Edit user (Pencil Icon) button onclick event
+    $(document).on('click', '.edit-user', function(){
+        $.ajax({
+            type: "get",
+            url: `http://localhost/admin/fetch/user/${$(this).parent().parent().siblings().first().html()}`,
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                $('#edit_id').val(response.id);
+                $('#edit_last_name').val(response.last_name);
+                $('#edit_first_name').val(response.first_name);
+                $('#edit_email').val(response.email);
+
+                $('#edit-user-modal').modal('show');
+            }
+        });
+    });
+
+
+
     $('#add-admin-modal').on('shown.bs.modal', function () {
         document.querySelector('#last_name').focus()
     })

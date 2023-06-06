@@ -34,4 +34,5 @@
 
 <script src="<?= base_url('assets/js/pagination/fetchUser.js') ?>"></script>
 <script src="<?= base_url('assets/js/admin/user/userTable.js') ?>"></script>
+<script src="<?= base_url('assets/js/admin/user/editUser.js') ?>"></script>
 <script src="<?= base_url('assets/js/admin/user/searchUser.js') ?>"></script>

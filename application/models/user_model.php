@@ -16,18 +16,20 @@ class User_model extends CI_Model
     public function get_all($limit = 10, $offset = 0, $search)
     {
         if ($search == 'null') {
-            return $this->db->select('user.id, user.first_name, user.last_name, email')
+            return $this->db->select('user.id, user.first_name, user.last_name, email, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
                 ->from('user')
+                ->join('user_address', 'user_address.user_id = user.id', 'left')
                 ->limit($limit, $offset)
                 ->order_by('updated_at', 'DESC')
                 ->get()
                 ->result_array();
         } else {
-            return $this->db->select('user.id, user.first_name, user.last_name, email')
+            return $this->db->select('user.id, user.first_name, user.last_name, email, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
                 ->from('user')
-                ->like('first_name', $search)
-                ->or_like('last_name', $search)
-                ->or_like('email', $search)
+                ->join('user_address', 'user_address.user_id = user.id', 'left')
+                ->like('user.first_name', $search)
+                ->or_like('user.last_name', $search)
+                ->or_like('user.email', $search)
                 ->limit($limit, $offset)
                 ->order_by('updated_at', 'DESC')
                 ->get()
@@ -86,13 +88,13 @@ class User_model extends CI_Model
     public function count_record($search)
     {
         if ($search == 'null') {
-            $total = $this->db->select('user.id, user.first_name, user.last_name, email')
+            $total = $this->db->select('*')
                 ->from('user')
                 ->order_by('updated_at', 'DESC')
                 ->get()
                 ->result_array();
         } else {
-            $total = $this->db->select('user.id, user.first_name, user.last_name, email')
+            $total = $this->db->select('*')
                 ->from('user')
                 ->like('first_name', $search)
                 ->or_like('last_name', $search)

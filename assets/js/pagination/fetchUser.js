@@ -32,8 +32,7 @@ function fetchUser(pageNumber = 1){
                         <td>${element.last_name}</td>
                         <td>${element.first_name}</td> 
                         <td>${element.email}</td>
-                        <td>${element.status}</td>
-                        <td>${actions('admin')} </td>
+                        <td>${actions('user')} </td>
                     </tr>
                     `)
                 });

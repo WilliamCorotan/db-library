@@ -81,6 +81,7 @@ $route['admin/add/admin'] = 'admin/store';
 $route['admin/users/users'] = 'admin/show_users';
 $route['admin/fetch/users/(:any)/(:any)'] = 'admin/fetch_users/$1/$2';
 $route['admin/fetch/user/(:any)'] = 'user/show/$1';
+$route['admin/fetch/user/(:any)/edit'] = 'user/update_security/$1';
 
 // Admin Profile Routes
 $route['admin/profile'] = 'admin/show_profile';
