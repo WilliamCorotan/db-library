@@ -2,7 +2,8 @@
     <div id="datatable-container" class="container">
         <div class="my-3 d-flex justify-content-between">
             <h2>Admins</h2>
-            <div>
+            <div class="d-flex gap-4">
+                <input id="admin-search" class="form-control" type="search" placeholder="Search" aria-label="Search">
                 <a name="add-admin" id="add-admin" class="btn btn-success" role="button" data-bs-toggle="modal" data-bs-target="#add-admin-modal">Add</a>
             </div>
         </div>
@@ -37,3 +38,4 @@
 <script src="<?= base_url('assets/js/admin/user/adminTable.js') ?>"></script>
 <script src="<?= base_url('assets/js/admin/user/addAdmin.js') ?>"></script>
 <script src="<?= base_url('assets/js/admin/user/editAdmin.js') ?>"></script>
+<script src="<?= base_url('assets/js/admin/user/searchAdmin.js') ?>"></script>

@@ -3,16 +3,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin_model extends CI_Model
 {
-    public function get_all($id, $limit = 10, $offset = 0)
+    public function get_all($id, $limit = 10, $offset = 0, $search)
     {
-        return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
-            ->from('admin')
-            ->join('status', 'status.id = admin.status_id', 'left')
-            ->where('admin.id !=', $id)
-            ->limit($limit, $offset)
-            ->order_by('updated_at', 'DESC')
-            ->get()
-            ->result_array();
+        if ($search == 'null') {
+            return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+                ->from('admin')
+                ->join('status', 'status.id = admin.status_id', 'left')
+                ->where('admin.id !=', $id)
+                ->limit($limit, $offset)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        } else {
+            return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+                ->from('admin')
+                ->join('status', 'status.id = admin.status_id', 'left')
+                ->like('first_name', $search)
+                ->or_like('last_name', $search)
+                ->or_like('email', $search)
+                ->not_like('admin.id', $id, 'none')
+                ->limit($limit, $offset)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        }
     }
 
     public function get($id)
@@ -30,9 +44,30 @@ class Admin_model extends CI_Model
         return $this->db->update('admin', $data);
     }
 
-    public function count_record()
+    public function count_record($id, $search)
     {
-        return $this->db->count_all('admin');
+        if ($search == 'null') {
+            $total =  $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+                ->from('admin')
+                ->join('status', 'status.id = admin.status_id', 'left')
+                ->where('admin.id !=', $id)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        } else {
+            $total = $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+                ->from('admin')
+                ->join('status', 'status.id = admin.status_id', 'left')
+                ->like('first_name', $search)
+                ->or_like('last_name', $search)
+                ->or_like('email', $search)
+                ->not_like('admin.id', $id, 'none')
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        }
+
+        return $total;
     }
     /**
      * Verify the user credentials in the database
