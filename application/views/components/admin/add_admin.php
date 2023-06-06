@@ -11,7 +11,7 @@
                 <div class="mb-3 row">
                     <label for="last_name" class="col-sm-3 col-form-label">Last Name</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="last_name" name="last_name">
+                        <input type="text" class="form-control" id="last_name" name="last_name" autofocus>
                         <small id="last_name_error" class="text-danger"></small>
                     </div>
                 </div>
@@ -43,8 +43,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="add" type="submit" class="btn btn-primary">Add</button>
+                <button id="add" type="submit" class="btn btn-primary order-2">Add</button>
+                <button type="button" class="btn btn-secondary order-1" data-bs-dismiss="modal">Close</button>
             </div>
             <?= form_close() ?>
         </div>

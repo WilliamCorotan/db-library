@@ -39,4 +39,8 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#add-admin-modal').on('shown.bs.modal', function () {
+        document.querySelector('#last_name').focus()
+    })
 });
