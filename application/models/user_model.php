@@ -12,10 +12,29 @@ class User_model extends CI_Model
         return $this->db->insert('user', $data);
     }
 
-    public function get_all()
+
+    public function get_all($limit = 10, $offset = 0, $search)
     {
-        return $this->db->get('user')->result_array();
+        if ($search == 'null') {
+            return $this->db->select('user.id, user.first_name, user.last_name, email')
+                ->from('user')
+                ->limit($limit, $offset)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        } else {
+            return $this->db->select('user.id, user.first_name, user.last_name, email')
+                ->from('user')
+                ->like('first_name', $search)
+                ->or_like('last_name', $search)
+                ->or_like('email', $search)
+                ->limit($limit, $offset)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        }
     }
+
 
     /**
      * Fetches specific data of a user in the database based on ID
@@ -62,6 +81,28 @@ class User_model extends CI_Model
         else {
             return $this->db->insert('user_address', $data);
         }
+    }
+
+    public function count_record($search)
+    {
+        if ($search == 'null') {
+            $total = $this->db->select('user.id, user.first_name, user.last_name, email')
+                ->from('user')
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        } else {
+            $total = $this->db->select('user.id, user.first_name, user.last_name, email')
+                ->from('user')
+                ->like('first_name', $search)
+                ->or_like('last_name', $search)
+                ->or_like('email', $search)
+                ->order_by('updated_at', 'DESC')
+                ->get()
+                ->result_array();
+        }
+
+        return $total;
     }
 
     /**

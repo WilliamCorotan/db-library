@@ -259,9 +259,49 @@ class Admin extends CI_Controller
         exit(json_encode($json_response));
     }
 
-    public function fetch_users()
+    public function fetch_users($page = 1, $search = NULL)
     {
-        exit(json_encode($this->user_model->get_all()));
+        $config['base_url'] = base_url('admin/users/users');
+        $config['per_page'] = 10;
+        $config['total_rows'] = count($this->user_model->count_record($search));
+        $config['uri_segment'] = 4;
+
+        if ($page == 1 || $page == NULL) {
+
+            $current_offset = 0;
+        } else {
+            $current_offset = $config['per_page'] * ($page - 1);
+        }
+
+
+        // Checker for negative page number
+        if ($page == 1) {
+            $prev_page = null;
+        } else {
+            $prev_page = $page - 1;
+        }
+
+        // Checker for exceeding page number
+        if (($page) >=  ceil($config['total_rows'] / $config['per_page'])) {
+            $next_page = null;
+        } else {
+            $next_page = $page + 1;
+        }
+
+        $this->pagination->initialize($config);
+
+        // $page = (($this->uri->segment(4)) ? $this->uri->segment(4) : 0);
+        $json_response['data'] = $this->user_model->get_all($config['per_page'], $current_offset, $search);
+        $json_response['total_rows'] = $config['total_rows'];
+        $json_response['current_page'] = (int)$page;
+        $json_response['first_page'] = 1;
+        $json_response['last_page'] = ceil($config['total_rows'] / $config['per_page']);
+        $json_response['prev_page'] = $prev_page;
+        $json_response['next_page'] = $next_page;
+        $json_response['total_pages'] = ceil($config['total_rows'] / $config['per_page']);
+        $json_response['current_offset'] = $current_offset;
+        $json_response['search'] = $search;
+        exit(json_encode($json_response));
     }
 
     public function search_admins()

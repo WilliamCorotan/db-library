@@ -79,7 +79,7 @@ $route['admin/fetch/admin/(:any)'] = 'admin/show/$1';
 $route['admin/fetch/admin/(:any)/edit'] = 'admin/update/$1';
 $route['admin/add/admin'] = 'admin/store';
 $route['admin/users/users'] = 'admin/show_users';
-$route['admin/fetch/users'] = 'admin/fetch_users';
+$route['admin/fetch/users/(:any)/(:any)'] = 'admin/fetch_users/$1/$2';
 $route['admin/fetch/user/(:any)'] = 'user/show/$1';
 
 // Admin Profile Routes
