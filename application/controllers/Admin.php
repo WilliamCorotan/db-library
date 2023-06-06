@@ -217,11 +217,10 @@ class Admin extends CI_Controller
     public function fetch_admins($page = 1)
     {
         $config['base_url'] = base_url('admin/users/admins');
-        $config['total_rows'] = $this->admin_model->count_record();
+        $config['total_rows'] = ($this->admin_model->count_record() - 1);
         $config['per_page'] = 10;
         $config['uri_segment'] = 4;
-
-        if ($page == 1) {
+        if ($page == 1 || $page == NULL) {
 
             $current_offset = 0;
         } else {
@@ -247,11 +246,13 @@ class Admin extends CI_Controller
         // $page = (($this->uri->segment(4)) ? $this->uri->segment(4) : 0);
         $json_response['data'] = $this->admin_model->get_all($this->session->userdata('user_id'), $config['per_page'], $current_offset);
         $json_response['total_rows'] = $config['total_rows'];
-        $json_response['page'] = $page;
+        $json_response['current_page'] = (int)$page;
+        $json_response['first_page'] = 1;
+        $json_response['last_page'] = ceil($config['total_rows'] / $config['per_page']);
         $json_response['prev_page'] = $prev_page;
         $json_response['next_page'] = $next_page;
+        $json_response['total_pages'] = ceil($config['total_rows'] / $config['per_page']);
         $json_response['current_offset'] = $current_offset;
-        $json_response['nt'] = ($config['total_rows'] / $config['per_page']);
         exit(json_encode($json_response));
     }
 

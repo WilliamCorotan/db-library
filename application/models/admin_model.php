@@ -10,6 +10,7 @@ class Admin_model extends CI_Model
             ->join('status', 'status.id = admin.status_id', 'left')
             ->where('admin.id !=', $id)
             ->limit($limit, $offset)
+            ->order_by('updated_at', 'DESC')
             ->get()
             ->result_array();
     }
