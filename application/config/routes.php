@@ -83,6 +83,10 @@ $route['admin/fetch/users/(:any)/(:any)'] = 'admin/fetch_users/$1/$2';
 $route['admin/fetch/user/(:any)'] = 'user/show/$1';
 $route['admin/fetch/user/(:any)/edit'] = 'user/update_security/$1';
 
+// Misc Routes
+$route['admin/fetch/active'] = 'admin/count_active_admins';
+$route['user/fetch/active'] = 'user/count_active_admins';
+
 // Admin Profile Routes
 $route['admin/profile'] = 'admin/show_profile';
 $route['admin/profile/update/user'] = 'admin/update_user';

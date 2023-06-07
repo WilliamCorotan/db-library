@@ -107,6 +107,16 @@ class User_model extends CI_Model
         return $total;
     }
 
+    public function count_active()
+    {
+        return $this->db->select('COUNT(user.id) as count, status.code')
+            ->from('user')
+            ->join('status', 'status.id = user.status_id', 'left')
+            ->group_by('user.status_id')
+            ->get()
+            ->result_array();
+    }
+
     /**
      * Verify the user credentials in the database
      * @param string $email

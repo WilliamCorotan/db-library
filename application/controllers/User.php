@@ -37,4 +37,9 @@ class User extends CI_Controller
             exit(json_encode($json_response));
         }
     }
+
+    public function count_active_admins()
+    {
+        exit(json_encode($this->user_model->count_active()));
+    }
 }

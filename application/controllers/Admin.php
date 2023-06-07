@@ -301,8 +301,9 @@ class Admin extends CI_Controller
         exit(json_encode($json_response));
     }
 
-    public function search_admins()
+    public function count_active_admins()
     {
+        exit(json_encode($this->admin_model->count_active()));
     }
     /**
      * Custom validation rule for checking if the passed password matches the database 

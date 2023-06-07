@@ -69,6 +69,16 @@ class Admin_model extends CI_Model
 
         return $total;
     }
+
+    public function count_active()
+    {
+        return $this->db->select('COUNT(admin.id) as count, status.code')
+            ->from('admin')
+            ->join('status', 'status.id = admin.status_id', 'left')
+            ->group_by('admin.status_id')
+            ->get()
+            ->result_array();
+    }
     /**
      * Verify the user credentials in the database
      * @param string $email
