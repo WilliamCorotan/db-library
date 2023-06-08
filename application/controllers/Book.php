@@ -55,9 +55,7 @@ class Book extends CI_Controller
                 $form_data['publisher_id'] = $publisher;
             }
 
-            $json_response['data'] = $this->book_model->insert($form_data);
-            $json_response['message'] = 'Successfully updated profile picture!';
-            exit(json_encode($json_response));
+            redirect(base_url('admin/books'));
         } else {
             $errors = array('error' => $this->upload->display_errors());
             $json_response['message'] = $errors;
