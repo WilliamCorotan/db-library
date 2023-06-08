@@ -87,6 +87,16 @@ $route['admin/fetch/user/(:any)/edit'] = 'user/update_security/$1';
 $route['admin/fetch/active'] = 'admin/count_active_admins';
 $route['user/fetch/active'] = 'user/count_active_admins';
 
+
+//Book Routes
+$route['book/add'] = 'book/create';
+$route['book/store'] = 'book/store';
+
+// Author Routes
+$route['filter/author'] = 'author/filter';
+$route['filter/subject'] = 'subject/filter';
+$route['filter/publisher'] = 'publisher/filter';
+
 // Admin Profile Routes
 $route['admin/profile'] = 'admin/show_profile';
 $route['admin/profile/update/user'] = 'admin/update_user';
