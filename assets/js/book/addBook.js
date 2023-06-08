@@ -30,10 +30,10 @@ $('#add-book-form').on('submit', function(event){
         processData: false,
         contentType: false,
         beforeSend: function(){
-            console.log(formData)
+            $('input, textarea').attr('disabled', 'disabled')
         },
         success: function (response) {
-            console.log(response)
+            $('input, textarea').removeAttr('disabled')
         }
     });
 })
