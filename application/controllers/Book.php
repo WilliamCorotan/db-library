@@ -3,11 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Book extends CI_Controller
 {
+    public function index()
+    {
+        $data['title'] = 'All Books';
+        $this->load->view('partials/admin_header', $data);
+        $this->load->view('pages/books/index');
+        $this->load->view('partials/footer');
+    }
+
     public function create()
     {
         $data['title'] = 'Add Book';
         $this->load->view('partials/admin_header', $data);
-        $this->load->view('pages/books/index');
+        $this->load->view('pages/books/add');
         $this->load->view('partials/footer');
     }
 
@@ -54,8 +62,8 @@ class Book extends CI_Controller
                 $publisher = $this->publisher_model->insert($this->input->post('publisher'));
                 $form_data['publisher_id'] = $publisher;
             }
-
-            redirect(base_url('admin/books'));
+            $json_response['location'] = base_url('admin/books');
+            exit(json_encode($json_response));
         } else {
             $errors = array('error' => $this->upload->display_errors());
             $json_response['message'] = $errors;

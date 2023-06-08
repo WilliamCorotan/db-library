@@ -89,6 +89,7 @@ $route['user/fetch/active'] = 'user/count_active_admins';
 
 
 //Book Routes
+$route['admin/books'] = 'book/index';
 $route['book/add'] = 'book/create';
 $route['book/store'] = 'book/store';
 

@@ -34,6 +34,10 @@ $('#add-book-form').on('submit', function(event){
         },
         success: function (response) {
             $('input, textarea').removeAttr('disabled')
+            console.log(response)
+            if(response.location){
+                location.replace(response.location);
+            }
         }
     });
 })

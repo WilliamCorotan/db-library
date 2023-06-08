@@ -24,7 +24,7 @@
                 <div class="row p-0 px-3  mt-2 bg-light-subtle">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 p-2">
-                            <a class="nav-link px-3 " href="#">All Books</a>
+                            <a class="nav-link px-3 " href="<?= base_url('admin/books') ?>">All Books</a>
                         </li>
                         <li class="nav-item fs-6 p-2">
                             <a class="nav-link px-3 " href="<?= base_url('book/add') ?>">Add</a>
