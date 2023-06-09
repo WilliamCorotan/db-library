@@ -97,7 +97,13 @@ class Book extends CI_Controller
 
         $this->pagination->initialize($config);
 
-        $data['books'] = $this->book_model->get_all($config['per_page'], $offset);
+        $search = $this->input->get('search');
+        if (null !== $search) {
+            $data['books'] = $this->book_model->get_all($config['per_page'], $offset, $this->input->get('search'));
+        } else {
+            $data['books'] = $this->book_model->get_all($config['per_page'], $offset);
+        }
+
         $data['config'] = $config;
         $response  = $this->load->view('components/books/book_table', $data);
         return $response;
