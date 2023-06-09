@@ -74,9 +74,32 @@ class Book extends CI_Controller
         exit(json_encode($json_response));
     }
 
-    public function fetch()
+    public function fetch($offset = 0)
     {
-        $response  = $this->load->view('components/books/book_table');
+        $config['base_url'] = base_url('book/fetch');
+        $config['per_page'] = 5;
+        $config['total_rows'] = $this->book_model->count();
+        $config['uri_segment'] = 3;
+        $config['full_tag_open']    = '<nav id="book-pagination"><ul class="pagination">';
+        $config['full_tag_close']   = '</ul></nav>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tag_close']  = '<span aria-hidden="true"></span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tag_close']  = '</span></li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tag_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tag_close']  = '</span></li>';
+
+        $this->pagination->initialize($config);
+
+        $data['books'] = $this->book_model->get_all($config['per_page'], $offset);
+        $data['config'] = $config;
+        $response  = $this->load->view('components/books/book_table', $data);
         return $response;
     }
 }
