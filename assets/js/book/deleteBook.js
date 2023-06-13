@@ -1,15 +1,26 @@
 $(document).ready(function () {
-    $(document).on('click', '#delete-book-btn',function(){
-        console.log('clickkk')
+
+    $('#delete-book-modal-btn').on('click', function(){
+        $('#book-name').html($('#title').val())
+        $('#bookModal').modal('hide');
+        $('#delete-book').modal('show');
+    })
+
+    $(document).on('click', '#delete-book',function(){
         $.ajax({
             type: "post",
-            url: `${location.origin}/book/${$(this).attr('data-book-id')}/delete`,
+            url: `${location.origin}/book/${$('#edit-id').val()}/delete`,
             dataType: "json",
             success: function (response) {
+                $('#delete-book').modal('hide');
                 console.log(response)
-                $('#bookModal').modal('hide');
                 fetchBooks();
             }
         });
+    })
+
+    $('#cancel-book-delete').on('click', function(){
+        $('#delete-book').modal('hide');
+        $('#bookModal').modal('show');
     })
 });

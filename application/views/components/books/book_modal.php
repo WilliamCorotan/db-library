@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="delete-book-btn" class="btn btn-outline-danger">Delete</button>
+                <button type="button" id="delete-book-modal-btn" class="btn btn-outline-danger">Delete</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
 
@@ -98,6 +98,7 @@
     </div>
 </div>
 
+<?php $this->load->view('components/books/book_delete_prompt') ?>
 <script src="<?= base_url('assets/js/book/filterAuthor.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/filterSubject.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/filterPublisher.js') ?>"></script>
