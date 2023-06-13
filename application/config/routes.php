@@ -94,6 +94,8 @@ $route['book/add'] = 'book/create';
 $route['book/store'] = 'book/store';
 $route['book/fetch'] = 'book/fetch';
 $route['book/fetch/(:any)'] = 'book/fetch/$1';
+$route['book/(:any)'] = 'book/show/$1';
+$route['book/(:any)/edit'] = 'book/update/$1';
 
 // Author Routes
 $route['filter/author'] = 'author/filter';

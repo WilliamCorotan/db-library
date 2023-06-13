@@ -5,6 +5,10 @@ class Book extends CI_Controller
 {
     public function index()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $data['title'] = 'All Books';
         $this->load->view('partials/admin_header', $data);
         $this->load->view('pages/books/index');
@@ -13,6 +17,10 @@ class Book extends CI_Controller
 
     public function create()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $data['title'] = 'Add Book';
         $this->load->view('partials/admin_header', $data);
         $this->load->view('pages/books/add');
@@ -21,6 +29,10 @@ class Book extends CI_Controller
 
     public function store()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $config['upload_path'] = './assets/images/books/';
         $config['allowed_types'] = 'gif|jpg|png|webp';
         $config['encrypt_name'] = TRUE;
@@ -74,8 +86,23 @@ class Book extends CI_Controller
         exit(json_encode($json_response));
     }
 
+    public function show($id)
+    {
+        $json_response['data'] = $this->book_model->get($id);
+        exit(json_encode($json_response));
+    }
+
+    public function update($id)
+    {
+        exit(json_encode($this->input->post()));
+    }
+
     public function fetch($offset = 0)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $config['base_url'] = base_url('book/fetch');
         $config['per_page'] = 5;
         $config['total_rows'] = $this->book_model->count();

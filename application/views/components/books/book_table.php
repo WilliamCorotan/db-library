@@ -25,7 +25,7 @@
                 <td><?= $book['call_number'] ?></td>
                 <td><?= $book['publisher'] ?></td>
                 <td><?= $book['publish_date'] ?></td>
-                <td class="fw-bold"><?= $book['borrow_status'] ?></td>
+                <td class="fw-bold <?= ($book['borrow_status'] == 'available') ? 'text-success' : 'text-danger' ?>"><?= $book['borrow_status'] ?></td>
             </tr>
         <?php endforeach ?>
     </tbody>

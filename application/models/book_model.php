@@ -39,6 +39,19 @@ class Book_model extends CI_Model
         }
     }
 
+    public function get($id)
+    {
+        return $this->db->select('book.id, book.title, book.description, book.cover_image, book.author_id, book.subject_id, book.call_number, book.publish_date, book.publisher_id, book.borrow_status_id, author.name as author, subject.name as subject, publisher.name as publisher, borrow_status.code as borrow_status')
+            ->from('book')
+            ->join('author', 'book.author_id = author.id', 'left')
+            ->join('subject', 'book.subject_id = subject.id', 'left')
+            ->join('publisher', 'book.publisher_id = publisher.id', 'left')
+            ->join('borrow_status', 'book.borrow_status_id = borrow_status.id', 'left')
+            ->where('book.id', $id)
+            ->get()
+            ->row_array();
+    }
+
     public function count()
     {
         return $this->db->count_all('book');
