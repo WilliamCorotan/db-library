@@ -106,5 +106,208 @@ $(document).ready(function () {
             });
         }
     });
-        
+
+    $.ajax({
+        type: "get",
+        url: `${location.origin}/fetch/book/subjects`,
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            Highcharts.chart('book-subjects-card', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Books per Subject',
+                    align: 'left'
+                },
+    
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Books',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: response[0].name,
+                            y: parseInt(response[0].count)
+                        },
+                        {
+                            name: response[1].name,
+                            y: parseInt(response[1].count)
+                        },
+                        {
+                            name: response[2].name,
+                            y: parseInt(response[2].count)
+                        },
+                        {
+                            name: response[3].name,
+                            y: parseInt(response[3].count)
+                        },
+                        {
+                            name: response[4].name,
+                            y: parseInt(response[4].count)
+                        },]
+                }]
+            });
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: `${location.origin}/fetch/book/authors`,
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            Highcharts.chart('book-authors-card', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Books per Author',
+                    align: 'left'
+                },
+    
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Books',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: response[0].name,
+                            y: parseInt(response[0].count)
+                        },
+                        {
+                            name: response[1].name,
+                            y: parseInt(response[1].count)
+                        },
+                        {
+                            name: response[2].name,
+                            y: parseInt(response[2].count)
+                        },
+                        {
+                            name: response[3].name,
+                            y: parseInt(response[3].count)
+                        },
+                        {
+                            name: response[4].name,
+                            y: parseInt(response[4].count)
+                        },
+                        {
+                            name: response[5].name,
+                            y: parseInt(response[5].count)
+                        },
+                        {
+                            name: response[6].name,
+                            y: parseInt(response[6].count)
+                        },
+                    ]
+                }]
+            });
+        }
+    });
+     
+    $.ajax({
+        type: "get",
+        url: `${location.origin}/fetch/book/publishers`,
+        dataType: "json",
+        success: function(response) {
+            console.log(response);
+            Highcharts.chart('book-publishers-card', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Books per Publisher',
+                    align: 'left'
+                },
+    
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Books',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: response[0].name,
+                            y: parseInt(response[0].count)
+                        },
+                        {
+                            name: response[1].name,
+                            y: parseInt(response[1].count)
+                        },
+                        {
+                            name: response[2].name,
+                            y: parseInt(response[2].count)
+                        },
+                        {
+                            name: response[3].name,
+                            y: parseInt(response[3].count)
+                        },
+                        {
+                            name: response[4].name,
+                            y: parseInt(response[4].count)
+                        },
+                        {
+                            name: response[5].name,
+                            y: parseInt(response[5].count)
+                        },
+                        {
+                            name: response[6].name,
+                            y: parseInt(response[6].count)
+                        },
+                    ]
+                }]
+            });
+        }
+    });
 });

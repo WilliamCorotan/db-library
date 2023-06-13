@@ -66,4 +66,34 @@ class Book_model extends CI_Model
     {
         return $this->db->count_all('book');
     }
+
+    public function count_subjects()
+    {
+        return $this->db->select('COUNT(book.subject_id) as count, subject.name')
+            ->from('book')
+            ->join('subject', 'subject.id = book.subject_id', 'left')
+            ->group_by('book.subject_id')
+            ->get()
+            ->result_array();
+    }
+
+    public function count_authors()
+    {
+        return $this->db->select('COUNT(book.author_id) as count, author.name')
+            ->from('book')
+            ->join('author', 'author.id = book.author_id', 'left')
+            ->group_by('book.author_id')
+            ->get()
+            ->result_array();
+    }
+
+    public function count_publishers()
+    {
+        return $this->db->select('COUNT(book.publisher_id) as count, publisher.name')
+            ->from('book')
+            ->join('publisher', 'publisher.id = book.publisher_id', 'left')
+            ->group_by('book.publisher_id')
+            ->get()
+            ->result_array();
+    }
 }

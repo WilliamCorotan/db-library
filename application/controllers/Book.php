@@ -214,4 +214,17 @@ class Book extends CI_Controller
         $response  = $this->load->view('components/books/book_table', $data);
         return $response;
     }
+
+    public function count_books_by_subject()
+    {
+        exit(json_encode($this->book_model->count_subjects()));
+    }
+    public function count_books_by_author()
+    {
+        exit(json_encode($this->book_model->count_authors()));
+    }
+    public function count_books_by_publisher()
+    {
+        exit(json_encode($this->book_model->count_publishers()));
+    }
 }

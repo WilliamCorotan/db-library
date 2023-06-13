@@ -98,7 +98,9 @@ $route['book/fetch/(:any)'] = 'book/fetch/$1';
 $route['book/(:any)'] = 'book/show/$1';
 $route['book/(:any)/edit'] = 'book/update/$1';
 $route['book/(:any)/delete'] = 'book/destroy/$1';
-
+$route['fetch/book/subjects'] = 'book/count_books_by_subject';
+$route['fetch/book/authors'] = 'book/count_books_by_author';
+$route['fetch/book/publishers'] = 'book/count_books_by_publisher';
 // Author Routes
 $route['filter/author'] = 'author/filter';
 $route['filter/subject'] = 'subject/filter';
