@@ -76,6 +76,13 @@ class Admin extends CI_Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $this->admin_model->delete($id);
+        $json_response['message'] = "Successfully Deleted Admin!";
+        exit(json_encode($json_response));
+    }
+
     /**
      * Loads login page
      */

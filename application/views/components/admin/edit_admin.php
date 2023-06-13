@@ -55,10 +55,13 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="delete-admin-modal-btn" type="button" class="btn btn-outline-danger">Delete</button>
                 <button id="add" type="submit" class="btn btn-primary">Update</button>
             </div>
-            <?= form_close() ?>
+            <?= form_close() ?>z
         </div>
     </div>
 </div>
+
+<?php $this->load->view('components/admin/admin_delete_prompt') ?>
+<script src="<?= base_url('assets/js/admin/user/deleteAdmin.js') ?>"></script>

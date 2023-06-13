@@ -44,6 +44,11 @@ class Admin_model extends CI_Model
         return $this->db->update('admin', $data);
     }
 
+    public function delete($id)
+    {
+        $this->db->delete('admin', array('id' => $id));
+    }
+
     public function count_record($id, $search)
     {
         if ($search == 'null') {

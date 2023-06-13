@@ -78,6 +78,7 @@ $route['admin/fetch/admins/(:any)/(:any)'] = 'admin/fetch_admins/$1/$2';
 $route['admin/fetch/admin/(:any)'] = 'admin/show/$1';
 $route['admin/fetch/admin/(:any)/edit'] = 'admin/update/$1';
 $route['admin/add/admin'] = 'admin/store';
+$route['admin/delete/admin/(:any)'] = 'admin/destroy/$1';
 $route['admin/users/users'] = 'admin/show_users';
 $route['admin/fetch/users/(:any)/(:any)'] = 'admin/fetch_users/$1/$2';
 $route['admin/fetch/user/(:any)'] = 'user/show/$1';
