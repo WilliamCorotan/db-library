@@ -19,3 +19,4 @@
 <script src="<?= base_url('assets/js/book/searchBook.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/showBook.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/editBook.js') ?>"></script>
+<script src="<?= base_url('assets/js/book/deleteBook.js') ?>"></script>

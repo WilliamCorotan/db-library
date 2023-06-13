@@ -169,6 +169,13 @@ class Book extends CI_Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $this->book_model->delete($id);
+        $json_response['message'] = 'Successfully Deleted Book Entry!';
+        exit(json_encode($json_response));
+    }
+
     public function fetch($offset = 0)
     {
         if (empty($this->session->userdata('is_logged_in'))) {

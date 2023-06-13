@@ -57,6 +57,11 @@ class Book_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('book', $data);
     }
+
+    public function delete($id)
+    {
+        $this->db->delete('book', array('id' => $id));
+    }
     public function count()
     {
         return $this->db->count_all('book');

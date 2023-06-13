@@ -96,6 +96,7 @@ $route['book/fetch'] = 'book/fetch';
 $route['book/fetch/(:any)'] = 'book/fetch/$1';
 $route['book/(:any)'] = 'book/show/$1';
 $route['book/(:any)/edit'] = 'book/update/$1';
+$route['book/(:any)/delete'] = 'book/destroy/$1';
 
 // Author Routes
 $route['filter/author'] = 'author/filter';

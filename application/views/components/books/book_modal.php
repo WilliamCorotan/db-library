@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" id="delete-book-btn" class="btn btn-outline-danger">Delete</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
             </div>
 

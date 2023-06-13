@@ -26,6 +26,8 @@ $(document).on('click', '.book-row', function(){
 
             $('#call_number').val(response.data.call_number)
             $('#publish_date').val(response.data.publish_date)
+
+            $('#delete-book-btn').attr('data-book-id', response.data.id)
             $('#bookModal').modal('show')
         }
     });
