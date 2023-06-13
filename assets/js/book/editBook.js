@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    const spinner = `
+    <div style="width:98px;">
+        <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>`;
     $('#edit-book-form').on('submit', function(event){
         event.preventDefault();
         const id = $('#edit-id').val();
@@ -43,8 +49,15 @@ $(document).ready(function () {
             contentType: false,
             data: formData,
             dataType: "json",
+            beforeSend: function(){
+                $('input, select, textarea').attr('disabled', 'disabled');
+                $('button[type=submit]').html(spinner);
+            },
             success: function (response) {
-                console.log(response)
+                $('input, select, textarea').removeAttr('disabled');
+                $('button[type=submit]').html('Save Changes');
+                $('#bookModal').modal('hide');
+                fetchBooks();
             }
         });
     })
