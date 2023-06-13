@@ -29,9 +29,6 @@
                         <li class="nav-item fs-6 p-2">
                             <a class="nav-link px-3 " href="<?= base_url('book/add') ?>">Add</a>
                         </li>
-                        <li class="nav-item fs-6 p-2">
-                            <a class="nav-link px-3 " href="#">Search</a>
-                        </li>
                     </ul>
                 </div>
             </div>
