@@ -33,57 +33,71 @@ class Book extends CI_Controller
             redirect('admin/login');
             exit();
         }
-        $config['upload_path'] = './assets/images/books/';
-        $config['allowed_types'] = 'gif|jpg|png|webp';
-        $config['encrypt_name'] = TRUE;
-        $config['max_size'] = '5120';
 
-        $this->load->library('upload', $config);
-        $this->upload->initialize($config);
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('author', 'Author', 'required');
+        $this->form_validation->set_rules('subject', 'Subject', 'required');
+        $this->form_validation->set_rules('call_number', 'Call Number', 'required');
+        $this->form_validation->set_rules('publisher', 'Publisher', 'required');
+        $this->form_validation->set_rules('publish_date', 'Publish Date', 'required');
 
-        $form_data = array(
-            'title' => $this->input->post('title'),
-            'description' => $this->input->post('description'),
-            'subject_id' => $this->input->post('subject'),
-            'call_number' => $this->input->post('call_number'),
-            'publish_date' => $this->input->post('publish_date'),
-            'publisher_id' => $this->input->post('publisher'),
-            'borrow_status_id' => 1
-        );
-
-        if ($this->upload->do_upload('cover_image')) {
-
-            $form_data['cover_image'] = $this->upload->data('file_name');
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
         } else {
-            $form_data['cover_image'] = '01-no-cover.jpg';
+            $config['upload_path'] = './assets/images/books/';
+            $config['allowed_types'] = 'gif|jpg|png|webp';
+            $config['encrypt_name'] = TRUE;
+            $config['max_size'] = '5120';
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            $form_data = array(
+                'title' => $this->input->post('title'),
+                'description' => $this->input->post('description'),
+                'subject_id' => $this->input->post('subject'),
+                'call_number' => $this->input->post('call_number'),
+                'publish_date' => $this->input->post('publish_date'),
+                'publisher_id' => $this->input->post('publisher'),
+                'borrow_status_id' => 1
+            );
+
+            if ($this->upload->do_upload('cover_image')) {
+
+                $form_data['cover_image'] = $this->upload->data('file_name');
+            } else {
+                $form_data['cover_image'] = '01-no-cover.jpg';
+            }
+
+            if (!empty($this->author_model->get($this->input->post('author')))) {
+                $form_data['author_id'] = $this->input->post('author');
+            } else {
+                $author =  $this->author_model->insert($this->input->post('author'));
+                $form_data['author_id'] = $author;
+            }
+
+
+            if (!empty($this->subject_model->get($this->input->post('subject')))) {
+                $form_data['subject_id'] = $this->input->post('subject');
+            } else {
+                $subject = $this->subject_model->insert($this->input->post('subject'));
+                $form_data['subject_id'] = $subject;
+            }
+
+
+            if (!empty($this->publisher_model->get($this->input->post('publisher')))) {
+                $form_data['publisher_id'] = $this->input->post('publisher');
+            } else {
+                $publisher = $this->publisher_model->insert($this->input->post('publisher'));
+                $form_data['publisher_id'] = $publisher;
+            }
+
+            $this->book_model->insert($form_data);
+            $json_response['location'] = base_url('admin/books');
+            exit(json_encode($json_response));
         }
-
-        if (!empty($this->author_model->get($this->input->post('author')))) {
-            $form_data['author_id'] = $this->input->post('author');
-        } else {
-            $author =  $this->author_model->insert($this->input->post('author'));
-            $form_data['author_id'] = $author;
-        }
-
-
-        if (!empty($this->subject_model->get($this->input->post('subject')))) {
-            $form_data['subject_id'] = $this->input->post('subject');
-        } else {
-            $subject = $this->subject_model->insert($this->input->post('subject'));
-            $form_data['subject_id'] = $subject;
-        }
-
-
-        if (!empty($this->publisher_model->get($this->input->post('publisher')))) {
-            $form_data['publisher_id'] = $this->input->post('publisher');
-        } else {
-            $publisher = $this->publisher_model->insert($this->input->post('publisher'));
-            $form_data['publisher_id'] = $publisher;
-        }
-
-        $this->book_model->insert($form_data);
-        $json_response['location'] = base_url('admin/books');
-        exit(json_encode($json_response));
     }
 
     public function show($id)

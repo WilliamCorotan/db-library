@@ -12,6 +12,7 @@
                 <label for="title" class="col-lg-2 col-form-label">Title</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" name="title" id="title" aria-describedby="titleId" placeholder="Book Title">
+                    <small id="title-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 
@@ -19,6 +20,7 @@
                 <label for="description" class="col-lg-2 col-form-label">Description</label>
                 <div class="col-lg-10">
                     <textarea class="form-control" name="description" id="description" rows="3" placeholder="Book Description..."></textarea>
+                    <small id="description-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 
@@ -28,6 +30,7 @@
                     <input type="text" class="form-control" name="author" id="author" aria-describedby="authorId" placeholder="Author">
                     <div id="author-hint" class="rounded list-group">
                     </div>
+                    <small id="author-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 
@@ -36,7 +39,7 @@
                 <div class="col-lg-10  position-relative">
                     <input type="text" class="form-control" name="subject" id="subject" aria-describedby="subjectId" placeholder="Subject">
                     <div id="subject-hint" class="rounded list-group">
-                    </div>
+                    </div><small id="subject-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 
@@ -44,6 +47,7 @@
                 <label for="call_number" class="col-lg-2 col-form-label">Call Number</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" name="call_number" id="call_number" aria-describedby="call_numberId" placeholder="Call Number">
+                    <small id="call-number-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 
@@ -51,6 +55,7 @@
                 <label for="publisher" class="col-lg-2 col-form-label">Publisher</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" name="publisher" id="publisher" aria-describedby="publisherId" placeholder="Publisher">
+                    <small id="publisher-error" class="form-errors text-danger"></small>
                     <div id="publisher-hint" class="rounded list-group">
                     </div>
                 </div>
@@ -60,6 +65,7 @@
                 <label for="publish_date" class="col-lg-2 col-form-label">Publish Year</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" name="publish_date" id="publish_date" aria-describedby="publish_dateId" placeholder="Publish Year">
+                    <small id="publish_date-error" class="form-errors text-danger"></small>
                 </div>
             </div>
 

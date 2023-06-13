@@ -17,8 +17,15 @@ $('#add-book-form').on('submit', function(event){
     } else{
         formData.append('subject',$('#subject').val());
     }
+
+    if($('#publisher').attr('data-publisher-id')){
+        formData.append('publisher',$('#publisher').attr('data-publisher-id'));
+    } else{
+        formData.append('publisher',$('#publisher').val());
+    }
+
+
     formData.append('call_number',$('#call_number').val());
-    formData.append('publisher',$('#publisher').val());
     formData.append('publish_date',$('#publish_date').val());
     
 
@@ -31,10 +38,41 @@ $('#add-book-form').on('submit', function(event){
         contentType: false,
         beforeSend: function(){
             $('input, textarea').attr('disabled', 'disabled')
+            $('.form-errors').html('');
         },
         success: function (response) {
             $('input, textarea').removeAttr('disabled')
-            console.log(response)
+            if(response.form_errors){
+                console.log(response.form_errors)
+
+                if(response.form_errors.title){
+                        $('#title-error').html(response.form_errors.title)
+                }
+
+                if(response.form_errors.description){
+                        $('#description-error').html(response.form_errors.description)
+                }
+
+                if(response.form_errors.author){
+                        $('#author-error').html(response.form_errors.author)
+                }
+
+                if(response.form_errors.subject){
+                        $('#subject-error').html(response.form_errors.subject)
+                }
+
+                if(response.form_errors.call_number){
+                        $('#call_number-error').html(response.form_errors.call_number)
+                }
+
+                if(response.form_errors.publisher){
+                        $('#publisher-error').html(response.form_errors.publisher)
+                }
+
+                if(response.form_errors.publish_date){
+                        $('#publish_date-error').html(response.form_errors.publish_date)
+                }
+            }
             if(response.location){
                 location.replace(response.location);
             }
