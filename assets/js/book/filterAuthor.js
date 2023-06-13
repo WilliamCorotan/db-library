@@ -1,7 +1,6 @@
 //setup before functions
 let typingTimer;                //timer identifier
 let doneTypingInterval = 300;  //time in ms, 5 second for example
-let $input = $('#author');
 
 const hint = (el)=>{
      return (`<a type="button" data-author-id="${el.id}" class="list-group-item author-filter" aria-describedby="authorFilter">${el.name}</a>`)
@@ -12,19 +11,24 @@ const spinner = `
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>`;
+
+console.log('test fa')
+console.log($('#author'))
 //on keyup, start the countdown
-$input.on('keyup', function () {
+$('#author').on('keyup', function () {
   clearTimeout(typingTimer);
-  typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  typingTimer = setTimeout(doeTypingAuthor, doneTypingInterval);
+  console.log('keyup')
 });
 
 //on keydown, clear the countdown 
-$input.on('keydown', function () {
+$('#author').on('keydown', function () {
   clearTimeout(typingTimer);
+  console.log('keydown')
 });
 
 //user is "finished typing," do something
-function doneTyping () {
+function doeTypingAuthor () {
   //do something
   $('#author').removeAttr('data-author-id');
   
@@ -36,13 +40,14 @@ function doneTyping () {
   $.ajax({
     type: "get",
     url: `${location.origin}/filter/author`,
-    data: {input: $input.val()},
+    data: {input: $('#author').val()},
     dataType: "json",
     beforeSend: function(){
         $('#author-hint').html(spinner)
         $('#author-hint').removeClass('d-none')
     },
     success: function (response) {
+      console.log('response')
         $('#author-hint').children().remove();
         response.forEach(element => {
             $('#author-hint').append(hint(element));
