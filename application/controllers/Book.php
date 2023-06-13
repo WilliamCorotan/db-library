@@ -108,7 +108,65 @@ class Book extends CI_Controller
 
     public function update($id)
     {
-        exit(json_encode($this->input->post()));
+        $config['upload_path'] = './assets/images/books/';
+        $config['allowed_types'] = 'gif|jpg|png|webp';
+        $config['encrypt_name'] = TRUE;
+        $config['max_size'] = '5120';
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('description', 'Description', 'required');
+        $this->form_validation->set_rules('author', 'Author', 'required');
+        $this->form_validation->set_rules('subject', 'Subject', 'required');
+        $this->form_validation->set_rules('call_number', 'Call Number', 'required');
+        $this->form_validation->set_rules('publisher', 'Publisher', 'required');
+        $this->form_validation->set_rules('publish_date', 'Publish Date', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        } else {
+            if ($this->upload->do_upload('cover_image')) {
+                $form_data['cover_image'] = $this->upload->data('file_name');
+            } else {
+                $form_data['cover_image'] = $this->input->post('cover_image');
+            }
+
+            $form_data['title'] = $this->input->post('title');
+            $form_data['description'] = $this->input->post('description');
+            $form_data['call_number'] = $this->input->post('call_number');
+            $form_data['publish_date'] = $this->input->post('publish_date');
+            $form_data['borrow_status_id'] = $this->input->post('borrow_status');
+
+            if (!empty($this->author_model->get($this->input->post('author')))) {
+                $form_data['author_id'] = $this->input->post('author');
+            } else {
+                $author =  $this->author_model->insert($this->input->post('author'));
+                $form_data['author_id'] = $author;
+            }
+
+
+            if (!empty($this->subject_model->get($this->input->post('subject')))) {
+                $form_data['subject_id'] = $this->input->post('subject');
+            } else {
+                $subject = $this->subject_model->insert($this->input->post('subject'));
+                $form_data['subject_id'] = $subject;
+            }
+
+
+            if (!empty($this->publisher_model->get($this->input->post('publisher')))) {
+                $form_data['publisher_id'] = $this->input->post('publisher');
+            } else {
+                $publisher = $this->publisher_model->insert($this->input->post('publisher'));
+                $form_data['publisher_id'] = $publisher;
+            }
+
+            $this->book_model->update($id, $form_data);
+
+            exit(json_encode($form_data));
+        }
     }
 
     public function fetch($offset = 0)

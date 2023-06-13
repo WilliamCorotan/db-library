@@ -52,6 +52,11 @@ class Book_model extends CI_Model
             ->row_array();
     }
 
+    public function update($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('book', $data);
+    }
     public function count()
     {
         return $this->db->count_all('book');

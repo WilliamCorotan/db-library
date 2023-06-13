@@ -14,7 +14,7 @@
                 <div class="row px-4 py-3">
                     <div class="text-center">
                         <img id="cover_image" class="img-fluid mb-3" src="" alt="" style="max-width: 220px;">
-                        <input type="file" class="form-control" name="cover_image" id="cover_image">
+                        <input type="file" class="form-control" name="cover_image" id="edit-cover_image">
                     </div>
                     <div>
                         <input type="hidden" name="id" id="edit-id">
