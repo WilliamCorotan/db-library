@@ -34,7 +34,8 @@ class Admin extends CI_Controller
                 'status_id' => 1,
             );
             $this->admin_model->insert($form_data);
-            exit(json_encode($this->input->post()));
+            $json_response['message'] = 'Successfully added admin!';
+            exit(json_encode($json_response));
         }
     }
 
@@ -70,8 +71,7 @@ class Admin extends CI_Controller
         } else {
             // updates the user data in the database
             $this->admin_model->update($form_data);
-            $json_response['message'] = 'Personal information successfully updated!';
-            $json_response['data'] = $form_data;
+            $json_response['message'] = 'Successfully updated admin information!';
             exit(json_encode($json_response));
         }
     }

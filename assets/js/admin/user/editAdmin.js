@@ -18,9 +18,6 @@ $('#edit-admin-form').on('submit', function(event){
         url: `http://localhost/admin/fetch/admin/${$('#edit_id').val()}/edit`,
         data: formData,
         dataType: "json",
-        beforeSend: function (){
-            console.log(formData)
-        },
         success: function (response) {
             if (response.form_errors) {
                 if (response.form_errors.first_name) {
@@ -36,6 +33,16 @@ $('#edit-admin-form').on('submit', function(event){
             } else {
                 $('input').val('');
                 $('#edit-admin-modal').modal('hide');
+                if(response.message){
+                    $('#toast-body').html('')
+                    $('#toast-body').html(response.message)
+                    $('#liveToast').removeClass('text-bg-danger');
+                    $('#liveToast').addClass('text-bg-success');
+                    const toast = $('#liveToast');
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+                    toastBootstrap.show()
+
+                }
                 adminTable();
             }   
         }

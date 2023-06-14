@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="delete-admin" tabindex="1" aria-labelledby="deleteAdminModal" aria-hidden="true">
+<div class="modal fade" id="delete-admin-modal" tabindex="1" aria-labelledby="deleteAdminModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
             <div class="modal-body">

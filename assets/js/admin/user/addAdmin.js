@@ -23,7 +23,7 @@ $(document).ready(function () {
     
             },
             success: function(response) {
-    
+                console.log(response)
                 if (response.form_errors) {
                     if (response.form_errors.first_name) {
                         $('#first_name_error').html(response.form_errors.first_name);
@@ -40,6 +40,16 @@ $(document).ready(function () {
                 } else {
                     $('input').val('');
                     $('#add-admin-modal').modal('hide');
+                    if(response.message){
+                        $('#toast-body').html('')
+                        $('#toast-body').html(response.message)
+                        $('#liveToast').removeClass('text-bg-danger');
+                        $('#liveToast').addClass('text-bg-success');
+                        const toast = $('#liveToast');
+                        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+                        toastBootstrap.show()
+
+                    }
                     adminTable()
                 }   
             }
