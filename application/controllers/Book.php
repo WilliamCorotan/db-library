@@ -15,6 +15,27 @@ class Book extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    public function book_fetch()
+    {
+
+        $limit = 6;
+
+        if (empty($this->input->get('page_number'))) {
+            $page = 0;
+        } else {
+            $page = $this->input->get('page_number');
+        }
+
+        $offset = $page * $limit;
+        $json_response['page'] = $page;
+        $json_response['req'] = $this->input->get('page_number');
+        $json_response['offset'] = $offset;
+        $json_response['limit'] = $limit;
+        $json_response['books'] = $this->book_model->get_all($limit, $offset);
+        $json_response['total_books'] = $this->book_model->count();
+        exit(json_encode($json_response));
+    }
+
     public function create()
     {
         if (empty($this->session->userdata('is_logged_in'))) {

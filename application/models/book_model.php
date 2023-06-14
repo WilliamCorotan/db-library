@@ -8,7 +8,7 @@ class Book_model extends CI_Model
         return $this->db->insert('book', $data);
     }
 
-    public function get_all($limit = FALSE, $offset, $search = NULL)
+    public function get_all($limit = FALSE, $offset = 0, $search = NULL)
     {
         if ($limit) {
             $this->db->limit($limit, $offset);

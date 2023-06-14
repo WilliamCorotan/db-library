@@ -101,6 +101,11 @@ $route['book/(:any)/delete'] = 'book/destroy/$1';
 $route['fetch/book/subjects'] = 'book/count_books_by_subject';
 $route['fetch/book/authors'] = 'book/count_books_by_author';
 $route['fetch/book/publishers'] = 'book/count_books_by_publisher';
+
+// User Side Routes
+$route['api/book/fetch'] = 'book/book_fetch';
+$route['api/book/fetch/(:any)'] = 'book/book_fetch/$1';
+
 // Author Routes
 $route['filter/author'] = 'author/filter';
 $route['filter/subject'] = 'subject/filter';
