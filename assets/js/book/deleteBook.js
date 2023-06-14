@@ -14,6 +14,16 @@ $(document).ready(function () {
             success: function (response) {
                 $('#delete-book').modal('hide');
                 console.log(response)
+                if(response.message){
+                    $('#toast-body').html('')
+                    $('#toast-body').html(response.message)
+                    $('#liveToast').removeClass('text-bg-success');
+                    $('#liveToast').addClass('text-bg-danger');
+                    const toast = $('#liveToast');
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+                    toastBootstrap.show()
+
+                }
                 fetchBooks();
             }
         });

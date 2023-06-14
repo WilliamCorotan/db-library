@@ -95,6 +95,7 @@ class Book extends CI_Controller
             }
 
             $this->book_model->insert($form_data);
+            $json_response['message'] = 'Successfully added book!';
             $json_response['location'] = base_url('admin/books');
             exit(json_encode($json_response));
         }
@@ -164,8 +165,8 @@ class Book extends CI_Controller
             }
 
             $this->book_model->update($id, $form_data);
-
-            exit(json_encode($form_data));
+            $json_response['message'] = 'Successfully updated book information!';
+            exit(json_encode($json_response));
         }
     }
 

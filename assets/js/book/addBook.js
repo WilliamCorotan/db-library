@@ -74,6 +74,7 @@ $('#add-book-form').on('submit', function(event){
                 }
             }
             if(response.location){
+                sessionStorage.setItem('message', response.message);
                 location.replace(response.location);
             }
         }

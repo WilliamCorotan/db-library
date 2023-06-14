@@ -8,4 +8,17 @@ $(document).ready(function () {
     $(document).on('mouseover', 'td',function(){
         $(this).css('cursor', 'pointer');
     })
+
+    if(sessionStorage.getItem('message')){
+        const message = sessionStorage.getItem('message')
+        $('#toast-body').html('')
+        $('#toast-body').html(message)
+        $('#liveToast').removeClass('text-bg-danger');
+        $('#liveToast').addClass('text-bg-success');
+        const toast = $('#liveToast');
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+        toastBootstrap.show()
+
+        sessionStorage.removeItem('message')
+    }
 });

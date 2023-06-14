@@ -57,6 +57,17 @@ $(document).ready(function () {
                 $('input, select, textarea').removeAttr('disabled');
                 $('button[type=submit]').html('Save Changes');
                 $('#bookModal').modal('hide');
+
+                if(response.message){
+                    $('#toast-body').html('')
+                    $('#toast-body').html(response.message)
+                    $('#liveToast').removeClass('text-bg-danger');
+                    $('#liveToast').addClass('text-bg-success');
+                    const toast = $('#liveToast');
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+                    toastBootstrap.show()
+
+                }
                 fetchBooks();
             }
         });
