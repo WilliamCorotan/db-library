@@ -19,6 +19,7 @@ $('#edit-user-form').on('submit', function(event){
             console.log(formData)
         },
         success: function (response) {
+            console.log(response)
             if (response.form_errors) {
                 if (response.form_errors.email) {
                     $('#edit-email_error').html(response.form_errors.email);
@@ -27,6 +28,16 @@ $('#edit-user-form').on('submit', function(event){
             } else {
                 $('input').val('');
                 $('#edit-user-modal').modal('hide');
+                if(response.message){
+                    $('#toast-body').html('')
+                    $('#toast-body').html(response.message)
+                    $('#liveToast').removeClass('text-bg-danger');
+                    $('#liveToast').addClass('text-bg-success');
+                    const toast = $('#liveToast');
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+                    toastBootstrap.show()
+
+                }
                 userTable();
             }   
         }

@@ -33,7 +33,7 @@ class User extends CI_Controller
             // Updates data in the database
             $this->user_model->update($id, $form_data);
 
-            $json_response['message'] = 'Personal information successfully updated!';
+            $json_response['message'] = 'Successfully updated user information!';
             exit(json_encode($json_response));
         }
     }
