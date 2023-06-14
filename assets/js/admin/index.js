@@ -5,14 +5,17 @@ $(document).ready(function () {
     let status = (hours < 12) ? "morning" : ((hours <= 18 && hours >= 12 ) ? "afternoon" : "evening");
     
     $('#greeting-card').html(`Good ` + status + `, <span class="nav-user-container"></span> 👋`);
+
+    // User Chart Data Fetch
     $.ajax({
         type: "get",
         url: `${location.origin}/user/fetch/active`,
         dataType: "json",
         success: function(response) {
             console.log(response);
-            Highcharts.chart('users-card', {
+            const options = {
                 chart: {
+                    renderTo: 'users-card',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
@@ -41,30 +44,33 @@ $(document).ready(function () {
                 series: [{
                     name: 'Users',
                     colorByPoint: true,
-                    data: [
-                        {
-                            name: response[0].code,
-                            y: parseInt(response[0].count)
-                        },
-                        {
-                            name: response[1].code,
-                            y: parseInt(response[1].count)
-                        }]
+                    data: []
                 }]
-            });
+            }
 
+            response.forEach(element => {
+                options.series[0].data.push(
+                    {
+                        name: element.code,
+                        y: parseInt(element.count)
+                    })
+            });
+            const userChart = Highcharts;
+            userChart.chart(options)
         }
     });
     
-    
+    // Admin Chart Data Fetch
     $.ajax({
         type: "get",
         url: `${location.origin}/admin/fetch/active`,
         dataType: "json",
         success: function(response) {
             console.log(response);
-            Highcharts.chart('admins-card', {
+
+            const adminOptions = {
                 chart: {
+                    renderTo: 'admins-card',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
@@ -93,221 +99,215 @@ $(document).ready(function () {
                 series: [{
                     name: 'Admins',
                     colorByPoint: true,
-                    data: [
-                        {
-                            name: response[0].code,
-                            y: parseInt(response[0].count)
-                        },
-                        {
-                            name: response[1].code,
-                            y: parseInt(response[1].count)
-                        }]
+                    data: []
                 }]
+            }
+            response.forEach(element => {
+                adminOptions.series[0].data.push(
+                    {
+                        name: element.code,
+                        y: parseInt(element.count)
+                    })
             });
+            const adminChart = Highcharts;
+            adminChart.chart(adminOptions)
         }
     });
 
+    // Book per Subject Data Fetch
     $.ajax({
         type: "get",
         url: `${location.origin}/fetch/book/subjects`,
         dataType: "json",
         success: function(response) {
             console.log(response);
-            Highcharts.chart('book-subjects-card', {
+
+            const subjectOptions = {
                 chart: {
+                    renderTo: 'book-subjects-card',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'pie'
+                    type: 'column'
                 },
                 title: {
-                    text: 'Books per Subject',
-                    align: 'left'
+                    text: 'Books per Subject'
                 },
-    
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
                     }
                 },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Book Count'
                     }
                 },
+                legend: {
+                    enabled: false
+                },
+
                 series: [{
                     name: 'Books',
                     colorByPoint: true,
-                    data: [
-                        {
-                            name: response[0].name,
-                            y: parseInt(response[0].count)
-                        },
-                        {
-                            name: response[1].name,
-                            y: parseInt(response[1].count)
-                        },
-                        {
-                            name: response[2].name,
-                            y: parseInt(response[2].count)
-                        },
-                        {
-                            name: response[3].name,
-                            y: parseInt(response[3].count)
-                        },
-                        {
-                            name: response[4].name,
-                            y: parseInt(response[4].count)
-                        },]
+                    groupPadding: 0,
+                    data: [],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
                 }]
+            }
+
+            response.forEach(element => {
+                subjectOptions.series[0].data.push(
+                    {
+                        name: element.name,
+                        y: parseInt(element.count)
+                    })
             });
+            Highcharts.chart(subjectOptions );
         }
     });
 
+    // Book per Author Data Fetch
     $.ajax({
         type: "get",
         url: `${location.origin}/fetch/book/authors`,
         dataType: "json",
         success: function(response) {
-            console.log(response);
-            Highcharts.chart('book-authors-card', {
+            const authorOptions = {
                 chart: {
+                    renderTo: 'book-authors-card',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'pie'
+                    type: 'column'
                 },
                 title: {
-                    text: 'Books per Author',
-                    align: 'left'
+                    text: 'Books per Author'
                 },
-    
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
                     }
                 },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Book Count'
                     }
                 },
+                legend: {
+                    enabled: false
+                },
+
                 series: [{
                     name: 'Books',
                     colorByPoint: true,
-                    data: [
-                        {
-                            name: response[0].name,
-                            y: parseInt(response[0].count)
-                        },
-                        {
-                            name: response[1].name,
-                            y: parseInt(response[1].count)
-                        },
-                        {
-                            name: response[2].name,
-                            y: parseInt(response[2].count)
-                        },
-                        {
-                            name: response[3].name,
-                            y: parseInt(response[3].count)
-                        },
-                        {
-                            name: response[4].name,
-                            y: parseInt(response[4].count)
-                        },
-                        {
-                            name: response[5].name,
-                            y: parseInt(response[5].count)
-                        },
-                        {
-                            name: response[6].name,
-                            y: parseInt(response[6].count)
-                        },
-                    ]
+                    groupPadding: 0,
+                    data: [],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
                 }]
+            }
+
+            response.forEach(element => {
+                authorOptions.series[0].data.push(
+                    {
+                        name: element.name,
+                        y: parseInt(element.count)
+                    })
             });
+            Highcharts.chart(authorOptions );
         }
     });
      
+    // Book per Publisaher Data Fetch
     $.ajax({
         type: "get",
         url: `${location.origin}/fetch/book/publishers`,
         dataType: "json",
         success: function(response) {
-            console.log(response);
-            Highcharts.chart('book-publishers-card', {
+            const publisherOptions = {
                 chart: {
+                    renderTo: 'book-publishers-card',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false,
-                    type: 'pie'
+                    type: 'column'
                 },
                 title: {
-                    text: 'Books per Publisher',
-                    align: 'left'
+                    text: 'Books per Publisher'
                 },
-    
-                accessibility: {
-                    point: {
-                        valueSuffix: '%'
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
                     }
                 },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Book Count'
                     }
                 },
+                legend: {
+                    enabled: false
+                },
+
                 series: [{
                     name: 'Books',
                     colorByPoint: true,
-                    data: [
-                        {
-                            name: response[0].name,
-                            y: parseInt(response[0].count)
-                        },
-                        {
-                            name: response[1].name,
-                            y: parseInt(response[1].count)
-                        },
-                        {
-                            name: response[2].name,
-                            y: parseInt(response[2].count)
-                        },
-                        {
-                            name: response[3].name,
-                            y: parseInt(response[3].count)
-                        },
-                        {
-                            name: response[4].name,
-                            y: parseInt(response[4].count)
-                        },
-                        {
-                            name: response[5].name,
-                            y: parseInt(response[5].count)
-                        },
-                        {
-                            name: response[6].name,
-                            y: parseInt(response[6].count)
-                        },
-                    ]
+                    groupPadding: 0,
+                    data: [],
+                    dataLabels: {
+                        enabled: true,
+                        color: '#FFFFFF',
+                        align: 'center',
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
                 }]
+            }
+
+            response.forEach(element => {
+                publisherOptions.series[0].data.push(
+                    {
+                        name: element.name,
+                        y: parseInt(element.count)
+                    })
             });
+            Highcharts.chart(publisherOptions );
         }
     });
 });
