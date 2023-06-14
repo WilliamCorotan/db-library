@@ -1,4 +1,4 @@
-<section id="add-book-section" class="container mt-5 px-4 py-3 bg-light rounded">
+<section id="add-book-section" class="container mt-5 px-4 py-3 bg-amber-100 rounded">
     <h3>Add Book</h3>
     <hr>
     <?= form_open_multipart('', array('id' => 'add-book-form')) ?>

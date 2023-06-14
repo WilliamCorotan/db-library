@@ -1,4 +1,4 @@
-<nav class="navbar bg-body-tertiary py-4">
+<nav class="navbar bg-amber-300 py-4 border-bottom border-warning">
     <div class="container-fluid">
         <i class="fa-solid fa-bars fa-xl ms-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop"></i>
         <div class="d-flex align-items-center justify-content-center">

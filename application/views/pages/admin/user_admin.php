@@ -13,7 +13,7 @@
         <?php $this->load->view('components/admin/edit_admin') ?>
 
         <div class="table-responsive">
-            <table id="admin-table" class="table table-striped table-hover">
+            <table id="admin-table" class="table table-hover bg-amber-100">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>

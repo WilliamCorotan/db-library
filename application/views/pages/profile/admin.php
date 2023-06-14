@@ -1,6 +1,6 @@
 <section id="profile-container" class="container mt-5">
     <!-- Personal Information Fields -->
-    <article class="card mb-3">
+    <article class="card mb-3 bg-amber-100">
         <header class="card-header">
             <h3 class="card-title">Personal Information</h3>
         </header>

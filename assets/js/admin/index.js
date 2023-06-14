@@ -4,7 +4,7 @@ $(document).ready(function () {
     let hours = date.getHours();
     let status = (hours < 12) ? "morning" : ((hours <= 18 && hours >= 12 ) ? "afternoon" : "evening");
     
-    $('#greeting-card').html(`Good ` + status + `, <span class="nav-user-container"></span> 👋`);
+    $('#greeting-card').html(`Good ` + status + `, <span class="nav-user-container"></span>`);
 
     // User Chart Data Fetch
     $.ajax({

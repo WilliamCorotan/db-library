@@ -1,5 +1,5 @@
 <?php if (!empty($books)) : ?>
-    <table class="table table-bordered table-hover">
+    <table class="table table-hover bg-amber-100">
         <thead>
             <tr class="align-middle">
                 <th class="col-1">ID</th>

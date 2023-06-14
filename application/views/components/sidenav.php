@@ -4,7 +4,7 @@
     </div>
     <div class="offcanvas-body p-0">
         <nav class="nav justify-content-center row">
-            <div class="py-3 bg-secondary-subtle w-100">
+            <div class="py-3  bg-amber-300 border border-warning w-100">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 ">
@@ -13,7 +13,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="pt-3 bg-secondary-subtle">
+            <div class="pt-3 bg-amber-300 border border-warning">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 ">
@@ -21,7 +21,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="row p-0 px-3  mt-2 bg-light-subtle">
+                <div class="row p-0 px-3  mt-2 bg-amber-100">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 p-2">
                             <a class="nav-link px-3 " href="<?= base_url('admin/books') ?>">All Books</a>
@@ -32,7 +32,7 @@
                     </ul>
                 </div>
             </div>
-            <div class=" pt-3 bg-secondary-subtle">
+            <div class=" pt-3 bg-amber-300 border border-warning">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 ">
@@ -40,7 +40,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="px-3 row mt-2 bg-light-subtle">
+                <div class="px-3 row mt-2 bg-amber-100">
                     <ul class="navbar-nav">
                         <li class="nav-item fs-6 p-2">
                             <a class="nav-link px-3 " href="<?= base_url('admin/users/admins') ?>">Admins</a>

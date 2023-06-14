@@ -11,7 +11,7 @@
         <?php $this->load->view('components/user/edit_user') ?>
 
         <div class="table-responsive">
-            <table id="user-table" class="table">
+            <table id="user-table" class="table table-hover bg-amber-100">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>

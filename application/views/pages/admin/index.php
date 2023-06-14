@@ -1,5 +1,5 @@
-<section class="container-fluid bg-primary py-3 px-4 pt-5">
-    <div class="px-4 py-3 bg-primary-subtle text-capitalize mb-5">
+<section class="container-fluid bg-amber-50 py-3 px-4 pt-5">
+    <div class="px-4 py-3 bg-amber-300 text-capitalize mb-5">
         <h6 id="greeting-card" class="display-6 fw-medium"></h6>
         <span>Here is what's happening with your projects today:</span>
     </div>
