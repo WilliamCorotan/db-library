@@ -82,7 +82,7 @@ class Book extends CI_Controller
             $config['encrypt_name'] = TRUE;
             $config['max_size'] = '5120';
 
-            $this->load->library('upload', $config);`
+            $this->load->library('upload', $config);
             $this->upload->initialize($config);
 
             $form_data = array(
