@@ -1,3 +1,8 @@
+<pre>
+    <?php print_r($book) ?>
+    <?php print_r($user) ?>
+</pre>
+
 <section id="book-view-container" class="mx-0 mt-5">
     <div class=" mx-5">
         <button type="button" name="back-button" id="back-button" class="btn btn-dark rounded-circle"><i class="fa-solid fa-reply-all"></i></button>
@@ -5,7 +10,7 @@
     <div class="row ">
         <aside class="col-12 col-lg-4 ">
             <div class="px-4 py-3">
-                <img src="<?= base_url("assets/images/books/") . $book['cover_image'] ?>" alt="" class="w-100 object-fit-contain" style="height: 40rem;">
+                <img src="<?= base_url("assets/images/books/") . $book['cover_image'] ?>" alt="<?= $book['title'] ?> cover image" class="w-100 object-fit-contain" style="height: 40rem;">
             </div>
 
             <div class="px-4 pb-3">
@@ -63,4 +68,6 @@
     </div>
 </section>
 
+<?php $this->load->view('pages/user/collection/book/borrow_book') ?>
 <script src="<?= base_url('assets/js/user/index.js') ?>"></script>
+<script src="<?= base_url('assets/js/book/borrowBook.js') ?>"></script>

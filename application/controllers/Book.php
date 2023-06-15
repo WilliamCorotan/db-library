@@ -40,6 +40,7 @@ class Book extends CI_Controller
     {
         $data['title'] = 'Home | Tower of Honai';
         $data['book'] = $this->book_model->get($id);
+        $data['user'] = $this->user_model->get($this->session->userdata('user_id'));
         $this->load->view('partials/header', $data);
         $this->load->view('pages/user/collection/book/show', $data);
         $this->load->view('partials/footer');
@@ -81,7 +82,7 @@ class Book extends CI_Controller
             $config['encrypt_name'] = TRUE;
             $config['max_size'] = '5120';
 
-            $this->load->library('upload', $config);
+            $this->load->library('upload', $config);`
             $this->upload->initialize($config);
 
             $form_data = array(
