@@ -105,7 +105,7 @@ $route['fetch/book/publishers'] = 'book/count_books_by_publisher';
 // User Side Routes
 $route['api/book/fetch'] = 'book/book_fetch';
 $route['api/book/fetch/(:any)'] = 'book/book_fetch/$1';
-$route['collections/book/(:any)'] = 'book/book_fetch_show/$';
+$route['collections/book/(:any)'] = 'book/book_fetch_show/$1';
 // Author Routes
 $route['filter/author'] = 'author/filter';
 $route['filter/subject'] = 'subject/filter';

@@ -40,7 +40,6 @@ class Book extends CI_Controller
     {
         $data['title'] = 'Home | Tower of Honai';
         $data['book'] = $this->book_model->get($id);
-
         $this->load->view('partials/header', $data);
         $this->load->view('pages/user/collection/book/show', $data);
         $this->load->view('partials/footer');

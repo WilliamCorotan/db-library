@@ -21,4 +21,8 @@ $(document).ready(function () {
             }
         }
     })
+
+    $('#back-button').on('click', function(){
+        history.back()
+    })
 });     
