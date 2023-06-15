@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.book-card', function(){
         console.log($(this))
+        location.href = `${location.origin}/collections/book/${$(this).attr('data-book-id')}`
     })
 
     $(document).on('mouseover', '.book-card', function(){

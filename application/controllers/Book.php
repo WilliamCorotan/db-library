@@ -36,6 +36,16 @@ class Book extends CI_Controller
         exit(json_encode($json_response));
     }
 
+    public function book_fetch_show($id)
+    {
+        $data['title'] = 'Home | Tower of Honai';
+        $data['book'] = $this->book_model->get($id);
+
+        $this->load->view('partials/header', $data);
+        $this->load->view('pages/user/collection/book/show', $data);
+        $this->load->view('partials/footer');
+    }
+
     public function create()
     {
         if (empty($this->session->userdata('is_logged_in'))) {

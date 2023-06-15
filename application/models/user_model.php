@@ -15,26 +15,19 @@ class User_model extends CI_Model
 
     public function get_all($limit = 10, $offset = 0, $search)
     {
-        if ($search == 'null') {
-            return $this->db->select('user.id, user.first_name, user.last_name, email, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
-                ->from('user')
-                ->join('user_address', 'user_address.user_id = user.id', 'left')
-                ->limit($limit, $offset)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
-        } else {
-            return $this->db->select('user.id, user.first_name, user.last_name, email, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
-                ->from('user')
-                ->join('user_address', 'user_address.user_id = user.id', 'left')
+        $this->db->limit($limit, $offset);
+        $this->db->select('user.id, user.first_name, user.last_name, email, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
+            ->join('user_address', 'user_address.user_id = user.id', 'left');
+        if ($search != 'null') {
+            $this->db
                 ->like('user.first_name', $search)
                 ->or_like('user.last_name', $search)
-                ->or_like('user.email', $search)
-                ->limit($limit, $offset)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
+                ->or_like('user.email', $search);
         }
+        return
+            $this->db->order_by('updated_at', 'DESC')
+            ->get('user')
+            ->result_array();
     }
 
 
@@ -46,10 +39,9 @@ class User_model extends CI_Model
     public function get($id)
     {
         $query = $this->db->select('user.id, user.first_name, user.last_name, user.contact_number, user.email, user.password, user_address.id as address_id, user_address.street, user_address.barangay, user_address.city, user_address.province, user_address.zip_code')
-            ->from('user')
             ->join('user_address', 'user_address.user_id = user.id', 'left')
             ->where('user.id', $id)
-            ->get();
+            ->get('user');
         return $query->row_array();
     }
 
@@ -87,33 +79,23 @@ class User_model extends CI_Model
 
     public function count_record($search)
     {
-        if ($search == 'null') {
-            $total = $this->db->select('*')
-                ->from('user')
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
-        } else {
-            $total = $this->db->select('*')
-                ->from('user')
-                ->like('first_name', $search)
+        $this->db->select('*');
+        if ($search != 'null') {
+            $this->db->like('first_name', $search)
                 ->or_like('last_name', $search)
-                ->or_like('email', $search)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
+                ->or_like('email', $search);
         }
-
-        return $total;
+        return $this->db->order_by('updated_at', 'DESC')
+            ->get('user')
+            ->result_array();
     }
 
     public function count_active()
     {
         return $this->db->select('COUNT(user.id) as count, status.code')
-            ->from('user')
             ->join('status', 'status.id = user.status_id', 'left')
             ->group_by('user.status_id')
-            ->get()
+            ->get('user')
             ->result_array();
     }
 
@@ -126,9 +108,8 @@ class User_model extends CI_Model
     public function verify_credentials($email, $password)
     {
         $query = $this->db->select('*')
-            ->from('user')
             ->where('email', $email)
-            ->get();
+            ->get('user');
         $result = $query->row_array();
         if (password_verify($password, $result['password'])) {
             return $result;

@@ -5,28 +5,19 @@ class Admin_model extends CI_Model
 {
     public function get_all($id, $limit = 10, $offset = 0, $search)
     {
-        if ($search == 'null') {
-            return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
-                ->from('admin')
-                ->join('status', 'status.id = admin.status_id', 'left')
-                ->where('admin.id !=', $id)
-                ->limit($limit, $offset)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
-        } else {
-            return $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
-                ->from('admin')
-                ->join('status', 'status.id = admin.status_id', 'left')
-                ->like('first_name', $search)
+        $this->db->limit($limit, $offset);
+        $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+            ->join('status', 'status.id = admin.status_id', 'left');
+
+        if ($search != 'null') {
+            $this->db->like('first_name', $search)
                 ->or_like('last_name', $search)
-                ->or_like('email', $search)
-                ->not_like('admin.id', $id, 'none')
-                ->limit($limit, $offset)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
+                ->or_like('email', $search);
         }
+        return $this->db
+            ->order_by('updated_at', 'DESC')
+            ->get('admin')
+            ->result_array();
     }
 
     public function get($id)
@@ -51,28 +42,20 @@ class Admin_model extends CI_Model
 
     public function count_record($id, $search)
     {
-        if ($search == 'null') {
-            $total =  $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
-                ->from('admin')
-                ->join('status', 'status.id = admin.status_id', 'left')
-                ->where('admin.id !=', $id)
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
-        } else {
-            $total = $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
-                ->from('admin')
-                ->join('status', 'status.id = admin.status_id', 'left')
-                ->like('first_name', $search)
+
+        $this->db->select('admin.id, admin.first_name, admin.last_name, email, status.code AS status')
+            ->from('admin')
+            ->join('status', 'status.id = admin.status_id', 'left');
+
+        if ($search != 'null') {
+            $this->db->like('first_name', $search)
                 ->or_like('last_name', $search)
                 ->or_like('email', $search)
-                ->not_like('admin.id', $id, 'none')
-                ->order_by('updated_at', 'DESC')
-                ->get()
-                ->result_array();
+                ->not_like('admin.id', $id, 'none');
         }
-
-        return $total;
+        return $this->db->order_by('updated_at', 'DESC')
+            ->get()
+            ->result_array();
     }
 
     public function count_active()
