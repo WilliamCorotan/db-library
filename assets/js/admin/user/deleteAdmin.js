@@ -7,7 +7,7 @@ $(document).ready(function () {
     })
     
     $('#cancel-admin-delete').on('click', function(){
-        $('#delete-admin').modal('hide')
+        $('#delete-admin-modal').modal('hide')
         $('#edit-admin-modal').modal('show')
     })
 
