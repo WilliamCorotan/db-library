@@ -44,6 +44,7 @@ class Auth extends CI_Controller
             if (!empty($authenticated_user)) {
                 // Stores user data to session
                 $this->session->set_userdata('user_id', $authenticated_user['id']);
+                $this->session->set_userdata('first_name', $authenticated_user['first_name']);
                 $this->session->set_userdata('is_logged_in', TRUE);
 
                 //Stores useful information to the Response Body

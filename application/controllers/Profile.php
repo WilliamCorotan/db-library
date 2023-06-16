@@ -47,6 +47,7 @@ class Profile extends CI_Controller
         } else {
             // updates the user data in the database
             $this->user_model->update($this->session->userdata('user_id'), $form_data);
+            $this->session->set_userdata('first_name', $form_data['first_name']);
             $json_response['message'] = 'Personal information successfully updated!';
             exit(json_encode($json_response));
         }

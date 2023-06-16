@@ -1,6 +1,6 @@
 <section id="profile-container" class="container mt-5">
     <!-- Personal Information Fields -->
-    <article class="card mb-3">
+    <article id="personal-information" class="card mb-3">
         <header class="card-header">
             <h3 class="card-title">Personal Information</h3>
         </header>
@@ -33,7 +33,7 @@
     </article>
 
     <!-- Address Information Fields -->
-    <article class="card mb-3">
+    <article id="address-information" class="card mb-3">
         <header class="card-header">
             <h3 class="card-title">Address Information</h3>
         </header>
@@ -82,7 +82,7 @@
 
 
     <!-- Security Fields -->
-    <article class="card mb-3">
+    <article id="security-information" class="card mb-3">
         <header class="card-header">
             <h3 class="card-title">Security</h3>
         </header>
@@ -121,6 +121,6 @@
     </article>
 </section>
 
-<script src="assets/js/profile/user.js">
+<script src="<?= base_url('assets/js/profile/user.js') ?>">
 
 </script>

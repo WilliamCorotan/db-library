@@ -1,15 +1,19 @@
 $(document).ready(function() {
+    const param = new URLSearchParams(location.search)
     // Personal Information Form submit event
     $('#personal-information-form').on('submit', function(event) {
         event.preventDefault();
         console.log($(this).serialize())
         $.ajax({
             type: "post",
-            url: "profile/update/user",
+            url: `${location.origin}/profile/update/user`,
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
                 console.log(response);
+                if(!response.form_errors){
+                    location.href = param.get('location')
+                }
             }
         });
     });
@@ -19,12 +23,14 @@ $(document).ready(function() {
         event.preventDefault();
         $.ajax({
             type: "post",
-            url: "profile/update/address",
+            url: `${location.origin}/profile/update/address`,
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
                 console.log(response);
-
+                if(!response.form_errors){
+                    location.href = param.get('location')
+                }
             }
         });
     });
@@ -34,12 +40,11 @@ $(document).ready(function() {
         event.preventDefault();
         $.ajax({
             type: "post",
-            url: "profile/update/security",
+            url: `${location.origin}/profile/update/security`,
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
                 console.log(response);
-
             }
         });
     });

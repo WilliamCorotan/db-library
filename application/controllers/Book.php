@@ -251,6 +251,46 @@ class Book extends CI_Controller
         return $response;
     }
 
+    public function borrow()
+    {
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
+        $this->form_validation->set_rules('street', 'Street', 'required');
+        $this->form_validation->set_rules('barangay', 'Barangay', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('province', 'Province', 'required');
+        $this->form_validation->set_rules('zip_code', 'Zip Code', 'required');
+        $this->form_validation->set_rules('borrow_date', 'Borrow Date', 'required');
+        $this->form_validation->set_rules('return_date', 'Return Date', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        }
+
+
+        // If initial update of user data 
+        // Make condition here to ask user to save data 
+
+
+        $form_data = array(
+            'user_id' => $this->input->post('user_id'),
+            'book_id' => $this->input->post('book_id'),
+            'borrow_date' => $this->input->post('borrow_date'),
+            'return_date' => $this->input->post('return_date'),
+
+        );
+
+        //! ---------------------------NOT YET MADE MODEL--------------------------------- !//
+        $this->transaction_model->insert($form_data);
+
+
+        $json_response['data'] = $form_data;
+        $json_response['location'] = 'go b';
+        exit(json_encode($json_response));
+    }
+
     public function count_books_by_subject()
     {
         exit(json_encode($this->book_model->count_subjects()));
