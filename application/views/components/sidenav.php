@@ -51,6 +51,15 @@
                     </ul>
                 </div>
             </div>
+            <div class="py-3  bg-amber-300 border border-warning w-100">
+                <div class="navbar-nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item fs-6 ">
+                            <a class="nav-link px-3 fs-5" href="<?= base_url('admin/transaction') ?>">Transactions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </div>
 </div>

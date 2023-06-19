@@ -83,6 +83,7 @@ $route['admin/users/users'] = 'admin/show_users';
 $route['admin/fetch/users/(:any)/(:any)'] = 'admin/fetch_users/$1/$2';
 $route['admin/fetch/user/(:any)'] = 'user/show/$1';
 $route['admin/fetch/user/(:any)/edit'] = 'user/update_security/$1';
+$route['admin/transaction'] = 'transaction/index';
 
 // Misc Routes
 $route['admin/fetch/active'] = 'admin/count_active_admins';
@@ -111,6 +112,9 @@ $route['collections/book/(:any)'] = 'book/book_fetch_show/$1';
 $route['filter/author'] = 'author/filter';
 $route['filter/subject'] = 'subject/filter';
 $route['filter/publisher'] = 'publisher/filter';
+
+//Transaction Routes
+$route['transaction/fetch'] = 'transaction/fetch';
 
 // Admin Profile Routes
 $route['admin/profile'] = 'admin/show_profile';
