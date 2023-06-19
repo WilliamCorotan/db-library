@@ -1,4 +1,4 @@
-<section id="main-homepage" class="container bg-primary py-5">
+<section id="main-homepage" class="container py-5">
     <div>
         <h4 class="display-4 d-block"> Latest Collections</h4>
         <input type="hidden" id="page-number">
