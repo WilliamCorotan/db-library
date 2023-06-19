@@ -116,6 +116,7 @@ $route['filter/publisher'] = 'publisher/filter';
 //Transaction Routes
 $route['transaction/fetch'] = 'transaction/fetch';
 $route['transaction/fetch/(:any)'] = 'transaction/fetch/$1';
+$route['transaction/(:any)'] = 'transaction/show/$1';
 
 // Admin Profile Routes
 $route['admin/profile'] = 'admin/show_profile';

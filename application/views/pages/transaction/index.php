@@ -7,10 +7,12 @@
             </div>
         </div>
         <div id="transaction-table-container" class="overflow-x-scroll"></div>
+        <?php $this->load->view('components/transaction/transaction_modal') ?>
     </div>
 </section>
 
 
 <script src="<?= base_url('assets/js/transaction/fetchTransactions.js') ?>"></script>
 <script src="<?= base_url('assets/js/transaction/searchTransaction.js') ?>"></script>
+<script src="<?= base_url('assets/js/transaction/showTransaction.js') ?>"></script>
 <script src="<?= base_url('assets/js/transaction/index.js') ?>"></script>

@@ -15,6 +15,14 @@ class Transaction extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    public function show($id)
+    {
+        $json_response['data'] = $this->transaction_model->get($id);
+        $json_response['data']['borrow_date'] = (new DateTime($json_response['data']['borrow_date']))->format('Y-m-d');
+        $json_response['data']['return_date'] = (new DateTime($json_response['data']['return_date']))->format('Y-m-d');
+        exit(json_encode($json_response));
+    }
+
     public function fetch($offset = 0)
     {
         if (empty($this->session->userdata('is_logged_in'))) {
