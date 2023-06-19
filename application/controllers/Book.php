@@ -253,6 +253,11 @@ class Book extends CI_Controller
 
     public function borrow()
     {
+        if (!$this->book_model->check_availability($this->input->post('book_id'))) {
+            $json_response['availability'] = "Book is currently unavailable!";
+            exit(json_encode($json_response));
+        }
+
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
@@ -323,8 +328,8 @@ class Book extends CI_Controller
 
         $this->transaction_model->insert($transaction_data);
         $this->book_model->update($this->input->post('book_id'), array('borrow_status_id' => 2));
-        $json_response['data'] = $form_data;
-        $json_response['location'] = 'go b';
+        $json_response['message'] = 'Successfully borrowed book!';
+        $json_response['reload'] = TRUE;
         exit(json_encode($json_response));
     }
 

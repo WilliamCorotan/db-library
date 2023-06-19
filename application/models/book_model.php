@@ -26,6 +26,7 @@ class Book_model extends CI_Model
                 ->or_like('publisher.name', $search)
                 ->or_like('author.name', $search);
         }
+        $this->db->order_by('id', 'DESC');
         return $this->db->get('book')
             ->result_array();
     }
@@ -82,5 +83,16 @@ class Book_model extends CI_Model
             ->group_by('book.publisher_id')
             ->get('book')
             ->result_array();
+    }
+
+    public function check_availability($id)
+    {
+        $book = $this->db->where('id', $id)->get('book')->row_array();
+
+        if ($book['borrow_status_id'] == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 }

@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    if(sessionStorage.getItem('availability')){
+        const availabilityMessage = sessionStorage.getItem('availabilityMessage')
+        console.log(availabilityMessage)
+        $('#toast-body').html('')
+        $('#toast-body').html(availabilityMessage)
+        $('#liveToast').addClass('text-bg-danger');
+        const toast = $('#liveToast');
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+        toastBootstrap.show()
+
+        sessionStorage.removeItem('availability')
+        sessionStorage.removeItem('availabilityMessage')
+    }
     // Check if user information field has values
     if(!$('#first_name').val() || !$('#last_name').val() || !$('#contact_number').val() || !$('#street').val() || !$('#barangay').val() || !$('#city').val() || !$('#province').val() || !$('#zip_code').val()){
         $("#user_data").val('1')
@@ -66,12 +79,25 @@ $(document).ready(function () {
                 }
             } 
 
+            if(response.availability){
+                console.log(response.availability)
+                sessionStorage.setItem('availability', false)
+                sessionStorage.setItem('availabilityMessage', response.availability)
+                location.reload()
+
+            }
+
             if(response.first_save){
                 console.log(response.message);
                 $('#borrow-book-modal').modal('hide')
                 $('#first-save-modal').modal('show')
                 $('#first-save-modal').find('#modal-message').html(response.message)
             }
+
+            if(response.reload){
+                location.reload()
+            }
+
             }
         });
     })
@@ -131,7 +157,12 @@ $(document).ready(function () {
                 if(response.form_errors.return_date){
                     $('#return-date-error').html(response.form_errors.return_date)
                 }
-            } 
+            }
+
+            if(response.availability){
+                console.log(response)
+                location.reload()
+            }
 
             if(response.first_save){
                 console.log(response.message);
@@ -199,6 +230,11 @@ $(document).ready(function () {
                     $('#return-date-error').html(response.form_errors.return_date)
                 }
             } 
+
+            if(response.availability){
+                console.log(response)
+                location.reload()
+            }
 
             if(response.first_save){
                 console.log(response.message);

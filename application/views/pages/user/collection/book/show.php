@@ -64,6 +64,7 @@
 </section>
 
 <?php $this->load->view('components/transaction/first_save') ?>
+<?php $this->load->view('components/books/availability_toast') ?>
 <?php $this->load->view('pages/user/collection/book/borrow_book') ?>
 <script src="<?= base_url('assets/js/user/index.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/borrowBook.js') ?>"></script>
