@@ -12,8 +12,9 @@ $(document).ready(function () {
     $(window).on('scroll', function(event){
         let totalBooks = $('#total-books').val()
         let limit = $('#limit').val()
-        let pageNumber = $('#page-number').val() + 1
+        let pageNumber = parseInt($('#page-number').val()) + 1
         if((limit * pageNumber) <= totalBooks ){
+            console.log('me inner')
             if($(window).scrollTop() == $(document).height() - $(window).height()){
                 console.log('refreshhhhh');
                 pageNumber = parseInt($('#page-number').val()) + 1
