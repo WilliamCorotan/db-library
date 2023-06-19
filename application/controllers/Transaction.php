@@ -21,7 +21,7 @@ class Transaction extends CI_Controller
             redirect('admin/login');
             exit();
         }
-        $config['base_url'] = base_url('book/fetch');
+        $config['base_url'] = base_url('transaction/fetch');
         $config['per_page'] = 5;
         $config['total_rows'] = $this->transaction_model->count();
         $config['uri_segment'] = 3;
@@ -45,7 +45,6 @@ class Transaction extends CI_Controller
         $config['last_tag_close']  = '</span></li>';
 
         $this->pagination->initialize($config);
-        echo "<pre>";
         $search = $this->input->get('search');
         if (null !== $search) {
             $data['transactions'] = $this->transaction_model->get_all($config['per_page'], $offset, $this->input->get('search'));

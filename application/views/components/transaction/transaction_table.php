@@ -3,13 +3,13 @@
         <thead>
             <tr class="align-middle">
                 <th class="col-1">ID</th>
-                <th class="col-3">Book Title</th>
-                <th class="col-3">Borrow Date</th>
-                <th class="col-3">Return Date</th>
-                <th class="col-3">First Name</th>
-                <th class="col-3">Last Name</th>
-                <th class="col-3">Contact Number</th>
-                <th class="col-3">Return Status</th>
+                <th class="col-2">Book Title</th>
+                <th class="col-1">Borrow Date</th>
+                <th class="col-1">Return Date</th>
+                <th class="col-2">First Name</th>
+                <th class="col-2">Last Name</th>
+                <th class="col-2">Contact Number</th>
+                <th class="col-2">Return Status</th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
                     <td><?= $transaction['first_name'] ?></td>
                     <td><?= $transaction['last_name'] ?></td>
                     <td><?= $transaction['contact_number'] ?></td>
-                    <td><?= $transaction['return_status'] ?></td>
+                    <td class="fw-bold <?= ($transaction['return_status'] == 'Returned') ? "text-success" : "text-danger" ?>"><?= $transaction['return_status'] ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>

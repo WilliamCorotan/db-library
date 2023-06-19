@@ -13,3 +13,4 @@
 
 <script src="<?= base_url('assets/js/transaction/fetchTransactions.js') ?>"></script>
 <script src="<?= base_url('assets/js/transaction/searchTransaction.js') ?>"></script>
+<script src="<?= base_url('assets/js/transaction/index.js') ?>"></script>
