@@ -11,9 +11,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 console.log(response);
-                if(!response.form_errors){
-                    location.href = param.get('location')
-                }
+
             }
         });
     });
@@ -28,9 +26,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 console.log(response);
-                if(!response.form_errors){
-                    location.href = param.get('location')
-                }
+
             }
         });
     });

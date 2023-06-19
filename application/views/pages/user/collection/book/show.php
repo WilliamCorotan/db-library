@@ -1,26 +1,21 @@
-<pre>
-    <?php print_r($book) ?>
-    <?php print_r($user) ?>
-</pre>
-
-<section id="book-view-container" class="mx-0 mt-5">
+<section id="book-view-container" class="mx-auto mt-5 container">
     <div class=" mx-5">
-        <button type="button" name="back-button" id="back-button" class="btn btn-dark rounded-circle"><i class="fa-solid fa-reply-all"></i></button>
+        <button type="button" name="back-button" id="back-button" class="btn rounded-circle"><i class="fa-solid fa-reply-all"></i></button>
     </div>
     <div class="row ">
         <aside class="col-12 col-lg-4 ">
-            <div class="px-4 py-3">
-                <img src="<?= base_url("assets/images/books/") . $book['cover_image'] ?>" alt="<?= $book['title'] ?> cover image" class="w-100 object-fit-contain" style="height: 40rem;">
+            <div class="px-4 py-3 row align-items-center" style="height: 30rem;">
+                <img src="<?= base_url("assets/images/books/") . $book['cover_image'] ?>" alt="<?= $book['title'] ?> cover image" class=" h-100 p-0 object-fit-cover border border-dark">
             </div>
 
             <div class="px-4 pb-3">
                 <?php if ($book['borrow_status_id'] == 1) : ?>
                     <div class="d-grid gap-2">
-                        <button type="button" name="borrow-btn" id="borrow-btn" class="btn btn-primary">Borrow</button>
+                        <button type="button" name="borrow-btn" id="borrow-btn" class="btn btn-primary w-50 mx-auto">Borrow</button>
                     </div>
                 <?php else : ?>
                     <div class="d-grid gap-2">
-                        <span name="" id="" class="text-bg-danger px-3 py-2 rounded text-center">Not Available</span>
+                        <span name="" id="" class="text-bg-danger px-3 py-2 rounded text-center w-50 mx-auto">Not Available</span>
                     </div>
                 <?php endif ?>
             </div>
@@ -68,6 +63,7 @@
     </div>
 </section>
 
+<?php $this->load->view('components/transaction/first_save') ?>
 <?php $this->load->view('pages/user/collection/book/borrow_book') ?>
 <script src="<?= base_url('assets/js/user/index.js') ?>"></script>
 <script src="<?= base_url('assets/js/book/borrowBook.js') ?>"></script>

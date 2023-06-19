@@ -10,6 +10,8 @@
                 <div class="modal-body px-3">
                     <input type="hidden" name="user_id" id="user_id" value="<?= $user['id'] ?>">
                     <input type="hidden" name="book_id" id="book_id" value="<?= $book['id'] ?>">
+                    <input type="hidden" name="user_data" id="user_data">
+                    <input type="hidden" name="save" id="save">
                     <h4>User Information</h4>
                     <div class="row mb-3 m-0">
                         <div class="mb-3 row">

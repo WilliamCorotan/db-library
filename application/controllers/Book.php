@@ -266,26 +266,63 @@ class Book extends CI_Controller
 
         if ($this->form_validation->run() === FALSE) {
             $json_response['form_errors'] = $this->form_validation->error_array();
+            $json_response['form_data']   = array(
+                'user_id' => $this->input->post('user_id'),
+                'book_id' => $this->input->post('book_id'),
+                'borrow_date' => $this->input->post('borrow_date'),
+                'return_date' => $this->input->post('return_date'),
+
+            );
+
             exit(json_encode($json_response));
         }
 
 
-        // If initial update of user data 
-        // Make condition here to ask user to save data 
-
-
-        $form_data = array(
+        $transaction_data = array(
             'user_id' => $this->input->post('user_id'),
             'book_id' => $this->input->post('book_id'),
             'borrow_date' => $this->input->post('borrow_date'),
             'return_date' => $this->input->post('return_date'),
-
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'contact_number' => $this->input->post('contact_number'),
+            'street' => $this->input->post('street'),
+            'barangay' => $this->input->post('barangay'),
+            'city' => $this->input->post('city'),
+            'province' => $this->input->post('province'),
+            'zip_code' => $this->input->post('zip_code'),
         );
 
-        //! ---------------------------NOT YET MADE MODEL--------------------------------- !//
-        $this->transaction_model->insert($form_data);
+        if (!empty($this->input->post('user_data'))) {
+            $json_response['first_save'] = TRUE;
+            $json_response['message'] = 'Want to save your information for future transaction?';
+            exit(json_encode($json_response));
+        }
 
+        if (!empty($this->input->post('save'))) {
+            $user_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'contact_number' => $this->input->post('contact_number'),
+            );
 
+            $this->user_model->update($this->input->post('user_id'), $user_data);
+
+            $address_data = array(
+                'id' => '',
+                'street' => $this->input->post('street'),
+                'barangay' => $this->input->post('barangay'),
+                'city' => $this->input->post('city'),
+                'province' => $this->input->post('province'),
+                'zip_code' => $this->input->post('zip_code'),
+                'user_id' => $this->session->userdata('user_id')
+            );
+
+            $this->user_model->update_address($address_data);
+        }
+
+        $this->transaction_model->insert($transaction_data);
+        $this->book_model->update($this->input->post('book_id'), array('borrow_status_id' => 2));
         $json_response['data'] = $form_data;
         $json_response['location'] = 'go b';
         exit(json_encode($json_response));
