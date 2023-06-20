@@ -1,8 +1,8 @@
-<section id="book-view-container" class="mx-auto mt-5 container">
-    <div class=" mx-5">
+<section id="book-view-container" class="mx-auto pt-5 container " style="min-height: calc(100vh - 80px)">
+    <div class=" mx-5 mb-3">
         <button type="button" name="back-button" id="back-button" class="btn rounded-circle"><i class="fa-solid fa-reply-all"></i></button>
     </div>
-    <div class="row ">
+    <div class="row bg-white px-4 py-3 rounded">
         <aside class="col-12 col-lg-4 ">
             <div class="px-4 py-3 row align-items-center" style="height: 30rem;">
                 <img src="<?= base_url("assets/images/books/") . $book['cover_image'] ?>" alt="<?= $book['title'] ?> cover image" class=" h-100 p-0 object-fit-cover border border-dark">

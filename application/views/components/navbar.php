@@ -1,5 +1,5 @@
 <?php if (!empty($this->session->userdata('is_logged_in'))) : ?>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar bg-amber-300">
         <div class="container-fluid">
             <a class="navbar-brand h-1 p-0"><img class="h-100" src="<?= base_url('assets/images/site/tower-of-honai-logo-full-black.png') ?>" alt=""></a>
             <div class="d-flex align-items-center justify-content-center">
@@ -19,7 +19,7 @@
     </nav>
 <?php else : ?>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-amber-300">
         <div class="container-fluid">
             <a class="navbar-brand h-1 p-0"><img class="h-100" src="<?= base_url('assets/images/site/tower-of-honai-logo-full-black.png') ?>" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
