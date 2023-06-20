@@ -74,8 +74,8 @@ $(document).ready(function () {
                     $('#borrow-date-error').html(response.form_errors.borrow_date)
                 }
 
-                if(response.form_errors.return_date){
-                    $('#return-date-error').html(response.form_errors.return_date)
+                if(response.form_errors.due_date){
+                    $('#return-date-error').html(response.form_errors.due_date)
                 }
             } 
 
@@ -154,8 +154,8 @@ $(document).ready(function () {
                     $('#borrow-date-error').html(response.form_errors.borrow_date)
                 }
 
-                if(response.form_errors.return_date){
-                    $('#return-date-error').html(response.form_errors.return_date)
+                if(response.form_errors.due_date){
+                    $('#return-date-error').html(response.form_errors.due_date)
                 }
             }
 
@@ -226,8 +226,8 @@ $(document).ready(function () {
                     $('#borrow-date-error').html(response.form_errors.borrow_date)
                 }
 
-                if(response.form_errors.return_date){
-                    $('#return-date-error').html(response.form_errors.return_date)
+                if(response.form_errors.due_date){
+                    $('#return-date-error').html(response.form_errors.due_date)
                 }
             } 
 

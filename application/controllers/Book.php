@@ -267,7 +267,7 @@ class Book extends CI_Controller
         $this->form_validation->set_rules('province', 'Province', 'required');
         $this->form_validation->set_rules('zip_code', 'Zip Code', 'required');
         $this->form_validation->set_rules('borrow_date', 'Borrow Date', 'required');
-        $this->form_validation->set_rules('return_date', 'Return Date', 'required');
+        $this->form_validation->set_rules('due_date', 'Due Date', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $json_response['form_errors'] = $this->form_validation->error_array();
@@ -275,7 +275,7 @@ class Book extends CI_Controller
                 'user_id' => $this->input->post('user_id'),
                 'book_id' => $this->input->post('book_id'),
                 'borrow_date' => $this->input->post('borrow_date'),
-                'return_date' => $this->input->post('return_date'),
+                'due_date' => $this->input->post('due_date'),
 
             );
 
@@ -287,7 +287,7 @@ class Book extends CI_Controller
             'user_id' => $this->input->post('user_id'),
             'book_id' => $this->input->post('book_id'),
             'borrow_date' => $this->input->post('borrow_date'),
-            'return_date' => $this->input->post('return_date'),
+            'due_date' => $this->input->post('due_date'),
             'first_name' => $this->input->post('first_name'),
             'last_name' => $this->input->post('last_name'),
             'contact_number' => $this->input->post('contact_number'),

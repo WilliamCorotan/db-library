@@ -30,9 +30,9 @@
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="return_date" class="col-form-label">Return Date</label>
+                            <label for="due_date" class="col-form-label">Due Date</label>
                             <div>
-                                <input type="date" class="form-control" name="return_date" id="edit-return_date" aria-describedby="returnDateId" placeholder="Return Date">
+                                <input type="date" class="form-control" name="due_date" id="edit-due_date" aria-describedby="returnDateId" placeholder="Due Date">
                             </div>
                         </div>
 

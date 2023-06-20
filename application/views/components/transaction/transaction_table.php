@@ -5,7 +5,7 @@
                 <th class="col-1">ID</th>
                 <th class="col-2">Book Title</th>
                 <th class="col-1">Borrow Date</th>
-                <th class="col-1">Return Date</th>
+                <th class="col-1">Due Date</th>
                 <th class="col-2">First Name</th>
                 <th class="col-2">Last Name</th>
                 <th class="col-2">Contact Number</th>
@@ -18,7 +18,7 @@
                     <td scope="row" class="fw-bold"><?= $transaction['id'] ?></td>
                     <td><?= $transaction['book_title'] ?></td>
                     <td><?= $transaction['borrow_date'] ?></td>
-                    <td><?= $transaction['return_date'] ?></td>
+                    <td><?= $transaction['due_date'] ?></td>
                     <td><?= $transaction['first_name'] ?></td>
                     <td><?= $transaction['last_name'] ?></td>
                     <td><?= $transaction['contact_number'] ?></td>

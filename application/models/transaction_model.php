@@ -10,7 +10,7 @@ class Transaction_model extends CI_Model
 
     public function get($id)
     {
-        return $this->db->select('book.id as book_id, return_status.code as return_status, book.title as book_title, transaction.id as id, transaction.borrow_date, transaction.return_date, transaction.first_name, transaction.last_name, transaction.contact_number')
+        return $this->db->select('book.id as book_id, return_status.code as return_status, book.title as book_title, transaction.id as id, transaction.borrow_date, transaction.due_date, transaction.first_name, transaction.last_name, transaction.contact_number')
             ->join('book', 'book.id = transaction.book_id', 'left')
             ->join('return_status', 'transaction.return_status_id = return_status.id', 'left')
             ->where('transaction.id', $id)
@@ -29,7 +29,7 @@ class Transaction_model extends CI_Model
             $this->db->limit($limit, $offset);
         }
 
-        $this->db->select('book.id as book_id, return_status.code as return_status, book.title as book_title, transaction.id as id, transaction.borrow_date, transaction.return_date, transaction.first_name, transaction.last_name, transaction.contact_number')
+        $this->db->select('book.id as book_id, return_status.code as return_status, book.title as book_title, transaction.id as id, transaction.borrow_date, transaction.due_date, transaction.first_name, transaction.last_name, transaction.contact_number')
             ->join('book', 'book.id = transaction.book_id', 'left')
             ->join('return_status', 'transaction.return_status_id = return_status.id', 'left');
 

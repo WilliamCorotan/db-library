@@ -19,7 +19,7 @@ class Transaction extends CI_Controller
     {
         $json_response['data'] = $this->transaction_model->get($id);
         $json_response['data']['borrow_date'] = (new DateTime($json_response['data']['borrow_date']))->format('Y-m-d');
-        $json_response['data']['return_date'] = (new DateTime($json_response['data']['return_date']))->format('Y-m-d');
+        $json_response['data']['due_date'] = (new DateTime($json_response['data']['due_date']))->format('Y-m-d');
         exit(json_encode($json_response));
     }
 
@@ -61,8 +61,8 @@ class Transaction extends CI_Controller
             foreach ($data['transactions'] as &$transaction) {
                 $borrow_date = (new DateTime($transaction['borrow_date']))->format('Y-m-d');
                 $transaction['borrow_date'] = $borrow_date;
-                $return_date = (new DateTime($transaction['return_date']))->format('Y-m-d');
-                $transaction['return_date'] = $return_date;
+                $due_date = (new DateTime($transaction['due_date']))->format('Y-m-d');
+                $transaction['due_date'] = $due_date;
             }
         } else {
             $data['transactions'] = $this->transaction_model->get_all($config['per_page'], $offset);
@@ -70,8 +70,8 @@ class Transaction extends CI_Controller
             foreach ($data['transactions'] as &$transaction) {
                 $borrow_date = (new DateTime($transaction['borrow_date']))->format('Y-m-d');
                 $transaction['borrow_date'] = $borrow_date;
-                $return_date = (new DateTime($transaction['return_date']))->format('Y-m-d');
-                $transaction['return_date'] = $return_date;
+                $due_date = (new DateTime($transaction['due_date']))->format('Y-m-d');
+                $transaction['due_date'] = $due_date;
             }
         }
 

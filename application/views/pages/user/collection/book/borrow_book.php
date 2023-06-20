@@ -83,8 +83,8 @@
                             <small id="borrow-date-error" class="form-errors text-danger"></small>
                         </div>
                         <div class="mb-3 row col-12 col-lg-6">
-                            <label for="return_date" class="form-label">Return Date</label>
-                            <input type="date" class="form-control" name="return_date" id="return_date" aria-describedby="returnDate" placeholder="Enter return date [range=1week]">
+                            <label for="due_date" class="form-label">Due Date</label>
+                            <input type="date" class="form-control" name="due_date" id="due_date" aria-describedby="returnDate" placeholder="Enter Due Date [range=1week]">
                             <small id="return-date-error" class="form-errors text-danger"></small>
                         </div>
                     </div>

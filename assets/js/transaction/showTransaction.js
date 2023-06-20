@@ -11,7 +11,7 @@ $(document).on('click', '.transaction-row', function(){
             $('#edit-book-id').val(response.data.book_id);
             $('#edit-title').val(response.data.book_title);
             $('#edit-borrow_date').val(response.data.borrow_date)
-            $('#edit-return_date').val(response.data.return_date)
+            $('#edit-due_date').val(response.data.due_date)
             $('#edit-first_name').val(response.data.first_name)
             $('#edit-last_name').val(response.data.last_name)
             $('#edit-contact_number').val(response.data.contact_number)
