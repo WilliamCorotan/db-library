@@ -7,7 +7,8 @@ $(document).on('click', '.transaction-row', function(){
         success: function (response) {
 
             console.log(response)
-            $('#edit-id').val(response.data.id);
+            $('#transaction-number').html('Transaction No. ' + response.data.id);
+            $('#edit-id').val(response.data.id)
             $('#edit-book-id').val(response.data.book_id);
             $('#edit-title').val(response.data.book_title);
             $('#edit-borrow_date').val(response.data.borrow_date)

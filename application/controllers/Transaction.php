@@ -79,4 +79,48 @@ class Transaction extends CI_Controller
         $response  = $this->load->view('components/transaction/transaction_table', $data);
         return $response;
     }
+
+    public function update_return_status($id)
+    {
+        $this->form_validation->set_rules('return_date', 'Return Date', 'required|callback_validate_return_date');
+
+        if ($this->form_validation->run() === FALSE) {
+            $json_response['form_errors'] = $this->form_validation->error_array();
+            exit(json_encode($json_response));
+        }
+
+        $transaction_data = array(
+            'book_id' => $this->input->post('book_id'),
+        );
+        if ($this->input->post('return_status_id') == 1) {
+            $transaction_data['return_status_id'] = 2;
+        } else {
+            $transaction_data['return_status_id'] = 1;
+        }
+
+        $book_data = array();
+        if ($this->input->post('borrow_status_id') == 1) {
+            $book_data['borrow_status_id'] = 2;
+        } else {
+            $book_data['borrow_status_id'] = 1;
+        }
+
+
+
+        $this->transaction_model->update($id, $transaction_data);
+        $this->book_model->update($this->input->post('book_id'), $book_data);
+        $json_response['borrow_date'] = $this->input->post('borrow_date');
+        $json_response['return_date'] = $this->input->post('return_date');
+        exit(json_encode($json_response));
+    }
+
+    public function validate_return_date($return_date)
+    {
+        if ($return_date  < $this->input->post('borrow_date')) {
+            $this->form_validation->set_message('validate_return_date', 'Invalid return date.');
+            return FALSE;
+        }
+
+        return TRUE;
+    }
 }

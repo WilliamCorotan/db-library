@@ -36,11 +36,18 @@ class Transaction_model extends CI_Model
         if ($search != 'null') {
             $this->db->like('book.title', $search)
                 ->or_like('transaction.first_name', $search)
-                ->or_like('transaction.last_name', $search);
+                ->or_like('transaction.last_name', $search)
+                ->or_like('transaction.id', $search);
         }
 
         $this->db->order_by('id', 'DESC');
         return $this->db->get('transaction')
             ->result_array();
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('transaction', $data);
     }
 }
