@@ -76,13 +76,13 @@
                         </div>
                     </div>
 
-                    <div class="row gap-2">
-                        <div class="mb-3 row col-12 col-lg-6">
+                    <div class="row mb-3 m-0">
+                        <div class="mb-3 row">
                             <label for="borrow_date" class="form-label">Borrow Date</label>
-                            <input type="date" class="form-control" name="borrow_date" id="borrow_date" aria-describedby="borrowDate" placeholder="Enter borrow date [current timestamp]">
+                            <input type="date" class="form-control bg-body-secondary" name="borrow_date" id="borrow_date" aria-describedby="borrowDate" placeholder="Enter borrow date [current timestamp]" readonly>
                             <small id="borrow-date-error" class="form-errors text-danger"></small>
                         </div>
-                        <div class="mb-3 row col-12 col-lg-6">
+                        <div class="mb-3 row">
                             <label for="due_date" class="form-label">Due Date</label>
                             <input type="date" class="form-control" name="due_date" id="due_date" aria-describedby="returnDate" placeholder="Enter Due Date [range=1week]">
                             <small id="return-date-error" class="form-errors text-danger"></small>

@@ -21,6 +21,9 @@ $(document).ready(function () {
     $('#borrow-btn').on('click', function(){
         console.log('borrooww!')
         $('#borrow-book-modal').modal('show')
+        const currentDate = new Date();
+        $('#borrow_date').val(currentDate.toISOString().slice(0,10));
+        console.log(currentDate.toISOString().slice(0,10))
     })
     
     $('#borrow-book').on('click', function(){
