@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Transaction extends CI_Controller
 {
+
+    /**
+     * 
+     * Show transaction table page
+     * 
+     */
     public function index()
     {
         if (empty($this->session->userdata('is_logged_in'))) {
@@ -15,6 +21,10 @@ class Transaction extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    /**
+     * Show specific transaction based on id
+     * @param int $id
+     */
     public function show($id)
     {
         $json_response['data'] = $this->transaction_model->get($id);
@@ -23,12 +33,20 @@ class Transaction extends CI_Controller
         exit(json_encode($json_response));
     }
 
+    /**
+     * 
+     * Handles transaction page pagination
+     * @param int $offset
+     * 
+     */
     public function fetch($offset = 0)
     {
         if (empty($this->session->userdata('is_logged_in'))) {
             redirect('admin/login');
             exit();
         }
+
+        // Pagination configuration
         $config['base_url'] = base_url('transaction/fetch');
         $config['per_page'] = 5;
         $config['total_rows'] = $this->transaction_model->count();
@@ -53,11 +71,12 @@ class Transaction extends CI_Controller
         $config['last_tag_close']  = '</span></li>';
 
         $this->pagination->initialize($config);
+
         $search = $this->input->get('search');
         if (null !== $search) {
             $data['transactions'] = $this->transaction_model->get_all($config['per_page'], $offset, $this->input->get('search'));
 
-
+            // Transaform date to readable format
             foreach ($data['transactions'] as &$transaction) {
                 $borrow_date = (new DateTime($transaction['borrow_date']))->format('Y-m-d');
                 $transaction['borrow_date'] = $borrow_date;
@@ -67,6 +86,7 @@ class Transaction extends CI_Controller
         } else {
             $data['transactions'] = $this->transaction_model->get_all($config['per_page'], $offset);
 
+            // Transaform date to readable format
             foreach ($data['transactions'] as &$transaction) {
                 $borrow_date = (new DateTime($transaction['borrow_date']))->format('Y-m-d');
                 $transaction['borrow_date'] = $borrow_date;
@@ -80,15 +100,23 @@ class Transaction extends CI_Controller
         return $response;
     }
 
+    /**
+     * 
+     * Handles Update  transaction return status based on transaction id
+     * @param int $int
+     * 
+     */
     public function update_return_status($id)
     {
         $this->form_validation->set_rules('return_date', 'Return Date', 'required|callback_validate_return_date');
 
+        // Checks if form validation fails
         if ($this->form_validation->run() === FALSE) {
             $json_response['form_errors'] = $this->form_validation->error_array();
             exit(json_encode($json_response));
         }
 
+        // Transaction data fields
         $transaction_data = array(
             'book_id' => $this->input->post('book_id'),
         );
@@ -98,6 +126,7 @@ class Transaction extends CI_Controller
             $transaction_data['return_status_id'] = 1;
         }
 
+        // Book data fields
         $book_data = array();
         if ($this->input->post('borrow_status_id') == 1) {
             $book_data['borrow_status_id'] = 2;
@@ -105,15 +134,23 @@ class Transaction extends CI_Controller
             $book_data['borrow_status_id'] = 1;
         }
 
-
-
+        // Updates transaction entry in the database
         $this->transaction_model->update($id, $transaction_data);
+
+        // Updates book borrow status in the database
         $this->book_model->update($this->input->post('book_id'), $book_data);
+
         $json_response['borrow_date'] = $this->input->post('borrow_date');
         $json_response['return_date'] = $this->input->post('return_date');
         exit(json_encode($json_response));
     }
 
+    /**
+     * 
+     * Custom validation for validation the return date
+     * @param int $return_date
+     * 
+     */
     public function validate_return_date($return_date)
     {
         if ($return_date  < $this->input->post('borrow_date')) {

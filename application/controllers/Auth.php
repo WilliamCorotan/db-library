@@ -109,6 +109,9 @@ class Auth extends CI_Controller
         }
     }
 
+    /**
+     * Handles logout logic
+     */
     public function logout()
     {
         if (!empty($this->session->userdata('is_admin'))) {

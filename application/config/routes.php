@@ -87,7 +87,7 @@ $route['admin/transaction'] = 'transaction/index';
 
 // Misc Routes
 $route['admin/fetch/active'] = 'admin/count_active_admins';
-$route['user/fetch/active'] = 'user/count_active_admins';
+$route['user/fetch/active'] = 'user/count_active_users';
 
 
 //Book Routes

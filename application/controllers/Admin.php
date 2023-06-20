@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+
+    /**
+     * 
+     * Displays Admin dashboard 
+     *
+     */
     public function index()
     {
         if (empty($this->session->userdata('is_logged_in'))) {
@@ -15,6 +21,12 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+
+    /**
+     * 
+     *  Creates new admin account
+     * 
+     */
     public function store()
     {
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
@@ -39,12 +51,24 @@ class Admin extends CI_Controller
         }
     }
 
+    /**
+     * 
+     * Show specific admin based on id
+     * @param int $id
+     * 
+     */
     public function show($id)
     {
         $json_response['data'] = $this->admin_model->get($id);
         exit(json_encode($json_response));
     }
 
+    /**
+     * 
+     * Updates information of admin based on id
+     * @param int $id
+     * 
+     */
     public function update($id)
     {
         // Form validation Rules
@@ -76,6 +100,12 @@ class Admin extends CI_Controller
         }
     }
 
+    /**
+     * 
+     * Deletes specific admin based on id
+     * @param int $id
+     * 
+     */
     public function destroy($id)
     {
         $this->admin_model->delete($id);
@@ -138,6 +168,11 @@ class Admin extends CI_Controller
         }
     }
 
+    /**
+     * 
+     * Show profile page of current logged in admin
+     * 
+     */
     public function show_profile()
     {
         if (empty($this->session->userdata('user_id'))) {
@@ -152,6 +187,11 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    /**
+     * 
+     * Updates user information through admin panel
+     * 
+     */
     public function update_user()
     {
         // Form Validation Rules
@@ -194,6 +234,11 @@ class Admin extends CI_Controller
         }
     }
 
+    /**
+     * 
+     * Show admins table page
+     * 
+     */
     public function show_admins()
     {
         if (empty($this->session->userdata('is_logged_in'))) {
@@ -206,6 +251,11 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    /**
+     * 
+     * Show users table page
+     * 
+     */
     public function show_users()
     {
         if (empty($this->session->userdata('is_logged_in'))) {
@@ -218,8 +268,16 @@ class Admin extends CI_Controller
         $this->load->view('partials/footer');
     }
 
+    /**
+     * 
+     * Handles pagination of admins table
+     * @param int $page
+     * @param string $search
+     * 
+     */
     public function fetch_admins($page = 1, $search = NULL)
     {
+        //pagination configurations
         $config['base_url'] = base_url('admin/users/admins');
         $config['per_page'] = 10;
         $config['total_rows'] = count($this->admin_model->count_record($this->session->userdata('user_id'), $search));
@@ -263,8 +321,16 @@ class Admin extends CI_Controller
         exit(json_encode($json_response));
     }
 
+    /**
+     * 
+     * Handles pagination of users table
+     * @param int $page
+     * @param string $search
+     * 
+     */
     public function fetch_users($page = 1, $search = NULL)
     {
+        //pagination configurations
         $config['base_url'] = base_url('admin/users/users');
         $config['per_page'] = 10;
         $config['total_rows'] = count($this->user_model->count_record($search));
@@ -308,10 +374,16 @@ class Admin extends CI_Controller
         exit(json_encode($json_response));
     }
 
+    /**
+     * 
+     * Count total active admins
+     * 
+     */
     public function count_active_admins()
     {
         exit(json_encode($this->admin_model->count_active()));
     }
+
     /**
      * Custom validation rule for checking if the passed password matches the database 
      */

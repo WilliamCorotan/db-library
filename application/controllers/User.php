@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
+    /**
+     * 
+     * Displays specific user based on id
+     * @param int $id
+     */
     public function show($id)
     {
         $user = $this->user_model->get($id);
@@ -38,7 +43,12 @@ class User extends CI_Controller
         }
     }
 
-    public function count_active_admins()
+    /**
+     * 
+     * Counts all active admins
+     * 
+     */
+    public function count_active_users()
     {
         exit(json_encode($this->user_model->count_active()));
     }
