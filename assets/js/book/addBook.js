@@ -43,8 +43,6 @@ $('#add-book-form').on('submit', function(event){
         success: function (response) {
             $('input, textarea').removeAttr('disabled')
             if(response.form_errors){
-                console.log(response.form_errors)
-
                 if(response.form_errors.title){
                         $('#title-error').html(response.form_errors.title)
                 }

@@ -16,10 +16,8 @@ $('#edit-user-form').on('submit', function(event){
         data: formData,
         dataType: "json",
         beforeSend: function (){
-            console.log(formData)
         },
         success: function (response) {
-            console.log(response)
             if (response.form_errors) {
                 if (response.form_errors.email) {
                     $('#edit-email_error').html(response.form_errors.email);

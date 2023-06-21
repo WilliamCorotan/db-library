@@ -13,7 +13,6 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 $('#delete-book').modal('hide');
-                console.log(response)
                 if(response.message){
                     $('#toast-body').html('')
                     $('#toast-body').html(response.message)

@@ -23,7 +23,6 @@ $(document).ready(function () {
     
             },
             success: function(response) {
-                console.log(response)
                 if (response.form_errors) {
                     if (response.form_errors.first_name) {
                         $('#first_name_error').html(response.form_errors.first_name);

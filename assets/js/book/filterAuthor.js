@@ -12,19 +12,15 @@ const spinner = `
     </div>
 </div>`;
 
-console.log('test fa')
-console.log($('#author'))
 //on keyup, start the countdown
 $('#author').on('keyup', function () {
   clearTimeout(typingTimer);
   typingTimer = setTimeout(doeTypingAuthor, doneTypingInterval);
-  console.log('keyup')
 });
 
 //on keydown, clear the countdown 
 $('#author').on('keydown', function () {
   clearTimeout(typingTimer);
-  console.log('keydown')
 });
 
 //user is "finished typing," do something
@@ -36,7 +32,6 @@ function doeTypingAuthor () {
     $('#author-hint').children().remove();
     return
   }
-  console.log('test')
   $.ajax({
     type: "get",
     url: `${location.origin}/filter/author`,
@@ -47,12 +42,10 @@ function doeTypingAuthor () {
         $('#author-hint').removeClass('d-none')
     },
     success: function (response) {
-      console.log('response')
         $('#author-hint').children().remove();
         response.forEach(element => {
             $('#author-hint').append(hint(element));
         });
-        console.log(response)
     }
   });
 }
@@ -61,5 +54,4 @@ $(document).on('click', '.author-filter', function(){
     $('#author').val($(this).html());
     $('#author').attr('data-author-id',$(this).attr('data-author-id'));
     $('#author-hint').children().remove();
-    console.log($(this).html())
 })

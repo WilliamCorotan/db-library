@@ -5,8 +5,6 @@ $(document).on('click', '.transaction-row', function(){
         url: `${location.origin}/transaction/${$(this).attr('data-transaction-id')}`,
         dataType: "json",
         success: function (response) {
-
-            console.log(response)
             $('#transaction-number').html('Transaction No. ' + response.data.id);
             $('#edit-id').val(response.data.id)
             $('#edit-book-id').val(response.data.book_id);

@@ -19,14 +19,12 @@ function fetchBookCard(pageNumber = 0){
         data: {page_number: pageNumber},
         dataType: "json",
         success: function (response) {
-            console.log(response)
             $('#page-number').val(response.page)
             $('#total-books').val(response.total_books)
             $('#limit').val(response.limit)
             response.books.forEach(element => {
                 $('#book-card-container').append(bookCard(element))
             });
-            console.log('test')
         }
     });
 }

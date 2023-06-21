@@ -39,7 +39,6 @@ function doneTypingPublisher () {
         response.forEach(element => {
             $('#publisher-hint').append(publisherHint(element));
         });
-        console.log(response)
     }
   });
 }
@@ -48,5 +47,4 @@ $(document).on('click', '.publisher-filter', function(){
     $('#publisher').val($(this).html());
     $('#publisher').attr('data-publisher-id',$(this).attr('data-publisher-id'));
     $('#publisher-hint').children().remove();
-    console.log($(this).html())
 })

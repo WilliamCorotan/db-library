@@ -23,7 +23,6 @@ function fetchUser(pageNumber = 1){
 
             },
             success: function (response) {
-                console.log(response)
                 $('.spinner-container').remove();
                 response.data.forEach(element => {
                     $('tbody').append(`

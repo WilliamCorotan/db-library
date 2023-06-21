@@ -8,8 +8,6 @@ $(document).ready(function () {
 
 
     $('#return-book').on('click', function(){
-        console.log('clicked');
-
         $.ajax({
             type: "post",
             url: `${location.origin}/transaction/return/book/${$('#edit-id').val()}`,
@@ -25,7 +23,6 @@ $(document).ready(function () {
                 $('#return-date-error').html('')
             },
             success: function (response) {
-                console.log(response)
                 if(response.form_errors){
                     $('#return-date-error').html(response.form_errors.return_date)
                 }else{

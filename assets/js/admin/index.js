@@ -12,7 +12,6 @@ $(document).ready(function () {
         url: `${location.origin}/user/fetch/active`,
         dataType: "json",
         success: function(response) {
-            console.log(response);
             const options = {
                 chart: {
                     renderTo: 'users-card',
@@ -66,8 +65,6 @@ $(document).ready(function () {
         url: `${location.origin}/admin/fetch/active`,
         dataType: "json",
         success: function(response) {
-            console.log(response);
-
             const adminOptions = {
                 chart: {
                     renderTo: 'admins-card',
@@ -120,8 +117,6 @@ $(document).ready(function () {
         url: `${location.origin}/fetch/book/subjects`,
         dataType: "json",
         success: function(response) {
-            console.log(response);
-
             const subjectOptions = {
                 chart: {
                     renderTo: 'book-subjects-card',

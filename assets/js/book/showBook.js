@@ -5,8 +5,6 @@ $(document).on('click', '.book-row', function(){
         url: `${location.origin}/book/${$(this).attr('data-book-id')}`,
         dataType: "json",
         success: function (response) {
-
-            console.log(response)
             $('#id').html(`Book ID: ${response.data.id}`)
             $('#cover_image').attr('src',`${location.origin}/assets/images/books/${response.data.cover_image}`)
             $('#edit-cover_image').attr('data-cover-image', response.data.cover_image)

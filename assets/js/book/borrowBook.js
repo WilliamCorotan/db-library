@@ -1,7 +1,6 @@
 $(document).ready(function () {
     if(sessionStorage.getItem('availability')){
         const availabilityMessage = sessionStorage.getItem('availabilityMessage')
-        console.log(availabilityMessage)
         $('#toast-body').html('')
         $('#toast-body').html(availabilityMessage)
         $('#liveToast').addClass('text-bg-danger');
@@ -15,19 +14,15 @@ $(document).ready(function () {
     // Check if user information field has values
     if(!$('#first_name').val() || !$('#last_name').val() || !$('#contact_number').val() || !$('#street').val() || !$('#barangay').val() || !$('#city').val() || !$('#province').val() || !$('#zip_code').val()){
         $("#user_data").val('1')
-        console.log('checking')
     }
 
     $('#borrow-btn').on('click', function(){
-        console.log('borrooww!')
         $('#borrow-book-modal').modal('show')
         const currentDate = new Date();
         $('#borrow_date').val(currentDate.toISOString().slice(0,10));
-        console.log(currentDate.toISOString().slice(0,10))
     })
     
     $('#borrow-book').on('click', function(){
-        console.log($('#borrow-book-form').serialize())
         $.ajax({
             type: "post",
             url: `${location.origin}/book/borrow`,
@@ -41,7 +36,6 @@ $(document).ready(function () {
 
             if(response.form_errors){
                 if(response.form_errors.first_name){
-                    console.log(response.form_errors.first_name)
                     $('#first-name-error').html(response.form_errors.first_name)
                 }
 
@@ -83,7 +77,6 @@ $(document).ready(function () {
             } 
 
             if(response.availability){
-                console.log(response.availability)
                 sessionStorage.setItem('availability', false)
                 sessionStorage.setItem('availabilityMessage', response.availability)
                 location.reload()
@@ -91,7 +84,6 @@ $(document).ready(function () {
             }
 
             if(response.first_save){
-                console.log(response.message);
                 $('#borrow-book-modal').modal('hide')
                 $('#first-save-modal').modal('show')
                 $('#first-save-modal').find('#modal-message').html(response.message)
@@ -121,7 +113,6 @@ $(document).ready(function () {
 
             if(response.form_errors){
                 if(response.form_errors.first_name){
-                    console.log(response.form_errors.first_name)
                     $('#first-name-error').html(response.form_errors.first_name)
                 }
 
@@ -163,12 +154,10 @@ $(document).ready(function () {
             }
 
             if(response.availability){
-                console.log(response)
                 location.reload()
             }
 
             if(response.first_save){
-                console.log(response.message);
                 $('#borrow-book-modal').modal('hide')
                 $('#first-save-modal').modal('show')
                 $('#first-save-modal').find('#modal-message').html(response.message)
@@ -193,7 +182,6 @@ $(document).ready(function () {
 
             if(response.form_errors){
                 if(response.form_errors.first_name){
-                    console.log(response.form_errors.first_name)
                     $('#first-name-error').html(response.form_errors.first_name)
                 }
 
@@ -235,12 +223,10 @@ $(document).ready(function () {
             } 
 
             if(response.availability){
-                console.log(response)
                 location.reload()
             }
 
             if(response.first_save){
-                console.log(response.message);
                 $('#borrow-book-modal').modal('hide')
                 $('#first-save-modal').modal('show')
                 $('#first-save-modal').find('#modal-message').html(response.message)
@@ -248,4 +234,3 @@ $(document).ready(function () {
             }
         });
     })
-});

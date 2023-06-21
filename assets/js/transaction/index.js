@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $(document).on('click', '.pagination li span a  ', function(event){
         event.preventDefault();
-        console.log($(this).attr('data-ci-pagination-page'))
         fetchTransactions($(this).attr('href'))
     })
 

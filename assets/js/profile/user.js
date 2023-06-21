@@ -3,15 +3,13 @@ $(document).ready(function() {
     // Personal Information Form submit event
     $('#personal-information-form').on('submit', function(event) {
         event.preventDefault();
-        console.log($(this).serialize())
         $.ajax({
             type: "post",
             url: `${location.origin}/profile/update/user`,
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
-                console.log(response);
-
+                location.reload()
             }
         });
     });
@@ -25,8 +23,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
-                console.log(response);
-
+                location.reload()
             }
         });
     });
@@ -40,7 +37,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             dataType: "json",
             success: function(response) {
-                console.log(response);
+                location.reload()
             }
         });
     });

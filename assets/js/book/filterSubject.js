@@ -39,7 +39,6 @@ function doneTypingSubject () {
         response.forEach(element => {
             $('#subject-hint').append(subjectHint(element));
         });
-        console.log(response)
     }
   });
 }
@@ -48,5 +47,4 @@ $(document).on('click', '.subject-filter', function(){
     $('#subject').val($(this).html());
     $('#subject').attr('data-subject-id',$(this).attr('data-subject-id'));
     $('#subject-hint').children().remove();
-    console.log($(this).html())
 })
