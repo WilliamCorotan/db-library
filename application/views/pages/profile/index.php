@@ -24,7 +24,7 @@
             <div class="mb-3">
                 <label for="contact_number" class="form-label">Contact Number</label>
                 <input type="text" name="contact_number" id="contact_number" class="form-control" value="<?= $userdata['contact_number'] ?>" placeholder="Enter your contact..." aria-describedby="firstNameHelp">
-                <small id="contact-error" class="text-danger form-errors"></small>
+                <small id="contact-number-error" class="text-danger form-errors"></small>
             </div>
 
             <!-- Update Button -->

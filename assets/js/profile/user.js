@@ -21,7 +21,7 @@ $(document).ready(function() {
             data: $(this).serialize(),
             dataType: "json",
             beforeSend: function(){
-                $('#form-errors').html('')
+                $('.form-errors').html('')
             },
             success: function(response) {
 
