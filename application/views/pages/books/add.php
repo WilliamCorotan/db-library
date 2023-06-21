@@ -27,7 +27,7 @@
             <div class="mb-3 row">
                 <label for="author" class="col-lg-2 col-form-label">Author</label>
                 <div class="col-lg-10 position-relative">
-                    <input type="text" class="form-control" name="author" id="author" aria-describedby="authorId" placeholder="Author">
+                    <input type="text" class="form-control" name="author" id="author" aria-describedby="authorId" placeholder="Author" autocomplete="off">
                     <div id="author-hint" class="rounded list-group position-absolute z-3 me-3 overflow-scroll" style="width: 96% !important; max-height: 210px;">
                     </div>
                     <small id="author-error" class="form-errors text-danger"></small>
@@ -37,7 +37,7 @@
             <div class="mb-3 row">
                 <label for="subject" class="col-lg-2 col-form-label">Subject</label>
                 <div class="col-lg-10  position-relative">
-                    <input type="text" class="form-control" name="subject" id="subject" aria-describedby="subjectId" placeholder="Subject">
+                    <input type="text" class="form-control" name="subject" id="subject" aria-describedby="subjectId" placeholder="Subject" autocomplete="off">
                     <div id="subject-hint" class="rounded list-group position-absolute z-3 me-3 overflow-scroll" style="width: 96% !important; max-height: 210px;">
                     </div><small id="subject-error" class="form-errors text-danger"></small>
                 </div>
@@ -54,7 +54,7 @@
             <div class="mb-3 row">
                 <label for="publisher" class="col-lg-2 col-form-label">Publisher</label>
                 <div class="col-lg-10 position-relative">
-                    <input type="text" class="form-control" name="publisher" id="publisher" aria-describedby="publisherId" placeholder="Publisher">
+                    <input type="text" class="form-control" name="publisher" id="publisher" aria-describedby="publisherId" placeholder="Publisher" autocomplete="off">
                     <small id="publisher-error" class="form-errors text-danger"></small>
                     <div id="publisher-hint" class="rounded list-group position-absolute z-3 me-3 overflow-scroll" style="width: 96% !important; max-height: 210px;">
                     </div>

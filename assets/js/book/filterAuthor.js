@@ -50,6 +50,32 @@ function doeTypingAuthor () {
   });
 }
 
+$(document).on('click', function(){
+  if($('#publisher').is(':focus')){
+    $('#publisher-hint').show()
+  }
+
+  if(!$('#publisher').is(':focus')){
+    $('#publisher-hint').hide()
+  }
+
+  if($('#author').is(':focus')){
+    $('#author-hint').show()
+  }
+
+  if(!$('#author').is(':focus')){
+    $('#author-hint').hide()
+  }
+
+  if($('#subject').is(':focus')){
+    $('#subject-hint').show()
+  }
+
+  if(!$('#subject').is(':focus')){
+    $('#subject-hint').hide()
+  }
+})
+
 $(document).on('click', '.author-filter', function(){
     $('#author').val($(this).html());
     $('#author').attr('data-author-id',$(this).attr('data-author-id'));
