@@ -4,7 +4,7 @@
         <input type="hidden" id="page-number">
         <input type="hidden" id="total-books">
         <input type="hidden" id="limit">
-        <div id="book-card-container" class="grid grid-cols-3 gap-3">
+        <div id="book-card-container" class="grid grid-cols-5 gap-3">
         </div>
     </div>
 </section>

@@ -28,7 +28,7 @@ class Book extends CI_Controller
     public function book_fetch()
     {
 
-        $limit = 6;
+        $limit = 10;
 
         if (empty($this->input->get('page_number'))) {
             $page = 0;
