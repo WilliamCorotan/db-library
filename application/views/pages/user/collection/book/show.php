@@ -1,5 +1,5 @@
 <section id="book-view-container" class="mx-auto pt-5 container " style="min-height: calc(100vh - 80px)">
-    <div class=" mx-5 mb-3">
+    <div class="mb-3">
         <button type="button" name="back-button" id="back-button" class="btn rounded-circle"><i class="fa-solid fa-reply-all"></i></button>
     </div>
     <div class="row bg-white px-4 py-3 rounded">
