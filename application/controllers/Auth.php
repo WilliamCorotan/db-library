@@ -50,7 +50,12 @@ class Auth extends CI_Controller
                 //Stores useful information to the Response Body
                 $json_response['authenticated_user'] = $authenticated_user;
                 $json_response['message'] = 'Logged in successfully!';
-                $json_response['location'] = '/';
+
+                if (!empty($this->input->get('location'))) {
+                    $json_response['location'] = $this->input->get('location');
+                } else {
+                    $json_response['location'] = '/';
+                }
                 exit(json_encode($json_response));
             }
 

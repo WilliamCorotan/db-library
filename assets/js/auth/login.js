@@ -1,9 +1,15 @@
 $(document).ready(function() {
     $('#register-form').on('submit', function(event) {
         event.preventDefault();
+
+        let query = ''
+        if(location.search){
+            param = new URLSearchParams(location.search)
+            query = param.get('location')
+        }
         $.ajax({
             type: "post",
-            url: "login/user",
+            url: `${location.origin}/login/user/?location=${query}`,
             data: $(this).serialize(),
             dataType: "json",
             beforeSend: function() {

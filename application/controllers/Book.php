@@ -345,8 +345,7 @@ class Book extends CI_Controller
     public function borrow()
     {
         if (empty($this->session->userdata('user_id'))) {
-            redirect('login');
-            exit();
+            exit(json_encode(array('login' => 'login')));
         }
 
         if (!$this->book_model->check_availability($this->input->post('book_id'))) {

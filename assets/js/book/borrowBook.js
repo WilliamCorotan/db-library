@@ -33,6 +33,10 @@ $(document).ready(function () {
                 $('.form-errors').html('')
             },
             success: function (response) {
+            
+            if(response.login){
+                location.href = `${location.origin}/${response.login}/?location=${location.href}`
+            }
 
             if(response.form_errors){
                 if(response.form_errors.first_name){
