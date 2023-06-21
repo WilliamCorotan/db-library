@@ -12,7 +12,14 @@ class User_model extends CI_Model
         return $this->db->insert('user', $data);
     }
 
-
+    /**
+     * 
+     * Retrieves all users for paginated table
+     * @param int $limit
+     * @param int $offset
+     * @param string $search
+     * 
+     */
     public function get_all($limit = 10, $offset = 0, $search)
     {
         $this->db->limit($limit, $offset);
@@ -49,6 +56,8 @@ class User_model extends CI_Model
      * Updates the user's information in the database
      * @param int $id
      * @param array $data
+     * 
+     * @return boolean
      */
     public function update($id, $data)
     {
@@ -59,6 +68,8 @@ class User_model extends CI_Model
     /**
      * Updates the user's address information in the database
      * @param array $data
+     * 
+     * @return boolean
      */
     public function update_address($data)
     {
@@ -77,6 +88,13 @@ class User_model extends CI_Model
         }
     }
 
+    /**
+     * 
+     * Counts all user based on search query
+     * @param string $search
+     * 
+     * @return array users
+     */
     public function count_record($search)
     {
         $this->db->select('*');
@@ -90,6 +108,12 @@ class User_model extends CI_Model
             ->result_array();
     }
 
+    /**
+     * 
+     * Counts for active users in the database
+     * 
+     * @return array users
+     */
     public function count_active()
     {
         return $this->db->select('COUNT(user.id) as count, status.code')
