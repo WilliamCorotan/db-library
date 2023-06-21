@@ -13,6 +13,12 @@ class publisher_model extends CI_Model
      */
     public function insert($data)
     {
+        $publisher = $this->db->get_where('publisher', array('name' => $data))->row_array();
+
+        if (!empty($publisher)) {
+            return $publisher['id'];
+        }
+
         $this->db->insert('publisher', array('name' => $data));
         return $this->db->insert_id();
     }

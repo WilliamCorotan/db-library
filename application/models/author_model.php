@@ -13,6 +13,12 @@ class author_model extends CI_Model
      */
     public function insert($data)
     {
+        $author = $this->db->get_where('author', array('name' => $data))->row_array();
+
+        if (!empty($author)) {
+            return $author['id'];
+        }
+
         $this->db->insert('author', array('name' => $data));
         return $this->db->insert_id();
     }

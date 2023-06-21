@@ -13,6 +13,12 @@ class Subject_model extends CI_Model
      */
     public function insert($data)
     {
+        $subject = $this->db->get_where('subject', array('name' => $data))->row_array();
+
+        if (!empty($subject)) {
+            return $subject['id'];
+        }
+
         $this->db->insert('subject', array('name' => $data));
         return $this->db->insert_id();
     }

@@ -154,6 +154,7 @@ class Book extends CI_Controller
 
             $this->book_model->insert($form_data);
             $json_response['message'] = 'Successfully added book!';
+            $json_response['publisher'] = $publisher;
             $json_response['location'] = base_url('admin/books');
             exit(json_encode($json_response));
         }
