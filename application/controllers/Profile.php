@@ -27,6 +27,10 @@ class Profile extends CI_Controller
      */
     public function update_user()
     {
+        if (empty($this->session->userdata('user_id'))) {
+            redirect('login');
+            exit();
+        }
         // Form validation Rules
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -58,6 +62,11 @@ class Profile extends CI_Controller
      */
     public function update_address()
     {
+        if (empty($this->session->userdata('user_id'))) {
+            redirect('login');
+            exit();
+        }
+
         // Form validation rules
         $this->form_validation->set_rules('street', 'Street', 'required');
         $this->form_validation->set_rules('barangay', 'Barangay', 'required');
@@ -92,6 +101,11 @@ class Profile extends CI_Controller
      */
     public function update_security()
     {
+        if (empty($this->session->userdata('user_id'))) {
+            redirect('login');
+            exit();
+        }
+
         // Form validation rules
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('current_password', 'Current Password', 'required|callback_validate_password');

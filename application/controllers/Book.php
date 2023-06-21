@@ -178,6 +178,10 @@ class Book extends CI_Controller
      */
     public function update($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         //file input configurations
         $config['upload_path'] = './assets/images/books/';
         $config['allowed_types'] = 'gif|jpg|png|webp';
@@ -272,6 +276,10 @@ class Book extends CI_Controller
      */
     public function destroy($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
         $this->book_model->delete($id);
         $json_response['message'] = 'Successfully Deleted Book Entry!';
         exit(json_encode($json_response));
@@ -335,6 +343,11 @@ class Book extends CI_Controller
      */
     public function borrow()
     {
+        if (empty($this->session->userdata('user_id'))) {
+            redirect('login');
+            exit();
+        }
+
         if (!$this->book_model->check_availability($this->input->post('book_id'))) {
             $json_response['availability'] = "Book is currently unavailable!";
             exit(json_encode($json_response));
@@ -343,7 +356,7 @@ class Book extends CI_Controller
         // Form validations
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required');
+        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required|regex_match[/^(09|\+639)\d{9}$/]', array('regex_match' => 'Provide a contact number with format: 09xxxxxxxxx or +639xxxxxxxxx'));
         $this->form_validation->set_rules('street', 'Street', 'required');
         $this->form_validation->set_rules('barangay', 'Barangay', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');

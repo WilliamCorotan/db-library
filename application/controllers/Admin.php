@@ -29,6 +29,11 @@ class Admin extends CI_Controller
      */
     public function store()
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
+
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[admin.email]');
@@ -71,6 +76,11 @@ class Admin extends CI_Controller
      */
     public function update($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
+
         // Form validation Rules
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -108,6 +118,11 @@ class Admin extends CI_Controller
      */
     public function destroy($id)
     {
+        if (empty($this->session->userdata('is_logged_in'))) {
+            redirect('admin/login');
+            exit();
+        }
+
         $this->admin_model->delete($id);
         $json_response['message'] = "Successfully Deleted Admin!";
         exit(json_encode($json_response));
