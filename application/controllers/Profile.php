@@ -92,7 +92,8 @@ class Profile extends CI_Controller
         } else {
             // Updates user's address data in the database
             $this->user_model->update_address($form_data);
-            exit(json_encode($form_data));
+            $json_response['message'] = 'Address information successfully updated!';
+            exit(json_encode($json_response));
         }
     }
 
@@ -126,7 +127,7 @@ class Profile extends CI_Controller
             // Updates data in the database
             $this->user_model->update($this->session->userdata('user_id'), $data);
 
-            $json_response['message'] = 'Personal information successfully updated!';
+            $json_response['message'] = 'Security information successfully updated!';
             exit(json_encode($json_response));
         }
     }
