@@ -26,4 +26,4 @@
         <!-- place navbar here -->
         <?php $this->load->view('components/navbar') ?>
     </header>
-    <main id="app" class="bg-amber-100 h-100">
+    <main id="app" class="bg-amber-100 h-100" style="min-height: calc(100vh - 80px) !important;">

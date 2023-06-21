@@ -3,10 +3,11 @@ background-image: url('<?= base_url("assets/images/site/bg/bg-image1.jpg") ?>');
 background-repeat: no-repeat;
 background-position: center center;
 background-size: cover;
+min-height: calc(100vh - 80px) !important;
 ">
 
     <!-- Register Form Container -->
-    <div class="container h-100 mx-auto row align-items-center justify-content-center position-relative">
+    <div class="container h-100 mx-auto row align-items-center justify-content-center position-relative" style="min-height: calc(100vh - 80px) !important;">
         <div class="bg-body-tertiary bg-opacity-75 max-w-36 row rounded py-3">
 
             <div>

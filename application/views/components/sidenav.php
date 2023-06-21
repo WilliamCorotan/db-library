@@ -7,7 +7,7 @@
             <div class="py-3  bg-amber-300 border border-warning w-100">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
-                        <li class="nav-item fs-6 ">
+                        <li class="nav-item fs-6 side-nav-item">
                             <a class="nav-link px-3 fs-5" href="<?= base_url('dashboard') ?>">Dashboard</a>
                         </li>
                     </ul>
@@ -23,10 +23,10 @@
                 </div>
                 <div class="row p-0 px-3  mt-2 bg-amber-100">
                     <ul class="navbar-nav">
-                        <li class="nav-item fs-6 p-2">
+                        <li class="nav-item fs-6 p-2 side-nav-item">
                             <a class="nav-link px-3 " href="<?= base_url('admin/books') ?>">All Books</a>
                         </li>
-                        <li class="nav-item fs-6 p-2">
+                        <li class="nav-item fs-6 p-2 side-nav-item">
                             <a class="nav-link px-3 " href="<?= base_url('book/add') ?>">Add</a>
                         </li>
                     </ul>
@@ -35,17 +35,17 @@
             <div class=" pt-3 bg-amber-300 border border-warning">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
-                        <li class="nav-item fs-6 ">
+                        <li class="nav-item fs-6 side-nav-item ">
                             <span class="nav-link px-3 fs-5">Users</span>
                         </li>
                     </ul>
                 </div>
                 <div class="px-3 row mt-2 bg-amber-100">
                     <ul class="navbar-nav">
-                        <li class="nav-item fs-6 p-2">
+                        <li class="nav-item fs-6 p-2 side-nav-item">
                             <a class="nav-link px-3 " href="<?= base_url('admin/users/admins') ?>">Admins</a>
                         </li>
-                        <li class="nav-item fs-6 p-2">
+                        <li class="nav-item fs-6 p-2 side-nav-item">
                             <a class="nav-link px-3 " href="<?= base_url('admin/users/users') ?>">All Users</a>
                         </li>
                     </ul>
@@ -54,7 +54,7 @@
             <div class="py-3  bg-amber-300 border border-warning w-100">
                 <div class="navbar-nav">
                     <ul class="navbar-nav">
-                        <li class="nav-item fs-6 ">
+                        <li class="nav-item fs-6 side-nav-item ">
                             <a class="nav-link px-3 fs-5" href="<?= base_url('admin/transaction') ?>">Transactions</a>
                         </li>
                     </ul>

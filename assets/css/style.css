@@ -48,7 +48,10 @@
     background-color: rgb(252 211 77);
 }
 
+.side-nav-item hover{
+    cursor: pointer !important;
 
+}
 
 
 @media (min-width: 992px) { 

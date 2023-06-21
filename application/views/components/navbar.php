@@ -1,7 +1,7 @@
 <?php if (!empty($this->session->userdata('is_logged_in'))) : ?>
     <nav class="navbar bg-amber-300">
         <div class="container-fluid">
-            <a class="navbar-brand h-1 p-0"><img class="h-100" src="<?= base_url('assets/images/site/tower-of-honai-logo-full-black.png') ?>" alt=""></a>
+            <a class="navbar-brand h-1 p-0" href="<?= base_url('') ?>"><img class="h-100" src="<?= base_url('assets/images/site/tower-of-honai-logo-full-black.png') ?>" alt=""></a>
             <div class="d-flex align-items-center justify-content-center">
                 <div class="btn-group">
                     <span>Welcome back, </span>

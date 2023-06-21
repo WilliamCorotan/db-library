@@ -1,4 +1,4 @@
-<section id="profile-container" class="container mt-5">
+<section id="profile-container" class="container py-5">
     <!-- Personal Information Fields -->
     <article id="personal-information" class="card mb-3">
         <header class="card-header">
