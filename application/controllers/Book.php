@@ -357,7 +357,7 @@ class Book extends CI_Controller
         // Form validations
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required|regex_match[/^(09|\+639)\d{9}$/]', array('regex_match' => 'Provide a contact number with format: 09xxxxxxxxx or +639xxxxxxxxx'));
+        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required|is_unique[user.contact_number]|regex_match[/^(09|\+639)\d{9}$/]', array('regex_match' => 'Provide a contact number with format: 09xxxxxxxxx or +639xxxxxxxxx'));
         $this->form_validation->set_rules('street', 'Street', 'required');
         $this->form_validation->set_rules('barangay', 'Barangay', 'required');
         $this->form_validation->set_rules('city', 'City', 'required');

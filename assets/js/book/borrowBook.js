@@ -153,7 +153,7 @@ $(document).ready(function () {
                 }
             }
 
-            if(response.availability){
+            if(response.reload){
                 location.reload()
             }
 
@@ -221,10 +221,6 @@ $(document).ready(function () {
                     $('#return-date-error').html(response.form_errors.due_date)
                 }
             } 
-
-            if(response.availability){
-                location.reload()
-            }
 
             if(response.first_save){
                 $('#borrow-book-modal').modal('hide')

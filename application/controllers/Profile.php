@@ -34,7 +34,7 @@ class Profile extends CI_Controller
         // Form validation Rules
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('contact_number', 'Contact Number', 'regex_match[/^(09|\+639)\d{9}$/]', array('regex_match' => 'Provide a contact number with format: 09xxxxxxxxx or +639xxxxxxxxx'));
+        $this->form_validation->set_rules('contact_number', 'Contact Number', 'required|is_unique[user.contact_number]|regex_match[/^(09|\+639)\d{9}$/]', array('regex_match' => 'Provide a contact number with format: 09xxxxxxxxx or +639xxxxxxxxx'));
 
         // Form Data 
         $form_data = array(
