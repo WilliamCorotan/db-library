@@ -10,6 +10,10 @@ class Auth extends CI_Controller
      */
     public function show_login()
     {
+        if (!empty($this->session->userdata('is_logged_in'))) {
+            redirect('/');
+            exit();
+        }
         $data['title'] = 'Login | Tower of Honai';
         $this->load->view('partials/header', $data);
         $this->load->view('pages/auth/login');
@@ -70,6 +74,11 @@ class Auth extends CI_Controller
      */
     public function show_register()
     {
+        if (!empty($this->session->userdata('is_logged_in'))) {
+            redirect('/');
+            exit();
+        }
+
         $data['title'] = 'Register | Tower of Honai';
         $this->load->view('partials/header', $data);
         $this->load->view('pages/auth/register');
